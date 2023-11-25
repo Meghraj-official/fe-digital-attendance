@@ -1,3 +1,16 @@
+
+
+
+
+import Login from '@/components/Login'
+import Image from 'next/image'
+
 export default function Home() {
-  return <main> This is main page. </main>;
+  return (
+    <main >
+      
+      <Login/>
+      
+    </main>
+  )
 }
