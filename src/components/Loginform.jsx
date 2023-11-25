@@ -1,29 +1,32 @@
 "use client";
 import { Input } from "@/components/ui/input";
 
-// const clickHandler=()=>{
-//     console.log('hi')
-// }
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-const Array = ["FullName", "Email", "Password", "Confirm Password"];
-const Data = (_,index) => {
+
+
+const Array = [
+ 
+  { name: "Email", type: "text" },
+  { name: "Password", type: "password" },
+];
+const Ldata = (user, index) => {
   return (
     <div key={index} className="flex justify-between mb-3">
-      <label></label>
-      {index}
-      <Input className="w-72 ml-10 max-sm:w-40" />
+      <label>{user.name}</label>
+      <Input type={user.type} className="w-72 ml-10 max-sm:w-40" />
     </div>
   );
 };
 
-const clickHandler = () => {
+const toLogIn = () => {
   console.log("hi");
   alert("hello");
 };
 
 // bg-cyan-500
 
-export default function Login() {
+export default function Loginform() {
   return (
     <>
       <div className="h-screen w-screen bg-cyan-500 max-sm:h-screen max-sm:w-screen ">
@@ -35,15 +38,15 @@ export default function Login() {
         </div>
         <div className="flex justify-center  p-5 rounded-lg ">
           <div className="h-auto w-auto bg-cyan-200 rounded-lg p-5 max-sm:w-80">
-            {Array.map(Data)}
+            {Array.map(Ldata)}
 
             <div className="flex justify-center mt-10 mb-5">
               <button
                 type="button"
-                onClick={clickHandler}
+                onClick={toLogIn}
                 className="bg-cyan-500 rounded-xl h-10 w-20 "
               >
-                clickme
+                Login
               </button>
             </div>
           </div>
