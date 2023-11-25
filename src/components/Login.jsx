@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 // }
 
 const Array = ["FullName", "Email", "Password", "Confirm Password"];
-const Data = (index) => {
+const Data = (_,index) => {
   return (
     <div key={index} className="flex justify-between mb-3">
       <label></label>
@@ -34,7 +34,7 @@ export default function Login() {
           </h1>{" "}
         </div>
         <div className="flex justify-center  p-5 rounded-lg ">
-          <div className="h-auto w-auto bg-cyan-200 rounded-xl p-5 max-sm:w-80">
+          <div className="h-auto w-auto bg-cyan-200 rounded-lg p-5 max-sm:w-80">
             {Array.map(Data)}
 
             <div className="flex justify-center mt-10 mb-5">
