@@ -1,14 +1,8 @@
-
-import Landing from '../components/Landing'
-
-
-import Image from 'next/image'
-
+import LandingPage from "../components/LandingPage";
 export default function Home() {
   return (
-    <main >
-      
-       <Landing/>
+    <main>
+      <LandingPage />
     </main>
-  )
+  );
 }
