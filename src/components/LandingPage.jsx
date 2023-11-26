@@ -27,7 +27,7 @@ const LandingPage = () => {
         {show && (
           <Link href="/login">
             <Button
-              className=" text-primaryColor-200 font-bold tracking-wider uppercase text-lg py-2 mx-auto w-[80%] xl:w-[50%] mt-8 lg:mt-0 xl:ml-10 "
+              className=" text-primaryColor-200 font-bold tracking-wider uppercase text-lg py-2 mx-auto w-[80%] xl:w-[50%] mt-8 lg:mt-0 xl:mt-10 xl:ml-10 "
               buttonText="Join the revolution"
             />
           </Link>
