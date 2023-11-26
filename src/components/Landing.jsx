@@ -22,7 +22,7 @@ const Landing = () => {
           with your attendance
         </h3>
         <div className="flex justify-center mt-20 max-sm:mt-10">
-          <Link href="/signup">
+          <Link href="/login">
             {" "}
             <button className="bg-cyan-500 rounded-lg w-32 h-14 p-3">
               Get Started
