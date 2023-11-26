@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 
 const Button = ({ className, buttonText }) => {
   const hoverStyle =
-    "hover:bg-gradient-to-bl hover:from-primaryColor-600 hover:to-primaryColor-900 ";
+    "hover:bg-gradient-to-bl hover:from-primaryColor-200 hover:via-slate-500 hover:to-primaryColor-600 ";
   return (
     <button
       className={cn(
-        "  flex justify-center rounded-full items-center bg-gradient-to-tr from-primaryColor-500 to-primaryColor-700   ",
+        "  flex justify-center rounded-full items-center bg-gradient-to-bl from-primaryColor-500 via-slate-700 to-primaryColor-900    ",
         className,
         hoverStyle
       )}
@@ -18,3 +18,6 @@ const Button = ({ className, buttonText }) => {
 };
 
 export default Button;
+
+// from-primaryColor-500 via-slate-800 to-primaryColor-900
+// from-primaryColor-500 to-primaryColor-700
