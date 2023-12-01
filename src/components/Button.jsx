@@ -7,7 +7,7 @@ const Button = ({ className, buttonText }) => {
   return (
     <button
       className={cn(
-        "  flex justify-center rounded-full items-center bg-gradient-to-bl from-primaryColor-500 via-slate-700 to-primaryColor-900    ",
+        "  flex justify-center rounded-full items-center bg-gradient-to-bl from-primaryColor-500 via-slate-700 to-primaryColor-900 max-md:h-10 max-sm:w-24   ",
         className,
         hoverStyle
       )}
