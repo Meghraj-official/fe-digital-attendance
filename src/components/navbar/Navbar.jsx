@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SidebarContext } from "@/app/dashboard/layout";
 import { Brain } from "lucide-react";
 

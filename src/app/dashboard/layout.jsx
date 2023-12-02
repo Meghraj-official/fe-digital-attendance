@@ -1,7 +1,9 @@
 "use client";
+
 import React, { useState, createContext } from "react";
-import Sidebar from "@/components/sidebar";
-import Navbar from "@/components/navbar";
+import Sidebar from "@/components/sidebar/Sidebar";
+import Navbar from "@/components/navbar/Navbar";
+// @ts-ignore
 
 export const SidebarContext = createContext();
 
