@@ -54,6 +54,9 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      fontFamily:{
+        poppins: ['Poppins', 'sans-serif'],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
