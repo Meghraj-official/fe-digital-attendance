@@ -19,7 +19,7 @@ const Data = (item, index) => {
   return (
     <div key={index} className=" max-lg:mb-1">
       <div className="mb-2 max-md:mb-1 max-lg:mb-2 ">
-        <label className=" ml-7  max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
+        <label className="  max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
           {item.name}
         </label>
       </div>
@@ -27,9 +27,9 @@ const Data = (item, index) => {
         <Input
           required
           type={item.type}
-          className="w-full ml-5  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
+          className="w-full   max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
         />
-        <label className="absolute mt-2 p-1 ml-7 max-sm:mt-1 max-md:text-xs max-lg:text-sm max-sm:text-xs  max-sm:ml-7    text-primaryColor-400 text-sm transition duration-200 input-text">
+        <label className="absolute mt-3 ml-3 max-sm:ml-3 max-sm:mt-2 max-md:text-xs max-lg:text-sm max-sm:text-xs     text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
         </label>
       </div>
@@ -45,8 +45,8 @@ const handleSubmit = () => {
 export default function Signupform() {
   return (
     <>
-      <div className="h-screen w-screen bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex justify-around ">
-        <div className=" flex w-1/2 bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:hidden  ">
+      <div className="h-screen w-screen bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex  ">
+        <div className=" flex w-1/3 bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:hidden  ">
           <div className="relative w-full h-full">
             <Image
               className="bg"
@@ -56,30 +56,32 @@ export default function Signupform() {
             />
           </div>
         </div>
-        <div className="w-1/2 max-sm:w-full  ">
+        <div className="w-2/3 max-sm:w-full ">
           <form onSubmit={handleSubmit}>
             <div className="h-5 w-full mb-3 text-center align-middle py-1">
               <label className="text-center font-bold text-primaryColor-900 font-mono  max-lg:text-xl text-2xl">
                 SignUp
               </label>
             </div>
-            <div className="h-auto w-auto  text-primaryColor-950 rounded-lg px-5 max-sm:w-full max-sm:h-full max-md:h-full ">
+            <div className="px-10 text-primaryColor-950 rounded-lg  max-sm:w-full max-sm:h-full max-md:h-full ">
               {inputField.map(Data)}
 
               <div className="flex flex-col max-lg:text-sm  max-sm:text-xs  mb-2">
-                <div className=" p-2 ml-7  max-md:text-xs ">
+                <div className=" max-md:text-xs ">
                   <label>Role</label>
                 </div>
 
-                <div className=" px-2 ml-7  max-md:text-xs">
-                  <RadioGroup defaultValue="male">
-                    <div className="flex items-center space-x-2  text-primaryColor-950 max-md:text-xs max-lg:text-sm">
-                      <RadioGroupItem value="Teacher" />
-                      Teacher
-                    </div>
-                    <div className="flex items-center space-x-2   text-primaryColor-950 max-md:text-xs max-lg:text-sm">
-                      <RadioGroupItem value="Student" />
-                      Student
+                <div className="  max-md:text-xs  flex">
+                  <RadioGroup defaultValue="Teacher">
+                    <div className="flex ">
+                      <div className="flex items-center space-x-2  text-primaryColor-950 max-md:text-xs max-lg:text-sm">
+                        <RadioGroupItem value="Teacher" />
+                        Teacher
+                      </div>
+                      <div className="flex items-center space-x-2 ml-10 max-sm:ml-5   text-primaryColor-950 max-md:text-xs max-lg:text-sm">
+                        <RadioGroupItem value="Student" />
+                        Student
+                      </div>
                     </div>
                   </RadioGroup>
                 </div>
