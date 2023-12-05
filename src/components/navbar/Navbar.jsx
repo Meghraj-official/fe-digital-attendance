@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useContext, useState } from "react";
-import { SidebarContext } from "@/app/dashboard/layout";
+import React, { useContext } from "react";
+import { SidebarContext } from "@/context/SidebarContext";
 import { Brain } from "lucide-react";
 
 const Navbar = () => {

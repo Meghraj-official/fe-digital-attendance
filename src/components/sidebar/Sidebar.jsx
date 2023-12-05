@@ -1,7 +1,7 @@
 "use client";
 import { HomeIcon, XIcon } from "lucide-react";
-import React, { useContext, useState } from "react";
-import { SidebarContext } from "@/app/dashboard/layout";
+import React, { useContext } from "react";
+import { SidebarContext } from "@/context/SidebarContext";
 
 const Sidebar = () => {
   const { open, setOpen } = useContext(SidebarContext);

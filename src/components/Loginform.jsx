@@ -2,9 +2,7 @@
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Button from "./Button";
-import Image from "next/image";
 
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const loginField = [
   { name: "Email", type: "text", placeholder: "Enter Email" },
