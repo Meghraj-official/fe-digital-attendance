@@ -20,14 +20,14 @@ const LandingPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex  flex-row   bg-gradient-to-tl from-primaryColor-500 via-slate-500 to-primaryColor-900  h-screen  ">
-      <div className="text-white h-full  flex flex-col justify-center w-full lg:w-1/2 xl:pl-20 ">
+    <div className="flex  flex-row   bg-gradient-to-tl from-primaryColor-900 via-primaryColor-600 to-primaryColor-900  h-screen  ">
+      <div className="text-primaryColor-50 h-full  flex flex-col justify-center w-full lg:w-1/2 xl:pl-20 ">
         <TypingAnimation />
 
         {show && (
           <Link href="/login">
             <Button
-              className=" text-primaryColor-100 font-bold tracking-wider uppercase text-lg py-2 mx-auto md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
+              className=" text-primaryColor-50  bg-gradient-to-tl from-primaryColor-900 via-primaryColor-700  to-primaryColor-900  font-bold tracking-wider uppercase text-lg py-2 mx-auto md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
               buttonText="Join the revolution"
             />
           </Link>

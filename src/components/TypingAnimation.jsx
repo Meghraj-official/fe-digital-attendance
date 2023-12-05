@@ -18,7 +18,7 @@ const TypingAnimation = () => {
         ]}
         wrapper="div"
         speed={50}
-        className=" min-h-full mb-10  text-left  text-4xl xl:text-5xl font-mono font-bold"
+        className=" min-h-full mb-10  text-left  text-4xl xl:text-5xl font-poppins tracking-wider font-bold"
         // className=" h-60 md:h-[240px]  xl:h-[300px] md:w-[70%]   lg:w-[70%]  text-left  text-4xl xl:text-5xl font-mono font-bold"
         // repeat={Infinity}
       />
