@@ -6,13 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const inputField = [
-  { name: "Full Name", type: "text", placeholder: "Enter Full name" },
-  { name: "Email", type: "text", placeholder: "Enter Email " },
-  { name: "Password", type: "password", placeholder: "Enter Password" },
+  { name: "Full Name", type: "text", placeholder: "Full name" },
+  { name: "Email", type: "text", placeholder: " Email " },
+  { name: "Password", type: "password", placeholder: " Password" },
   {
     name: "Confirm Password",
     type: "password",
-    placeholder: "Re-enter Password",
+    placeholder: "Confirm Password",
   },
 ];
 const Data = (item, index) => {
@@ -31,7 +31,7 @@ const Data = (item, index) => {
         />
         <label className="absolute mt-3 ml-3 max-sm:ml-3 max-sm:mt-2 max-md:text-xs max-lg:text-sm max-sm:text-xs     text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
-        </label>
+        </label> */}
       </div>
     </div>
   );
@@ -107,8 +107,8 @@ export default function Signupform() {
                   buttonText="Sign Up"
                 />
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>
