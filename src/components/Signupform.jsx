@@ -15,6 +15,8 @@ const inputField = [
     placeholder: "Confirm Password",
   },
 ];
+
+//comments
 const Data = (item, index) => {
   return (
     <div key={index} className="">
