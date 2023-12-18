@@ -4,9 +4,10 @@ import Button from "@/components/Button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Link from "next/link";
 import Image from "next/image";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
 const inputField = [
-  { name: "Full Name", type: "text", placeholder: "Full name" },
+  { name: "FullName", type: "text", placeholder: "Full name" },
   { name: "Email", type: "text", placeholder: " Email " },
   { name: "Password", type: "password", placeholder: " Password" },
   {
@@ -15,9 +16,12 @@ const inputField = [
     placeholder: "Confirm Password",
   },
 ];
-const Data = (item, index) => {
+
+const Data = ({ item, register }) => {
+  // const { register } = useFormContext();
+
   return (
-    <div key={index} className="">
+    <div className="">
       <div className="mb-2 max-lg:mb-1  ">
         <label className="  max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
           {item.name}
@@ -27,22 +31,27 @@ const Data = (item, index) => {
         <Input
           required
           type={item.type}
+          {...register(item.name)}
           className="w-full    max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
         />
-        <label className="absolute mt-3 ml-3 max-sm:ml-3 max-sm:mt-2 max-md:text-xs max-lg:text-sm max-sm:text-xs     text-primaryColor-400 text-sm transition duration-200 input-text">
+        <label className="absolute pointer-events-none mt-3 ml-3 max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs     text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
-        </label> */}
+        </label>
       </div>
     </div>
   );
 };
 
-const handleSubmit = () => {
-  console.log("hi");
-  alert("hello");
-};
-
 export default function Signupform() {
+  const methods = useForm();
+
+  const { handleSubmit, register } = methods;
+
+  const onSubmit = (data) => {
+    console.log(data);
+    alert("hello ");
+  };
+
   return (
     <>
       <div className="h-screen w-screen bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex  ">
@@ -57,7 +66,7 @@ export default function Signupform() {
           </div>
         </div>
         <div className="w-2/3 max-sm:w-full ">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="h-8 w-full text-center  py-1 ">
               <label className="text-center font-bold tracking-wide text-primaryColor-900 font-poppins max-lg:text-xl text-2xl">
                 SignUp
@@ -68,8 +77,10 @@ export default function Signupform() {
                 Transform Attendance with a Scan
               </label>
             </div>
-            <div className="px-20 max-sm:px-10 text-primaryColor-950 rounded-lg  max-sm:w-full max-sm:h-full ">
-              {inputField.map(Data)}
+            <div className="px-40 max-sm:px-10 max-lg:px-20 text-primaryColor-950 rounded-lg  max-sm:w-full max-sm:h-full ">
+              {inputField.map((item) => (
+                <Data register={register} item={item} key={item.name} />
+              ))}
 
               <div className="flex flex-col max-lg:text-sm  max-sm:text-xs  mb-2">
                 <div className=" max-md:text-xs ">
@@ -80,11 +91,21 @@ export default function Signupform() {
                   <RadioGroup defaultValue="Teacher">
                     <div className="flex ">
                       <div className="flex items-center space-x-2  text-primaryColor-950 max-md:text-xs max-lg:text-sm">
-                        <RadioGroupItem value="Teacher" />
+                        <input
+                          type="radio"
+                          name={"Role"}
+                          {...register("Role")}
+                          value={"Teacher"}
+                        />
                         Teacher
                       </div>
                       <div className="flex items-center space-x-2 ml-10 max-sm:ml-5   text-primaryColor-950 max-md:text-xs max-lg:text-sm">
-                        <RadioGroupItem value="Student" />
+                        <input
+                          type="radio"
+                          name={"gender"}
+                          {...register("Role")}
+                          value={"Student"}
+                        />
                         Student
                       </div>
                     </div>
@@ -107,8 +128,8 @@ export default function Signupform() {
                   buttonText="Sign Up"
                 />
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </>
