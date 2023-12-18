@@ -1,10 +1,10 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/Button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@/components/ui/radio-group";
 import Link from "next/link";
 import Image from "next/image";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const inputField = [
   { name: "FullName", type: "text", placeholder: "Full name" },

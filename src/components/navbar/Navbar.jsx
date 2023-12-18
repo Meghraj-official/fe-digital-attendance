@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useContext, useRef, useState } from "react";
-import { SidebarContext } from "@/app/dashboard/layout";
+import React, { useContext, useState } from "react";
 import { Menu } from "lucide-react";
-import Image from "next/image";
 import Dropmenu from "../Dropmenu";
+import { SidebarContext } from "@/context/SidebarContext";
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const [isDropdown, setIsDropDown] = useState(false);

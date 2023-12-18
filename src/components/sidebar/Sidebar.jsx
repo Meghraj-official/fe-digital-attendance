@@ -1,14 +1,13 @@
 "use client";
 import { HomeIcon, XIcon } from "lucide-react";
-import Image from "next/image";
 
 import { LogOut } from "lucide-react";
-import React, { useContext, useState } from "react";
-import { SidebarContext } from "@/app/dashboard/layout";
+import React, { useContext } from "react";
 import { Settings } from "lucide-react";
 import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { SidebarContext } from "@/context/SidebarContext";
 
 const Sidebar = () => {
   const { open, setOpen } = useContext(SidebarContext);

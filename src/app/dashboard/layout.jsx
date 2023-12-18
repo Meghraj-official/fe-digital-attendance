@@ -5,9 +5,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
 
-
 const Layout = ({ children }) => {
-
   return (
     <SidebarContextProvider>
       <div className="flex">
@@ -18,9 +16,8 @@ const Layout = ({ children }) => {
           <Navbar /> <div> {children} </div>
         </div>
       </div>
-      </SidebarContextProvider>
+    </SidebarContextProvider>
   );
 };
 
 export default Layout;
-
