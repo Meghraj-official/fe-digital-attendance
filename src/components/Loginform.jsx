@@ -22,7 +22,7 @@ const LoginData = (user, index) => {
           type={user.type}
           className="  w-full  max-sm:text-xs max-md:text-xs max-lg:text-sm    focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
         />
-        <label className="absolute ml-3 mt-3 max-sm:mt-2 max-sm:ml-3 max-md:text-xs max-lg:text-sm max-sm:text-xs   text-primaryColor-400 text-sm transition duration-200 input-text  ">
+        <label className="absolute pointer-events-none ml-3 mt-3 max-sm:mt-2 max-sm:ml-3 max-md:text-xs max-lg:text-sm max-sm:text-xs   text-primaryColor-400 text-sm transition duration-200 input-text  ">
           {user.placeholder}
         </label>
       </div>
@@ -32,7 +32,7 @@ const LoginData = (user, index) => {
 
 const handleSubmit = () => {
   console.log("hello sandhya");
-  alert("hi sandhya");
+  alert("helloooooo");
 };
 
 export default function Loginform() {
@@ -60,9 +60,10 @@ export default function Loginform() {
             </div>
           </div>
         </div>
+        {/* //form */}
 
         <div className="w-2/3  max-sm:w-full max-sm:h-2/3  ">
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="h-5 w-full mb-3 text-center align-middle py-1">
               <label className="text-center font-bold tracking-wide text-primaryColor-900 font-poppins max-lg:text-xl text-2xl">
                 LogIn
@@ -73,11 +74,12 @@ export default function Loginform() {
                 Scan Smart, Attend Smarter
               </label>
             </div>
-            <div className=" px-20 max-sm:px-10 w-full text-primaryColor-950 rounded-lg  mt-28 max-sm:mt-0 max-sm:w-full max-md:h-full  ">
+            <div className=" px-40 max-sm:px-10 max-lg:px-20 w-full text-primaryColor-950 rounded-lg  mt-28 max-sm:mt-0 max-sm:w-full max-md:h-full  ">
               {loginField.map(LoginData)}
 
               <div className="flex justify-center  mt-10 max-sm:mt-1    ">
                 <Button
+                  onClick={handleSubmit}
                   className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
                   buttonText="Login"
                 />

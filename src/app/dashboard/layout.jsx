@@ -5,21 +5,19 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
 
-
 const Layout = ({ children }) => {
-
   return (
     <SidebarContextProvider>
       <div className="flex">
         {/* sidebar */}
+
         <Sidebar />
         <div className=" w-full lg:ml-72 flex flex-col text-center bg-white text-black h-screen ">
           <Navbar /> <div> {children} </div>
         </div>
       </div>
-      </SidebarContextProvider>
+    </SidebarContextProvider>
   );
 };
 
 export default Layout;
-
