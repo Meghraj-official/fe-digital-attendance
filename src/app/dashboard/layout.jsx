@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useState, createContext } from "react";
+import React from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/navbar/Navbar";
-// @ts-ignore
+import SidebarContextProvider from "@/context/SidebarContext";
 
-export const SidebarContext = createContext();
 
 const Layout = ({ children }) => {
-  const [open, setOpen] = useState(false);
 
   return (
-    <SidebarContext.Provider value={{ open, setOpen }}>
+    <SidebarContextProvider>
       <div className="flex">
         {/* sidebar */}
 
@@ -20,8 +18,9 @@ const Layout = ({ children }) => {
           <Navbar /> <div> {children} </div>
         </div>
       </div>
-    </SidebarContext.Provider>
+      </SidebarContextProvider>
   );
 };
 
 export default Layout;
+

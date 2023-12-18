@@ -82,10 +82,10 @@ export default function Signupform() {
                 <Data register={register} item={item} key={item.name} />
               ))}
 
-              <div className="flex flex-col max-lg:text-sm  max-sm:text-xs  mb-2">
-                <div className=" max-md:text-xs ">
-                  <label>Role</label>
-                </div>
+            <div className="flex flex-col max-lg:text-sm  max-sm:text-xs  mb-2">
+              <div className=" max-md:text-xs ">
+                <label>Role</label>
+              </div>
 
                 <div className="  max-md:text-xs py-1 flex">
                   <RadioGroup defaultValue="Teacher">
@@ -113,14 +113,14 @@ export default function Signupform() {
                 </div>
               </div>
 
-              <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
-                <label>
-                  Already have an account?
-                  <Link href="/login" className="underline font-semibold">
-                    Login
-                  </Link>
-                </label>
-              </div>
+            <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
+              <label>
+                Already have an account?
+                <Link href="/login" className="underline font-semibold">
+                  Login
+                </Link>
+              </label>
+            </div>
 
               <div className="flex justify-center  ">
                 <Button
@@ -132,6 +132,6 @@ export default function Signupform() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
