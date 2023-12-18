@@ -18,8 +18,6 @@ const inputField = [
 ];
 
 const Data = ({ item, register }) => {
-  // const { register } = useFormContext();
-
   return (
     <div className="">
       <div className="mb-2 max-lg:mb-1  ">
@@ -113,12 +111,10 @@ export default function Signupform() {
             </div>
 
             <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
-              <label>
-                Already have an account?
-                <Link href="/login" className="underline font-semibold">
-                  Login
-                </Link>
-              </label>
+              Already have an account?
+              <Link href="/login" className="underline font-semibold">
+                Login
+              </Link>
             </div>
 
             <div className="flex justify-center  ">

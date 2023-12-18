@@ -1,14 +1,8 @@
-import Link from "next/link";
 import React from "react";
-import Loginform from "../../../components/Loginform";
-
-
+import Loginform from "@/components/Login/Loginform";
 
 const Login = () => {
-  return <div className="">
-    <Link href='/login'><Loginform/></Link>
-    
-       </div>;
+  return <Loginform />;
 };
 
 export default Login;

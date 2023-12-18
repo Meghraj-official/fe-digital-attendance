@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "src/components/Login.jsx",
     "src/app/dashboard/layout.jsx"
-  ],
+, "src/components/Login/LoginData.jsx", "src/components/Signupform.jsx"  ],
   "exclude": ["node_modules"]
 }
