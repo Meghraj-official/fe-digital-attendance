@@ -50,13 +50,13 @@ const inputField = [
 
 const Data = ({ item, register, errors }) => {
   return (
-    <div className="">
-      <div className="mb-3 max-lg:mb-1  ">
-        <label className=" mb-1 text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
+    <div className="mb-1">
+      <div className="mb-2 max-lg:mb-1  ">
+        <label className="  text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
           {item.placeholder}
         </label>
       </div>
-      <div className="flex mb-3 max-lg:mb-1">
+      <div className="flex max-lg:mb-1">
         <Input
           type={item.type}
           {...register(item.name)}
