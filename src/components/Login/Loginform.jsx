@@ -3,15 +3,48 @@ import Link from "next/link";
 import Button from "../Button";
 import LoginData from "./LoginData";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object({
+  email: yup.string().required("Email is required"),
+
+  password: yup.string().min(6).max(10).required("Password is required"),
+});
 
 const loginField = [
-  { name: "Email", type: "text", placeholder: "Enter Email" },
-  { name: "Password", type: "password", placeholder: "Enter Password" },
+  {
+    name: "email",
+    type: "text",
+    placeholder: " Email",
+    message: "email is required",
+  },
+  {
+    name: "password",
+    type: "password",
+    placeholder: " Password",
+    message: "password is required",
+  },
 ];
 
 export default function Loginform() {
-  const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => {
+  const { handleSubmit, register, formState } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const { errors } = formState;
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(
+        `https://digital-attendance.onrender.com/auth/signin`,
+        data
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
     console.log(data);
   };
   return (
@@ -52,7 +85,12 @@ export default function Loginform() {
             </div>
             <div className=" px-40 max-sm:px-10 max-lg:px-20 w-full text-primaryColor-950 rounded-lg  mt-28 max-sm:mt-0 max-sm:w-full max-md:h-full  ">
               {loginField.map((user) => (
-                <LoginData register={register} user={user} key={user.name} />
+                <LoginData
+                  register={register}
+                  user={user}
+                  key={user.name}
+                  errors={errors}
+                />
               ))}
 
               <div className="flex justify-center  mt-10 max-sm:mt-1    ">
