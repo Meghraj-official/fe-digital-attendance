@@ -11,24 +11,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const schema = yup.object({
   firstName: yup.string().required("Firstname is required"),
   lastName: yup.string().required("Lastname is required"),
-  email: yup.string().required("Email is required"),
-  password: yup.string().min(6).max(10).required("Password is required"),
+  email: yup.string().email().required("Email is required"),
+  password: yup.string().required("Password is required").min(6).max(10),
+  confirmpassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
   role: yup.string().required("Role is required"),
 });
 
 const inputField = [
   {
-    name: "firstName",
+    name: "fullName",
     type: "text",
-    placeholder: "First Name",
-    message: "Firstname is required",
+    placeholder: "Full Name",
+    message: "Full Name is required",
   },
-  {
-    name: "lastName",
-    type: "text",
-    placeholder: "Last Name",
-    message: "Lastname is required",
-  },
+
   {
     name: "email",
     type: "text",
@@ -42,7 +41,7 @@ const inputField = [
     message: "Password is required",
   },
   {
-    name: "Confirm Password",
+    name: "confirmpassword",
     type: "password",
     placeholder: "Confirm Password",
   },
@@ -58,6 +57,7 @@ const Data = ({ item, register, errors }) => {
       </div>
       <div className="flex max-lg:mb-1">
         <Input
+          placeholder=""
           type={item.type}
           {...register(item.name)}
           className="w-full  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
@@ -99,7 +99,7 @@ export default function Signupform() {
   };
 
   return (
-    <div className="h-screen w-screen bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex  ">
+    <div className="min-h-screen  w-full  bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex  ">
       <div className=" flex w-1/2 bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:hidden  bg-red-800   ">
         <div className="relative  w-full h-full">
           <Image
@@ -110,7 +110,7 @@ export default function Signupform() {
           />
         </div>
       </div>
-      <div className="w-1/2 h-full max-sm:w-full flex justify-center items-center  ">
+      <div className="w-1/2 h-screen  max-sm:w-full flex justify-center items-center ">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="h-8 w-full text-center  py-1 ">
             <label className="text-center font-bold tracking-wide text-primaryColor-900 font-poppins max-lg:text-xl text-2xl">

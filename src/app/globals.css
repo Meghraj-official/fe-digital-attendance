@@ -8,7 +8,8 @@
     @apply text-primaryColor-800 bg-primaryColor-100 transform -translate-y-5 translate-x-0.5 scale-75;
 } */
 
-.input-text:focus ~ .input-text,
-.input-type:valid ~ .input-text {
+/* .input-text:focus ~ .input-text, */
+.input-type:not(:placeholder-shown) + label,
+.input-type:focus + label {
   @apply text-primaryColor-800 bg-primaryColor-100 transform -translate-y-5 translate-x-0.5 scale-75 max-sm:-translate-y-5;
 }
