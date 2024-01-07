@@ -9,8 +9,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object({
-  firstName: yup.string().required("Firstname is required"),
-  lastName: yup.string().required("Lastname is required"),
+  fullName: yup.string().required("Full Name is required"),
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required").min(6).max(10),
   confirmpassword: yup
@@ -55,9 +54,10 @@ const Data = ({ item, register, errors }) => {
           {item.placeholder}
         </label>
       </div>
-      <div className="flex max-lg:mb-1">
+      <div className="flex ">
         <Input
           placeholder=""
+          autoComplete="off"
           type={item.type}
           {...register(item.name)}
           className="w-full  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
@@ -66,7 +66,9 @@ const Data = ({ item, register, errors }) => {
           {item.placeholder}
         </label>
       </div>
-      <p className="text-red-500 text-xs">{errors[item.name]?.message}</p>
+      <p className="text-red-500 text-xs max-sm:text-[10px]">
+        {errors[item.name]?.message}
+      </p>
     </div>
   );
 };
@@ -84,8 +86,8 @@ export default function Signupform() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`,
         {
-          firstName: data.firstName,
-          lastName: data.lastName,
+          fullName: data.fullName,
+
           email: data.email,
           password: data.password,
           role: data.role,
@@ -110,14 +112,14 @@ export default function Signupform() {
           />
         </div>
       </div>
-      <div className="w-1/2 h-screen  max-sm:w-full flex justify-center items-center ">
+      <div className="w-1/2 h-screen   max-sm:w-full flex justify-center items-center ">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="h-8 w-full text-center  py-1 ">
-            <label className="text-center font-bold tracking-wide text-primaryColor-900 font-poppins max-lg:text-xl text-2xl">
+            <label className="text-center max-sm:hidden font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:sm max-lg:text-xl text-2xl">
               SignUp
             </label>
           </div>
-          <div className="h-6 w-full mb-2  text-center align-middle  ">
+          <div className="h-6 w-full mb-2 max-sm:mb-0  text-center align-middle  ">
             <label className="text-center font-thin tracking-wide text-primaryColor-600 font-poppins max-lg:text-xs text-sm">
               Transform Attendance with a Scan
             </label>
@@ -147,7 +149,9 @@ export default function Signupform() {
                   Student
                 </div>
               </div>
-              <p className="text-red-500 text-xs">{errors.role?.message}</p>
+              <p className="text-red-500 text-xs max-sm:text-[10px]">
+                {errors.role?.message}
+              </p>
             </div>
           </div>
 
