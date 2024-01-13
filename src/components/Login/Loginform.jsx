@@ -45,7 +45,7 @@ export default function Loginform() {
   const { errors } = formState;
   const { toast } = useToast();
 
-  const navigate = useRouter();
+  const router = useRouter();
   const { mutate, isLoading } = useMutation(loginApi, {
     onSuccess: (data) => {
       console.log("data form auth", data);
@@ -54,7 +54,7 @@ export default function Loginform() {
         token: data.data.accessToken,
         // userType: data.data.userType
       });
-      navigate.push("/dashboard");
+      router.push("/dashboard");
     },
     onError: (error) => {
       toast({

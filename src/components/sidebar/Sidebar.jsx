@@ -13,6 +13,7 @@ import { useAuthStore } from "@/store/authStore";
 const Sidebar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const router = useRouter();
+
   const pathname = usePathname();
   const { setAuth } = useAuthStore();
 
@@ -134,7 +135,7 @@ const Sidebar = () => {
       {/* Logout button here */}
       <button
         onClick={() => {
-          location.href = "./login";
+          router.push("/");
           setAuth({
             isAuth: false,
             token: null,
