@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import { Menu } from "lucide-react";
 import Dropmenu from "../Dropmenu";
 import { SidebarContext } from "@/context/SidebarContext";
-import DialogBox from "../DialogBox";
+import QRBox from "../QRBox";
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const [isDropdown, setIsDropDown] = useState(false);
@@ -58,10 +58,9 @@ const Navbar = () => {
               placeholder="Search here"
             />
           </div>
-          <div className="flex items-center p-2 bg-primaryColor-400 rounded-md hover:bg-primaryColor-200">
-            <button>Generate Qr</button>
+          <div>
+            <QRBox />
           </div>
-
           <div className="flex items-center">
             <button
               onClick={toggleDropdown}
