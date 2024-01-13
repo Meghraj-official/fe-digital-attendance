@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import { Menu } from "lucide-react";
 import Dropmenu from "../Dropmenu";
 import { SidebarContext } from "@/context/SidebarContext";
+import QRBox from "../QRBox";
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const [isDropdown, setIsDropDown] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="  py-8 px-2 m-8 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
+      <div className=" py-8 px-2 m-8 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
         {/* Headings Here L */}
         {/* <div className="flex font-poppins flex-col gap-2 text-left ">
         <h2 className="text-md  font-thin"> page / Home pages </h2>
@@ -57,7 +58,9 @@ const Navbar = () => {
               placeholder="Search here"
             />
           </div>
-
+          <div>
+            <QRBox />
+          </div>
           <div className="flex items-center">
             <button
               onClick={toggleDropdown}
@@ -67,10 +70,7 @@ const Navbar = () => {
         </div>
       </div>
       {isDropdown && (
-        <div
-          // ref={menuRef}
-          className="absolute right-1 p-8 mt-20 transform transition duration-200 translate-y-6"
-        >
+        <div className="absolute right-1 p-8 mt-20 z-10 transform transition duration-200 translate-y-1 ">
           <Dropmenu />
         </div>
       )}
