@@ -37,18 +37,22 @@ const loginApi = (data) => {
 };
 
 export default function Loginform() {
+  const { setAuth } = useAuthStore();
+
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const { errors } = formState;
   const { toast } = useToast();
 
   const navigate = useRouter();
   const { mutate, isLoading } = useMutation(loginApi, {
     onSuccess: (data) => {
+      console.log("data form auth", data);
       setAuth({
         isAuth: true,
         token: data.data.accessToken,
+        // userType: data.data.userType
       });
       navigate.push("/dashboard");
     },
@@ -60,10 +64,6 @@ export default function Loginform() {
       });
     },
   });
-
-  const { setAuth } = useAuthStore();
-
-  const { errors } = formState;
 
   const onSubmit = async (data) => {
     mutate(data);
