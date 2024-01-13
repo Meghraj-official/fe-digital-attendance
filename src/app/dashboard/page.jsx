@@ -3,7 +3,11 @@ import { TableDemo } from "@/app/table";
 import DialogBox from "@/components/DialogBox";
 import { useState } from "react";
 
+import { useAuthStore } from "@/store/authStore";
+
 const Dashboard = () => {
+  const { userType } = useAuthStore();
+  console.log("user type", userType);
   // const [openBox, setOpenBox] = useState(false);
 
   return (

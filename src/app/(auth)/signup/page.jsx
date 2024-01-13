@@ -1,6 +1,20 @@
+"use client";
+
 import React from "react";
 import Signupform from "../../../components/Signupform";
+import { useAuthStore } from "@/store/authStore";
 const Signup = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  const { isAuth } = useAuthStore();
+
+  React.useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading || isAuth) {
+    return "loading";
+  }
   return (
     <div>
       <Signupform />

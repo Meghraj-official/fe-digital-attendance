@@ -8,11 +8,13 @@ import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { SidebarContext } from "@/context/SidebarContext";
+import { useAuthStore } from "@/store/authStore";
 
 const Sidebar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const router = useRouter();
   const pathname = usePathname();
+  const { setAuth } = useAuthStore();
 
   return (
     <div
@@ -133,6 +135,10 @@ const Sidebar = () => {
       <button
         onClick={() => {
           location.href = "./login";
+          setAuth({
+            isAuth: false,
+            token: null,
+          });
         }}
         className="absolute flex justify-center inset-x-0 bottom-0 py-3 px-2 text-center bg-primaryColor-400"
       >
