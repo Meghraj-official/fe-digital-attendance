@@ -3,14 +3,18 @@ import Link from "next/link";
 import Button from "../Button";
 import LoginData from "./LoginData";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuthStore } from "@/store/authStore";
+import { useMutation } from "react-query";
+import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
+import axiosInstance from "@/lib/axios";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
 
-  password: yup.string().required("Password is required").min(6).max(10),
+  password: yup.string().required("Password is required").min(6).max(28),
 });
 
 const loginField = [
@@ -28,25 +32,43 @@ const loginField = [
   },
 ];
 
+const loginApi = (data) => {
+  return axiosInstance.post(`/auth/signin`, data);
+};
+
 export default function Loginform() {
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const { toast } = useToast();
+
+  const navigate = useRouter();
+  const { mutate, isLoading } = useMutation(loginApi, {
+    onSuccess: (data) => {
+      setAuth({
+        isAuth: true,
+        token: data.data.accessToken,
+      });
+      navigate.push("/dashboard");
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error?.response?.data?.error?.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const { setAuth } = useAuthStore();
+
   const { errors } = formState;
 
   const onSubmit = async (data) => {
-    try {
-      const res = await axios.post(
-        `https://digital-attendance.onrender.com/auth/signin`,
-        data
-      );
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-    console.log(data);
+    mutate(data);
   };
+
   return (
     <>
       <div className="h-screen w-screen  bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex flex-row max-sm:flex-col">
@@ -96,7 +118,7 @@ export default function Loginform() {
               <div className="flex justify-center  mt-10 max-sm:mt-1    ">
                 <Button
                   className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-                  buttonText="Login"
+                  buttonText={isLoading ? "Logging in..." : "Login"}
                 />
               </div>
             </div>

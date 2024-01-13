@@ -6,6 +6,16 @@ import Navbar from "@/components/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
 
 const Layout = ({ children }) => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <SidebarContextProvider>
       <div className="flex">

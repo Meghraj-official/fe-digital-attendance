@@ -4,12 +4,15 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axiosInstance from "@/lib/axios";
+import { useMutation } from "react-query";
+import { useToast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object({
-  fullName: yup.string().required("Full Name is required"),
+  fullName: yup.string().required("Full name is required"),
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required").min(6).max(10),
   confirmpassword: yup
@@ -24,20 +27,17 @@ const inputField = [
     name: "fullName",
     type: "text",
     placeholder: "Full Name",
-    message: "Full Name is required",
   },
 
   {
     name: "email",
     type: "text",
-    placeholder: " Email ",
-    message: "Email is required",
+    placeholder: "Email",
   },
   {
     name: "password",
     type: "password",
-    placeholder: " Password",
-    message: "Password is required",
+    placeholder: "Password",
   },
   {
     name: "confirmpassword",
@@ -48,13 +48,13 @@ const inputField = [
 
 const Data = ({ item, register, errors }) => {
   return (
-    <div className="mb-1">
-      <div className="mb-2 max-lg:mb-1  ">
-        <label className="  text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
+    <div className="">
+      <div className="mb-3 max-lg:mb-1  ">
+        <label className=" mb-1 text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
           {item.placeholder}
         </label>
       </div>
-      <div className="flex ">
+      <div className="flex mb-3 max-lg:mb-1">
         <Input
           placeholder=""
           autoComplete="off"
@@ -62,7 +62,7 @@ const Data = ({ item, register, errors }) => {
           {...register(item.name)}
           className="w-full  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
         />
-        <label className="absolute pointer-events-none mt-3 ml-3  max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs     text-primaryColor-400 text-sm transition duration-200 input-text">
+        <label className="absolute pointer-events-none mt-3 ml-3  max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs scale-100  text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
         </label>
       </div>
@@ -73,11 +73,35 @@ const Data = ({ item, register, errors }) => {
   );
 };
 
-console.log(process.env.BASE_URL);
+const signupApi = (data) => {
+  return axiosInstance.post(`/auth/signup`, data);
+};
+
 export default function Signupform() {
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const navigate = useRouter();
+
+  const { mutate, isLoading } = useMutation(signupApi, {
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Account created successfully",
+      });
+      navigate.push("/login");
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error?.response?.data?.error?.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const { toast } = useToast();
 
   const { errors } = formState;
 
@@ -97,7 +121,8 @@ export default function Signupform() {
     } catch (err) {
       console.log(err);
     }
-    console.log(data);
+    delete data?.confirmpassword;
+    mutate(data);
   };
 
   return (
@@ -139,14 +164,27 @@ export default function Signupform() {
                 <label>Role</label>
               </div>
 
-              <div className=" flex justify-between  max-md:text-xs py-1  ">
-                <div className=" flex justify-between text-primaryColor-950 max-md:text-xs  text-sm">
-                  <input type="radio" {...register("role")} value={"teacher"} />
-                  Teacher
+              <div className=" flex space-x-6 max-md:text-xs py-1">
+                <div className=" flex space-x-1 justify-between text-primaryColor-950 max-md:text-xs  text-sm">
+                  <input
+                    id="teacher"
+                    type="radio"
+                    {...register("role")}
+                    value={"teacher"}
+                    className="accent-primaryColor-900"
+                  />
+                  <label htmlFor="teacher">Teacher</label>
                 </div>
-                <div className="  max-sm:ml-5 text-primaryColor-950 max-md:text-xs text-sm">
-                  <input type="radio" {...register("role")} value={"student"} />
-                  Student
+                <div className="max-sm:ml-5 space-x-1 text-primaryColor-950 max-md:text-xs text-sm">
+                  <input
+                    id="student"
+                    type="radio"
+                    {...register("role")}
+                    value={"student"}
+                    className="accent-primaryColor-900"
+                  />
+
+                  <label htmlFor="student">Student</label>
                 </div>
               </div>
               <p className="text-red-500 text-xs max-sm:text-[10px]">
@@ -165,7 +203,7 @@ export default function Signupform() {
           <div className="flex justify-center  max-sm:mt-1 mt-3  px-40 max-lg:px-20">
             <Button
               className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-              buttonText="Sign Up"
+              buttonText={isLoading ? "Signing up..." : "Sign Up"}
             />
           </div>
         </form>
