@@ -12,12 +12,6 @@ const queryClient = new QueryClient();
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Digital Attendance",
-  description:
-    "This is an online attendance system for schools based on QR code",
-};
-
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const { isAuth, setAuth, token } = useAuthStore();
