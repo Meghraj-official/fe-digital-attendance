@@ -2,9 +2,9 @@
 
 import React, { useContext, useState } from "react";
 import { Menu } from "lucide-react";
-import Dropmenu from "../Dropmenu";
+import Dropmenu from "../../../Dropmenu";
 import { SidebarContext } from "@/context/SidebarContext";
-import QRBox from "../QRBox";
+import QRBox from "../../../QRBox";
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const [isDropdown, setIsDropDown] = useState(false);
