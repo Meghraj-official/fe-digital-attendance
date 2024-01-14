@@ -1,6 +1,6 @@
 "use client";
-import { TableDemo } from "@/app/table";
 import DialogBox from "@/components/common/DialogBox";
+import { TableDemo } from "@/components/dashboard/teacher/TableDemo";
 
 import { useAuthStore } from "@/store/authStore";
 
