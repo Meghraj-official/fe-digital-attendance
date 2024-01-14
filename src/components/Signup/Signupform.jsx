@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/Button";
+import Button from "@/components/common/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -8,8 +8,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "react-query";
-import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -158,7 +158,7 @@ export default function Signupform() {
                 errors={errors}
               />
             ))}
-
+            {/* 
             <div className="flex flex-col max-lg:text-sm max-sm:text-xs  mb-2">
               <div className=" max-md:text-xs text-sm">
                 <label>Role</label>
@@ -190,7 +190,7 @@ export default function Signupform() {
               <p className="text-red-500 text-xs max-sm:text-[10px]">
                 {errors.role?.message}
               </p>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
