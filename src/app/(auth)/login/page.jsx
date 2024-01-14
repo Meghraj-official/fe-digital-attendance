@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Loginform from "@/components/Login/Loginform";
+import Loginform from "@/components/login/Loginform";
 import { useAuthStore } from "@/store/authStore";
 
 const Login = () => {
