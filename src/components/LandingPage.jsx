@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import TypingAnimation from "./TypingAnimation";
-import Button from "./Button";
+import Button from "./common/Button";
 import Link from "next/link";
 
 const LandingPage = () => {
