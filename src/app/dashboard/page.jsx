@@ -7,7 +7,6 @@ import { useAuthStore } from "@/store/authStore";
 const Dashboard = () => {
   const { userType } = useAuthStore();
   console.log("user type", userType);
-  // const [openBox, setOpenBox] = useState(false);
 
   return (
     <>
@@ -24,4 +23,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-[];
