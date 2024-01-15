@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Signupform from "../../../components/Signupform";
+import Signupform from "../../../components/signup/Signupform";
 import { useAuthStore } from "@/store/authStore";
 const Signup = () => {
   const [isLoading, setIsLoading] = React.useState(true);

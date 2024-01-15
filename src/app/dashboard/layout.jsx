@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Sidebar from "@/components/sidebar/Sidebar";
-import Navbar from "@/components/navbar/Navbar";
+import Sidebar from "@/components/dashboard/common/sidebar/Sidebar";
+import Navbar from "@/components/dashboard/common/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
 
 const Layout = ({ children }) => {

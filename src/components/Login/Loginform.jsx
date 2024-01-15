@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import Button from "../Button";
-import LoginData from "./LoginData";
+import Button from "../common/Button";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +9,7 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import axiosInstance from "@/lib/axios";
+import LoginData from "./LoginData";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -85,12 +85,23 @@ export default function Loginform() {
               </label>
             </div>
             <div className="flex justify-center mt-10 max-sm:mt-1">
-              <Link
-                className="text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-100 rounded-3xl  font-medium tracking-wider uppercase text-lg py-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
-                href="/signup"
-              >
-                Sign Up
-              </Link>
+              <div>
+                <Link
+                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wider uppercase text-md p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  href="/signup"
+                >
+                  Sign Up As Teacher
+                </Link>
+              </div>
+              <div>
+                <Link
+                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wider uppercase text-md 
+                   p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  href="/signupstudent"
+                >
+                  Sign Up As Student
+                </Link>
+              </div>
             </div>
           </div>
         </div>
