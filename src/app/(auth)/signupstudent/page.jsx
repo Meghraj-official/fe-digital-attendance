@@ -2,8 +2,9 @@
 
 import React from "react";
 import { useAuthStore } from "@/store/authStore";
-import Signupform from "@/components/Signup/Signupform";
-const Signup = () => {
+// import Signupform from "@/components/Signup/Signupform";
+import SignupStudentForm from "@/components/signupstudent/SignupStudentForm";
+const SignupStudent = () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   const { isAuth } = useAuthStore();
@@ -17,9 +18,9 @@ const Signup = () => {
   }
   return (
     <div>
-      <Signupform />
+      <SignupStudentForm />
     </div>
   );
 };
 
-export default Signup;
+export default SignupStudent;
