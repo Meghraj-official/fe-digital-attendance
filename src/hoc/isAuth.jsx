@@ -13,7 +13,7 @@ export default function isAuth(Component) {
 
     useLayoutEffect(() => {
       if (!auth) {
-        return redirect("/");
+        return redirect("/login");
       }
     }, [auth]);
 
@@ -22,10 +22,10 @@ export default function isAuth(Component) {
     }
 
     if (
-      (pathname.startsWith("/login") || pathname.startsWith("/signup")) &&
-      auth
+      auth &&
+      (pathname.startsWith("/login") || pathname.startsWith("/signup"))
     ) {
-      navigate.push("/dashboard");
+      navigate.push(`/dashboard/${userType.toLowerCase()}`);
     }
 
     if (!auth) {
@@ -33,11 +33,20 @@ export default function isAuth(Component) {
     }
 
     if (auth) {
-      if (userType === userCategory.student) {
+      if (
+        userType === userCategory.student &&
+        (pathname.includes("/teacher") || pathname.includes("/admin"))
+      ) {
         navigate.push("/dashboard/student");
-      } else if (userType === userCategory.teacher) {
+      } else if (
+        userType === userCategory.teacher &&
+        (pathname.includes("/student") || pathname.includes("/admin"))
+      ) {
         navigate.push("/dashboard/teacher");
-      } else if (userType === userCategory.admin) {
+      } else if (
+        userType === userCategory.admin &&
+        (pathname.includes("/teacher") || pathname.includes("/student"))
+      ) {
         navigate.push("/dashboard/admin");
       }
     }
