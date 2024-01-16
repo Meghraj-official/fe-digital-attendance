@@ -1,3 +1,4 @@
+"use client";
 import isAuth from "@/hoc/isAuth";
 import React from "react";
 
