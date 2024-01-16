@@ -6,14 +6,15 @@ import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { SidebarContext } from "@/context/SidebarContext";
 import { useAuthStore } from "@/store/authStore";
-import { studentNavigation } from "@/lib/data/dashboard";
+import { studentNavigation, teacherNavigation } from "@/lib/data/dashboard";
 import NavigationButton from "../navbar/NavigationButton";
+import { userCategory } from "@/lib/data/user";
 
 const Sidebar = () => {
   const { open, setOpen } = useContext(SidebarContext);
   const router = useRouter();
 
-  const { setAuth } = useAuthStore();
+  const { setAuth, userType } = useAuthStore();
 
   return (
     <div
@@ -39,14 +40,23 @@ const Sidebar = () => {
       {/* Nav Links Here */}
 
       <div className="h-80 relative  py-20 ">
-        {studentNavigation.map((item) => (
-          <NavigationButton
-            labelName={item.label}
-            pathName={item.pathName}
-            IconName={item.icon}
-            key={item.id}
-          />
-        ))}
+        {userType === userCategory.student
+          ? studentNavigation.map((item) => (
+              <NavigationButton
+                labelName={item.label}
+                pathName={item.pathName}
+                IconName={item.icon}
+                key={item.id}
+              />
+            ))
+          : teacherNavigation.map((item) => (
+              <NavigationButton
+                labelName={item.label}
+                pathName={item.pathName}
+                IconName={item.icon}
+                key={item.id}
+              />
+            ))}
       </div>
       {/* Logout button here */}
       <button
