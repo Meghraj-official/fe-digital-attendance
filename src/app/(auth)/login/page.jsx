@@ -13,9 +13,9 @@ const Login = () => {
     setIsLoading(false);
   }, []);
 
-  if (isLoading || isAuth) {
-    return "loading";
-  }
+  // if (isLoading || isAuth) {
+  //   return "loading";
+  // }
   return <Loginform />;
 };
 
