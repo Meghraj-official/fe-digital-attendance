@@ -1,22 +1,15 @@
 "use client";
-
-import React from "react";
 import Loginform from "@/components/login/Loginform";
-import { useAuthStore } from "@/store/authStore";
+import React from "react";
+// import Loginform from "@/components/Login/Loginform";
+// import AuthWrapper from "@/components/common/AuthWrapper";
 
 const Login = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  const { isAuth } = useAuthStore();
-
-  React.useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
-  // if (isLoading || isAuth) {
-  //   return "loading";
-  // }
-  return <Loginform />;
+  return (
+    // <AuthWrapper>
+    <Loginform />
+    // </AuthWrapper>
+  );
 };
 
 export default Login;
