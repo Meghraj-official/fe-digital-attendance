@@ -1,13 +1,13 @@
 "use client";
 import DialogBox from "@/components/common/DialogBox";
 import { TableDemo } from "@/components/dashboard/teacher/TableDemo";
+// import isAuth from "@/hooks/isAuth";
 
 import { useAuthStore } from "@/store/authStore";
 
 const Dashboard = () => {
   const { userType } = useAuthStore();
   console.log("user type", userType);
-  // const [openBox, setOpenBox] = useState(false);
 
   return (
     <>
@@ -24,4 +24,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-[];
+// export default isAuth(Dashboard);
