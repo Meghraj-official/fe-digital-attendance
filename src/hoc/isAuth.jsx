@@ -2,10 +2,11 @@
 import { useLayoutEffect } from "react";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
+import { userCategory } from "@/lib/data/user";
 
 export default function isAuth(Component) {
   return function IsAuth(props) {
-    const { isAuth: isAuthenticated } = useAuthStore();
+    const { isAuth: isAuthenticated, userType } = useAuthStore();
     const pathname = usePathname();
     const auth = isAuthenticated;
     const navigate = useRouter();
@@ -31,6 +32,15 @@ export default function isAuth(Component) {
       return null;
     }
 
+    if (auth) {
+      if (userType === userCategory.student) {
+        navigate.push("/dashboard/student");
+      } else if (userType === userCategory.teacher) {
+        navigate.push("/dashboard/teacher");
+      } else if (userType === userCategory.admin) {
+        navigate.push("/dashboard/admin");
+      }
+    }
     return <Component {...props} />;
   };
 }

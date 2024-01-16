@@ -51,8 +51,8 @@ export default function Loginform() {
       console.log("data form auth", data);
       setAuth({
         isAuth: true,
-        token: data.data.accessToken,
-        // userType: data.data.userType
+        token: data?.data?.accessToken,
+        userType: data?.data?.userType,
       });
       router.push("/dashboard");
     },

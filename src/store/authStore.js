@@ -4,7 +4,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 const initialState = {
   isAuth: false,
   token: null,
-  userType: "student",
+  userType: "",
   userId: "",
 };
 

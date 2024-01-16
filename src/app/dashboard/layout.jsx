@@ -4,6 +4,7 @@ import React from "react";
 import Sidebar from "@/components/dashboard/common/sidebar/Sidebar";
 import Navbar from "@/components/dashboard/common/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
+import AuthWrapper from "@/components/common/AuthWrapper";
 
 const Layout = ({ children }) => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -17,16 +18,16 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <SidebarContextProvider>
-      <div className="flex">
-        {/* sidebar */}
-
-        <Sidebar />
-        <div className=" w-full lg:ml-72 flex flex-col text-center bg-white text-black h-screen ">
-          <Navbar /> <div> {children} </div>
+    <AuthWrapper>
+      <SidebarContextProvider>
+        <div className="flex">
+          <Sidebar />
+          <div className=" w-full lg:ml-72 flex flex-col text-center bg-white text-black h-screen ">
+            <Navbar /> <div> {children} </div>
+          </div>
         </div>
-      </div>
-    </SidebarContextProvider>
+      </SidebarContextProvider>
+    </AuthWrapper>
   );
 };
 
