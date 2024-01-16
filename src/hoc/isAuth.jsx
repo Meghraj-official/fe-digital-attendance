@@ -1,6 +1,6 @@
 "use client";
 import { useLayoutEffect } from "react";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import { userCategory } from "@/lib/data/user";
 
@@ -13,9 +13,9 @@ export default function isAuth(Component) {
 
     useLayoutEffect(() => {
       if (!auth) {
-        return redirect("/login");
+        return navigate.push("/login");
       }
-    }, [auth]);
+    }, [auth, navigate]);
 
     if (pathname.startsWith("/dashboard") && !auth) {
       navigate.push("/login");
@@ -29,7 +29,7 @@ export default function isAuth(Component) {
     }
 
     if (!auth) {
-      return null;
+      navigate.push("/login");
     }
 
     if (auth) {
