@@ -88,7 +88,7 @@ export default function Loginform() {
               <div>
                 <Link
                   className=" text-center px-2 lg:px-5 text-primaryColor-950  max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
-                  href="/signup"
+                  href={`/signup?type=teacher`}
                 >
                   Sign Up As Teacher
                 </Link>
@@ -97,7 +97,7 @@ export default function Loginform() {
                 <Link
                   className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md 
                    py-2 px-2 lg:px-5 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
-                  href="/signupstudent"
+                  href={`/signup?type=student`}
                 >
                   Sign Up As Student
                 </Link>

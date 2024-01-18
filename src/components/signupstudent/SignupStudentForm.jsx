@@ -12,60 +12,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 
 import RhfSelect from "../reactHookForms/RhfSelect";
-
-const yearOptions = [
-  {
-    label: "First Year",
-    value: "1",
-  },
-  {
-    label: "Second Year",
-    value: "2",
-  },
-  {
-    label: "Third Year",
-    value: "3",
-  },
-  {
-    label: "Fourth Year",
-    value: "4",
-  },
-];
-
-const semesterOptions = [
-  {
-    label: "First Semester",
-    value: "1",
-  },
-  {
-    label: "Second Semester",
-    value: "2",
-  },
-  {
-    label: "Third Semester",
-    value: "3",
-  },
-  {
-    label: "Fourth Semester",
-    value: "4",
-  },
-  {
-    label: "Fifth Semester",
-    value: "5",
-  },
-  {
-    label: "Sixth Semester",
-    value: "6",
-  },
-  {
-    label: "Seventh Semester",
-    value: "7",
-  },
-  {
-    label: "Eighth Semester",
-    value: "8",
-  },
-];
+import { courseOptions, semesterOptions, yearOptions } from "@/lib/data/signup";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -109,6 +56,14 @@ const inputField = [
     name: "confirmpassword",
     type: "password",
     placeholder: "Confirm Password",
+  },
+];
+
+const sectionField = [
+  {
+    name: "section",
+    type: "text",
+    placeholder: "Section",
   },
 ];
 
@@ -226,6 +181,15 @@ export default function SignupStudentForm() {
                     ]}
                   />
                 </div>
+                <div className=" border h-10 w-1/2 border-primaryColor-900 rounded-md text-center bg-primaryColor-50 ">
+                  <RhfSelect
+                    placeholder="Choose Course"
+                    name="courseCode"
+                    options={courseOptions}
+                  />
+                </div>
+              </div>
+              <div className="flex h-10 w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3">
                 <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
                   <RhfSelect
                     placeholder={isYearly ? "Select Year" : "Select Semester"}
@@ -233,6 +197,22 @@ export default function SignupStudentForm() {
                     options={isYearly ? yearOptions : semesterOptions}
                   />
                 </div>
+                {sectionField.map((item) => (
+                  <Data
+                    register={register}
+                    item={item}
+                    key={item.name}
+                    errors={errors}
+                  />
+                ))}
+
+                {/* <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
+                  <RhfSelect
+                    placeholder={isYearly ? "Select Year" : "Select Semester"}
+                    name={isYearly ? "year" : "semester"}
+                    options={isYearly ? yearOptions : semesterOptions}
+                  />
+                </div> */}
               </div>
 
               {inputField.slice(2).map((item) => (
