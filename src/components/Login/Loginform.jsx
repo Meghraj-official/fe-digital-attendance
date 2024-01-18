@@ -7,9 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthStore } from "@/store/authStore";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 import axiosInstance from "@/lib/axios";
 import LoginData from "./LoginData";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -43,25 +43,20 @@ export default function Loginform() {
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
-  const { toast } = useToast();
 
   const router = useRouter();
   const { mutate, isLoading } = useMutation(loginApi, {
     onSuccess: (data) => {
-      console.log("data form auth", data);
       setAuth({
         isAuth: true,
         token: data?.data?.accessToken,
         userType: data?.data?.userType,
       });
+      toast.success("Login Success");
       router.push("/dashboard");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error?.response?.data?.error?.message,
-        variant: "destructive",
-      });
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
 

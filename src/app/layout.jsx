@@ -2,7 +2,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <QueryClientProvider client={queryClient}>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <Toaster />
+          <Toaster position="bottom-center" reverseOrder={false} />
           {children}
         </body>
       </html>

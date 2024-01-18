@@ -9,10 +9,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 
 import RhfSelect from "../reactHookForms/RhfSelect";
 import { courseOptions, semesterOptions, yearOptions } from "@/lib/data/signup";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -108,22 +108,14 @@ export default function SignupStudentForm() {
 
   const { mutate, isLoading } = useMutation(signupApi, {
     onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Account created successfully",
-      });
-      navigate.push("/login");
+      toast.success("Account created successfully");
+      navigate.push("/verify-email?type=student");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error?.response?.data?.error?.message,
-        variant: "destructive",
-      });
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
   const isYearly = watch("courseType") === "YEARLY";
-  const { toast } = useToast();
 
   const { errors } = formState;
 
