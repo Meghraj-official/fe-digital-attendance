@@ -73,35 +73,35 @@ export default function Loginform() {
     <>
       <div className="h-screen w-screen  bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex flex-row max-sm:flex-col">
         <div className="flex justify-center w-1/2  max-w-sm:flex-row  bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:w-full max-sm:h-1/3">
-          <div className=" text-primaryColor-100   self-center">
-            <div className="flex justify-center ">
+          <div className=" text-primaryColor-100 flex justify-center flex-col   self-center">
+            <div className="flex  justify-center ">
               <label className="font-bold font-mono text-3xl p-2 max-lg:text-2xl max-sm:text-xl">
                 New Here?
               </label>
             </div>
-            <div className="flex justify-center">
+            <div className="flex  justify-center">
               <label className="font-bold font-mono text-lg text-center p-2 max-sm:text-sm max-lg:text-xl ">
                 Revolutionize Attendance with Speed!
               </label>
             </div>
-            <div className="flex justify-center mt-10 max-sm:mt-1">
-              <div>
-                <Link
-                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wider uppercase text-md p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
-                  href="/signup"
-                >
-                  Sign Up As Teacher
-                </Link>
-              </div>
-              <div>
-                <Link
-                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wider uppercase text-md 
-                   p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
-                  href="/signupstudent"
-                >
-                  Sign Up As Student
-                </Link>
-              </div>
+            <div className="flex  w-full h-10  items-center  flex-row gap-2  justify-center mt-10 max-sm:mt-2 max-sm:flex-col  ">
+              {/* <div className="  h-full items-center     "> */}
+              <Link
+                className=" text-center py-1 w-1/2 max-sm:w-2/3  px-3 text-primaryColor-950 place-self-center max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wide  text-md   "
+                href="/signup"
+              >
+                Sign Up As Teacher
+              </Link>
+              {/* </div> */}
+              {/* <div className="  h-full items-center  w-1/2 max-sm:w-full"> */}
+              <Link
+                className=" text-center py-1 px-3 w-1/2 max-sm:w-2/3 text-primaryColor-950   max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wide  text-md 
+         "
+                href="/signupstudent"
+              >
+                Sign Up As Student
+              </Link>
+              {/* </div> */}
             </div>
           </div>
         </div>
