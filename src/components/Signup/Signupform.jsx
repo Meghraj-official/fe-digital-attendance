@@ -49,24 +49,24 @@ const inputField = [
 const Data = ({ item, register, errors }) => {
   return (
     <div className="">
-      <div className="mb-3 max-lg:mb-1  ">
+      {/* <div className="mb-3 max-lg:mb-1  ">
         <label className=" mb-1 text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
           {item.placeholder}
         </label>
-      </div>
-      <div className="flex mb-3 max-lg:mb-1">
+      </div> */}
+      <div className="flex max-lg:mb-1">
         <Input
           placeholder=""
           autoComplete="off"
           type={item.type}
           {...register(item.name)}
-          className="w-full  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
+          className="w-full   max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
         />
         <label className="absolute pointer-events-none mt-3 ml-3  max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs scale-100  text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
         </label>
       </div>
-      <p className="text-red-500 text-xs max-sm:text-[10px]">
+      <p className="text-red-500 mb-3 text-xs max-sm:text-[10px]">
         {errors[item.name]?.message}
       </p>
     </div>
@@ -106,21 +106,6 @@ export default function Signupform() {
   const { errors } = formState;
 
   const onSubmit = async (data) => {
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`,
-        {
-          fullName: data.fullName,
-
-          email: data.email,
-          password: data.password,
-          role: data.role,
-        }
-      );
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
     delete data?.confirmpassword;
     mutate(data);
   };
@@ -158,39 +143,6 @@ export default function Signupform() {
                 errors={errors}
               />
             ))}
-            {/* 
-            <div className="flex flex-col max-lg:text-sm max-sm:text-xs  mb-2">
-              <div className=" max-md:text-xs text-sm">
-                <label>Role</label>
-              </div>
-
-              <div className=" flex space-x-6 max-md:text-xs py-1">
-                <div className=" flex space-x-1 justify-between text-primaryColor-950 max-md:text-xs  text-sm">
-                  <input
-                    id="teacher"
-                    type="radio"
-                    {...register("role")}
-                    value={"teacher"}
-                    className="accent-primaryColor-900"
-                  />
-                  <label htmlFor="teacher">Teacher</label>
-                </div>
-                <div className="max-sm:ml-5 space-x-1 text-primaryColor-950 max-md:text-xs text-sm">
-                  <input
-                    id="student"
-                    type="radio"
-                    {...register("role")}
-                    value={"student"}
-                    className="accent-primaryColor-900"
-                  />
-
-                  <label htmlFor="student">Student</label>
-                </div>
-              </div>
-              <p className="text-red-500 text-xs max-sm:text-[10px]">
-                {errors.role?.message}
-              </p>
-            </div> */}
           </div>
 
           <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">

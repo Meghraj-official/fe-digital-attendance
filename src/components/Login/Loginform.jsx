@@ -73,13 +73,13 @@ export default function Loginform() {
     <>
       <div className="h-screen w-screen  bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex flex-row max-sm:flex-col">
         <div className="flex justify-center w-1/2  max-w-sm:flex-row  bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:w-full max-sm:h-1/3">
-          <div className=" text-primaryColor-100   self-center">
-            <div className="flex justify-center ">
+          <div className=" text-primaryColor-100 flex justify-center flex-col   self-center">
+            <div className="flex  justify-center ">
               <label className="font-bold font-mono text-3xl p-2 max-lg:text-2xl max-sm:text-xl">
                 New Here?
               </label>
             </div>
-            <div className="flex justify-center">
+            <div className="flex  justify-center">
               <label className="font-bold font-mono text-lg text-center p-2 max-sm:text-sm max-lg:text-xl ">
                 Revolutionize Attendance with Speed!
               </label>

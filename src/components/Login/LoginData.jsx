@@ -4,11 +4,11 @@ import { Input } from "../ui/input";
 const LoginData = ({ user, register, errors }) => {
   return (
     <div className="flex-col mb-3  max-lg:mb-1 ">
-      <div className="mb-3 max-md:mb-1 max-lg:mb-2">
+      {/* <div className="mb-3 max-md:mb-1 max-lg:mb-2">
         <label className=" max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950 ">
           {user.placeholder}
         </label>
-      </div>
+      </div> */}
       <div className="flex  max-md-md:md-2">
         <Input
           type={user.type}
@@ -20,7 +20,7 @@ const LoginData = ({ user, register, errors }) => {
           {user.placeholder}
         </label>
       </div>
-      <p className="text-red-500 text-xs ">{errors[user.name]?.message}</p>
+      <p className="text-red-500 text-xs mb-3 ">{errors[user.name]?.message}</p>
     </div>
   );
 };
