@@ -4,6 +4,7 @@ import Button from "./Button";
 import { useMutation } from "react-query";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 if (typeof window !== "undefined") {
   var email = sessionStorage.getItem("email");
@@ -11,6 +12,7 @@ if (typeof window !== "undefined") {
 
 const OtpModal = () => {
   const [otpValue, setOtpValue] = useState("");
+  const navigate = useRouter();
   const handleChangeOtp = (e) => {
     setOtpValue(e.target.value);
   };
@@ -42,6 +44,7 @@ const OtpModal = () => {
   const { mutate, isLoading } = useMutation(handleVerifyOtp, {
     onSuccess: () => {
       toast.success("Account created successfully");
+      sessionStorage.removeItem("email");
       navigate.push("/login");
     },
     onError: (error) => {
