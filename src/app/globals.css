@@ -13,3 +13,8 @@
 .input-type:focus-visible + label {
   @apply text-primaryColor-800 bg-primaryColor-100 transform -translate-y-5 translate-x-0.5 scale-75 max-sm:-translate-y-5;
 }
+
+/* .active {
+  background-color: #a889a8;
+  color: #f8f6f8;
+} */

@@ -72,7 +72,7 @@ export function PendingStudent() {
       {/* <TableCaption className="caption-top h-8 font-semibold  items-center ">
         List of Pending Teachers
       </TableCaption> */}
-      <TableHeader className="bg-primaryColor-300 z-0 ">
+      <TableHeader className="bg-primaryColor-300  ">
         <TableRow className="">
           <TableHead className="text-center">Full Name</TableHead>
           <TableHead className="text-center">Email </TableHead>
@@ -90,11 +90,11 @@ export function PendingStudent() {
             <TableCell>{invoice.email}</TableCell>
             <TableCell>
               {invoice.status === "Pending" ? (
-                <Badge className="bg-red-200 text-primaryColor-800">
+                <Badge className="bg-red-200 text-red-600 pointer-events-none">
                   {invoice.status}
                 </Badge>
               ) : (
-                <Badge className="bg-green-200 text-primaryColor-800">
+                <Badge className="bg-green-200 text-green-600 pointer-events-none">
                   {invoice.status}
                 </Badge>
               )}
