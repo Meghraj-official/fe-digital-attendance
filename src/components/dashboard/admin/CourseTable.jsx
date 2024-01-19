@@ -6,10 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-<<<<<<< HEAD
-=======
 import { Badge } from "@/components/ui/badge";
->>>>>>> 86b128a (feat:table for course and subject)
 
 const invoices = [
   {
@@ -58,13 +55,13 @@ const invoices = [
   },
 ];
 
-export function SubjectTable() {
+export function CourseTable() {
   return (
     <Table className="">
       <TableHeader className="bg-primaryColor-300 z-0 ">
         <TableRow className="flex  mt-5 flex-row justify-between items-center">
-          <TableHead className="text-center">Subject Name</TableHead>
-          <TableHead className="text-center">Subject ID </TableHead>
+          <TableHead className="text-center">Course Name</TableHead>
+          <TableHead className="text-center">Course Id</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="flex w-full justify-around flex-col ">
