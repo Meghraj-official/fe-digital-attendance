@@ -2,7 +2,7 @@
 import { PendingTeacher } from "@/components/dashboard/admin/PendingTeacher";
 import { PendingStudent } from "@/components/dashboard/admin/PendingStudent";
 import React, { useState } from "react";
-const pendingUser = () => {
+const PendingUser = () => {
   const [teacherOpen, setTeacherOpen] = useState("true");
   return (
     <div className="w-full h-full flex flex-col justify-center">
@@ -27,4 +27,4 @@ const pendingUser = () => {
     </div>
   );
 };
-export default pendingUser;
+export default PendingUser;

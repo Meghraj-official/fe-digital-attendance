@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Menu } from "lucide-react";
 import { SidebarContext } from "@/context/SidebarContext";
 import QRBox from "../../teacher/QRBox";
-import Dropmenu from "./Dropmenu";
 
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
