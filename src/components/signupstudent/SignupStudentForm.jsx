@@ -9,63 +9,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 
 import RhfSelect from "../reactHookForms/RhfSelect";
-
-const yearOptions = [
-  {
-    label: "First Year",
-    value: "1",
-  },
-  {
-    label: "Second Year",
-    value: "2",
-  },
-  {
-    label: "Third Year",
-    value: "3",
-  },
-  {
-    label: "Fourth Year",
-    value: "4",
-  },
-];
-
-const semesterOptions = [
-  {
-    label: "First Semester",
-    value: "1",
-  },
-  {
-    label: "Second Semester",
-    value: "2",
-  },
-  {
-    label: "Third Semester",
-    value: "3",
-  },
-  {
-    label: "Fourth Semester",
-    value: "4",
-  },
-  {
-    label: "Fifth Semester",
-    value: "5",
-  },
-  {
-    label: "Sixth Semester",
-    value: "6",
-  },
-  {
-    label: "Seventh Semester",
-    value: "7",
-  },
-  {
-    label: "Eighth Semester",
-    value: "8",
-  },
-];
+import { courseOptions, semesterOptions, yearOptions } from "@/lib/data/signup";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -112,6 +59,14 @@ const inputField = [
   },
 ];
 
+const sectionField = [
+  {
+    name: "section",
+    type: "text",
+    placeholder: "Section",
+  },
+];
+
 const Data = ({ item, register, errors }) => {
   return (
     <div className="">
@@ -153,26 +108,20 @@ export default function SignupStudentForm() {
 
   const { mutate, isLoading } = useMutation(signupApi, {
     onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Account created successfully",
-      });
-      navigate.push("/login");
+      toast.success("Account created successfully");
+      navigate.push("/verify-email");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error?.response?.data?.error?.message,
-        variant: "destructive",
-      });
+      sessionStorage.removeItem("email");
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
   const isYearly = watch("courseType") === "YEARLY";
-  const { toast } = useToast();
 
   const { errors } = formState;
 
   const onSubmit = async (data) => {
+    sessionStorage.setItem("email", data.email);
     data.courseType === "YEARLY" ? delete data?.semester : delete data?.year;
 
     delete data?.confirmpassword;
@@ -226,6 +175,15 @@ export default function SignupStudentForm() {
                     ]}
                   />
                 </div>
+                <div className=" border h-10 w-1/2 border-primaryColor-900 rounded-md text-center bg-primaryColor-50 ">
+                  <RhfSelect
+                    placeholder="Choose Course"
+                    name="courseCode"
+                    options={courseOptions}
+                  />
+                </div>
+              </div>
+              <div className="flex h-10 w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3">
                 <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
                   <RhfSelect
                     placeholder={isYearly ? "Select Year" : "Select Semester"}
@@ -233,6 +191,22 @@ export default function SignupStudentForm() {
                     options={isYearly ? yearOptions : semesterOptions}
                   />
                 </div>
+                {sectionField.map((item) => (
+                  <Data
+                    register={register}
+                    item={item}
+                    key={item.name}
+                    errors={errors}
+                  />
+                ))}
+
+                {/* <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
+                  <RhfSelect
+                    placeholder={isYearly ? "Select Year" : "Select Semester"}
+                    name={isYearly ? "year" : "semester"}
+                    options={isYearly ? yearOptions : semesterOptions}
+                  />
+                </div> */}
               </div>
 
               {inputField.slice(2).map((item) => (
@@ -255,7 +229,8 @@ export default function SignupStudentForm() {
             <div className="flex justify-center  max-sm:mt-1 mt-3  px-40 max-lg:px-20">
               <Button
                 className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-                buttonText={isLoading ? "Signing up..." : "Sign Up"}
+                buttonText="Sign Up"
+                isLoading={isLoading}
               />
             </div>
           </form>
