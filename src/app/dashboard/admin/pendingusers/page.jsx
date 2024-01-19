@@ -25,7 +25,8 @@ const PendingUser = () => {
           Students
         </button>
       </div>
-      <div className="h-80  mt-10 ml-10 overflow-y-auto  bg-primaryColor-100">
+
+      <div className="h-[70vh] w-[95%] mt-10 ml-10 overflow-y-auto  bg-primaryColor-100">
         {teacherOpen === "true" && <PendingTeacher />}
         {teacherOpen === "false" && <PendingStudent />}
       </div>
