@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import Spinner from "./Spinner";
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -7,9 +8,15 @@ interface Props
     HTMLButtonElement
   > {
   buttonText: string;
+  isLoading: boolean;
 }
 
-const Button: React.FC<Props> = ({ className, buttonText, ...rest }) => {
+const Button: React.FC<Props> = ({
+  className,
+  buttonText,
+  isLoading,
+  ...rest
+}) => {
   const hoverStyle =
     "hover:bg-gradient-to-bl hover:from-primaryColor-700 hover:via-primaryColor-900 hover:to-primaryColor-700 ";
   return (
@@ -21,7 +28,7 @@ const Button: React.FC<Props> = ({ className, buttonText, ...rest }) => {
       )}
       {...rest}
     >
-      {buttonText}
+      {isLoading ? <Spinner className="border-white" /> : buttonText}
     </button>
   );
 };

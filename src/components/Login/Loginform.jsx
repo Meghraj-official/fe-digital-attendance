@@ -7,9 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthStore } from "@/store/authStore";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 import axiosInstance from "@/lib/axios";
 import LoginData from "./LoginData";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -43,25 +43,20 @@ export default function Loginform() {
     resolver: yupResolver(schema),
   });
   const { errors } = formState;
-  const { toast } = useToast();
 
   const router = useRouter();
   const { mutate, isLoading } = useMutation(loginApi, {
     onSuccess: (data) => {
-      console.log("data form auth", data);
       setAuth({
         isAuth: true,
         token: data?.data?.accessToken,
         userType: data?.data?.userType,
       });
+      toast.success("Login Success");
       router.push("/dashboard");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error?.response?.data?.error?.message,
-        variant: "destructive",
-      });
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
 
@@ -84,24 +79,24 @@ export default function Loginform() {
                 Revolutionize Attendance with Speed!
               </label>
             </div>
-            <div className="flex  w-full h-10  items-center  flex-row gap-2  justify-center mt-10 max-sm:mt-2 max-sm:flex-col  ">
-              {/* <div className="  h-full items-center     "> */}
-              <Link
-                className=" text-center py-1 w-1/2 max-sm:w-2/3  px-3 text-primaryColor-950 place-self-center max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wide  text-md   "
-                href="/signup"
-              >
-                Sign Up As Teacher
-              </Link>
-              {/* </div> */}
-              {/* <div className="  h-full items-center  w-1/2 max-sm:w-full"> */}
-              <Link
-                className=" text-center py-1 px-3 w-1/2 max-sm:w-2/3 text-primaryColor-950   max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium tracking-wide  text-md 
-         "
-                href="/signupstudent"
-              >
-                Sign Up As Student
-              </Link>
-              {/* </div> */}
+            <div className="flex justify-center mt-10 max-sm:mt-1">
+              <div>
+                <Link
+                  className=" text-center px-2 lg:px-5 text-primaryColor-950  max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  href={`/signup?type=teacher`}
+                >
+                  Sign Up As Teacher
+                </Link>
+              </div>
+              <div>
+                <Link
+                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md 
+                   py-2 px-2 lg:px-5 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  href={`/signup?type=student`}
+                >
+                  Sign Up As Student
+                </Link>
+              </div>
             </div>
           </div>
         </div>
