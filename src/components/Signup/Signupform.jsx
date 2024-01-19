@@ -19,7 +19,6 @@ const schema = yup.object({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
-  role: yup.string().required("Role is required"),
 });
 
 const inputField = [
@@ -74,7 +73,7 @@ const Data = ({ item, register, errors }) => {
 };
 
 const signupApi = (data) => {
-  return axiosInstance.post(`/auth/signup`, data);
+  return axiosInstance.post(`/auth/signup-teacher`, data);
 };
 
 export default function Signupform() {

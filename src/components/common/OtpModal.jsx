@@ -4,25 +4,41 @@ import Button from "./Button";
 import { useMutation } from "react-query";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
+
+if (typeof window !== "undefined") {
+  var email = sessionStorage.getItem("email");
+}
+
 const OtpModal = () => {
   const [otpValue, setOtpValue] = useState("");
-  // const [email, setEmail] = useState("");
-  const email = sessionStorage.getItem("email");
   const handleChangeOtp = (e) => {
     setOtpValue(e.target.value);
   };
-  // const handleChangeEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
 
   const handleVerifyOtp = () => {
     const otpData = {
       email: email,
-      otp: otpValue,
+      otp: otpValue.trim(),
     };
     return axiosInstance.post(`/auth/verify-otp`, otpData);
   };
 
+  const handleResendOtp = () => {
+    const otpData = {
+      email: email,
+    };
+    return axiosInstance.post(`/auth/resend-otp`, otpData);
+  };
+
+  const { mutate: mutateResend } = useMutation(handleResendOtp, {
+    onSuccess: () => {
+      toast.success("Verification Success");
+      navigate.push("/login");
+    },
+    onError: (error) => {
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+    },
+  });
   const { mutate, isLoading } = useMutation(handleVerifyOtp, {
     onSuccess: () => {
       toast.success("Account created successfully");
@@ -63,6 +79,7 @@ const OtpModal = () => {
           onClick={mutate}
           isLoading={isLoading}
         />
+        <button onClick={mutateResend}> Resend OTP </button>
       </div>
     </div>
   );
