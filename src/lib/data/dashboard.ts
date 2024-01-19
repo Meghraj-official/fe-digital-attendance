@@ -1,4 +1,6 @@
 import {
+  ADMIN_HOME_ROUTE,
+  ADMIN_PENDINGUSERS_ROUTE,
   STUDENT_HOME_ROUTE,
   STUDENT_PROFILE_ROUTE,
   STUDENT_SETTINGS_ROUTE,
@@ -46,5 +48,20 @@ export const teacherNavigation = [
     icon: Settings,
     label: "Settings",
     pathName: TEACHER_SETTINGS_ROUTE,
+  },
+];
+
+export const adminNavigation = [
+  {
+    id: 1,
+    icon: HomeIcon,
+    label: "Home",
+    pathName: ADMIN_HOME_ROUTE,
+  },
+  {
+    id: 2,
+    icon: UserIcon,
+    label: "Pending Users",
+    pathName: ADMIN_PENDINGUSERS_ROUTE,
   },
 ];

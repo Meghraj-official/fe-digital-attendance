@@ -6,7 +6,11 @@ import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { SidebarContext } from "@/context/SidebarContext";
 import { useAuthStore } from "@/store/authStore";
-import { studentNavigation, teacherNavigation } from "@/lib/data/dashboard";
+import {
+  adminNavigation,
+  studentNavigation,
+  teacherNavigation,
+} from "@/lib/data/dashboard";
 import NavigationButton from "../navbar/NavigationButton";
 import { userCategory } from "@/lib/data/user";
 
@@ -49,7 +53,16 @@ const Sidebar = () => {
                 key={item.id}
               />
             ))
-          : teacherNavigation.map((item) => (
+          : userType === userCategory.teacher
+          ? teacherNavigation.map((item) => (
+              <NavigationButton
+                labelName={item.label}
+                pathName={item.pathName}
+                IconName={item.icon}
+                key={item.id}
+              />
+            ))
+          : adminNavigation.map((item) => (
               <NavigationButton
                 labelName={item.label}
                 pathName={item.pathName}
