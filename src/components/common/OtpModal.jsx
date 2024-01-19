@@ -32,8 +32,8 @@ const OtpModal = () => {
 
   const { mutate: mutateResend } = useMutation(handleResendOtp, {
     onSuccess: () => {
-      toast.success("Verification Success");
-      navigate.push("/login");
+      toast.success("OTP send");
+      // navigate.push("/login");
     },
     onError: (error) => {
       toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
