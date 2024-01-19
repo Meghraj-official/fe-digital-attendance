@@ -64,6 +64,26 @@ const invoices = [
     email: "meghraj56@gmail.com",
     status: "Verified",
   },
+  {
+    name: "Meghraj Giri",
+    email: "meghraj56@gmail.com",
+    status: "Pending",
+  },
+  {
+    name: "Meghraj Giri",
+    email: "meghraj56@gmail.com",
+    status: "Verified",
+  },
+  {
+    name: "Meghraj Giri",
+    email: "meghraj56@gmail.com",
+    status: "Pending",
+  },
+  {
+    name: "Meghraj Giri",
+    email: "meghraj56@gmail.com",
+    status: "Verified",
+  },
 ];
 
 export function PendingTeacher() {
