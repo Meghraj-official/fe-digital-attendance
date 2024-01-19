@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -86,26 +86,19 @@ export default function Signupform() {
 
   const { mutate, isLoading } = useMutation(signupApi, {
     onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Account created successfully",
-      });
-      navigate.push("/login");
+      toast.success("Account created successfully");
+      navigate.push("/verify-email");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error?.response?.data?.error?.message,
-        variant: "destructive",
-      });
+      sessionStorage.removeItem("email");
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
-
-  const { toast } = useToast();
 
   const { errors } = formState;
 
   const onSubmit = async (data) => {
+    sessionStorage.setItem("email", data.email);
     delete data?.confirmpassword;
     mutate(data);
   };
@@ -154,8 +147,10 @@ export default function Signupform() {
 
           <div className="flex justify-center  max-sm:mt-1 mt-3  px-40 max-lg:px-20">
             <Button
+              type="submit"
               className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-              buttonText={isLoading ? "Signing up..." : "Sign Up"}
+              buttonText="Sign Up"
+              isLoading={isLoading}
             />
           </div>
         </form>

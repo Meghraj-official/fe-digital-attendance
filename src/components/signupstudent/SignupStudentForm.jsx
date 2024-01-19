@@ -109,9 +109,10 @@ export default function SignupStudentForm() {
   const { mutate, isLoading } = useMutation(signupApi, {
     onSuccess: () => {
       toast.success("Account created successfully");
-      navigate.push("/verify-email?type=student");
+      navigate.push("/verify-email");
     },
     onError: (error) => {
+      sessionStorage.removeItem("email");
       toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
     },
   });
@@ -120,6 +121,7 @@ export default function SignupStudentForm() {
   const { errors } = formState;
 
   const onSubmit = async (data) => {
+    sessionStorage.setItem("email", data.email);
     data.courseType === "YEARLY" ? delete data?.semester : delete data?.year;
 
     delete data?.confirmpassword;
@@ -227,7 +229,8 @@ export default function SignupStudentForm() {
             <div className="flex justify-center  max-sm:mt-1 mt-3  px-40 max-lg:px-20">
               <Button
                 className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-                buttonText={isLoading ? "Signing up..." : "Sign Up"}
+                buttonText="Sign Up"
+                isLoading={isLoading}
               />
             </div>
           </form>
