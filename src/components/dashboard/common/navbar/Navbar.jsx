@@ -1,32 +1,16 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Menu } from "lucide-react";
 import { SidebarContext } from "@/context/SidebarContext";
 import QRBox from "../../teacher/QRBox";
-import Dropmenu from "./Dropmenu";
 
 const Navbar = () => {
   const { open, setOpen } = useContext(SidebarContext);
-  const [isDropdown, setIsDropDown] = useState(false);
-
-  // const menuRef = useRef();
-
-  // window.addEventListener("click", (e) => {});
-
-  const toggleDropdown = () => {
-    setIsDropDown(!isDropdown);
-  };
 
   return (
     <>
-      <div className=" py-8 px-2 m-8 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
-        {/* Headings Here L */}
-        {/* <div className="flex font-poppins flex-col gap-2 text-left ">
-        <h2 className="text-md  font-thin"> page / Home pages </h2>
-        <h1 className="text-2xl font-bold "> John Doe </h1>
-      </div> */}
-
+      <div className=" py-5 px-2 m-8 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
         {/* Search Bar and buttons here */}
         <div className="flex  items-center justify-between  w-full  ">
           <span
@@ -62,19 +46,15 @@ const Navbar = () => {
           <div>
             <QRBox />
           </div>
-          <div className="flex items-center">
-            <button
-              onClick={toggleDropdown}
-              className="relative h-10 w-10 rounded-full bg-primaryColor-600 max-sm:h-6 max-sm:w-6"
-            ></button>
+
+          <div className="relative h-14 w-14 rounded-full bg-primaryColor-600 max-sm:h-8 max-sm:w-8">
+            <img
+              className=" absolute w-full h-full object-cover rounded-full"
+              src="/images/admin.png "
+            />
           </div>
         </div>
       </div>
-      {isDropdown && (
-        <div className="absolute right-1 p-8 mt-20 z-10 transform transition duration-200 translate-y-1 ">
-          <Dropmenu />
-        </div>
-      )}
     </>
   );
 };
