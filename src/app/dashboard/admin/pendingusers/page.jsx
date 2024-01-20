@@ -21,7 +21,6 @@ const PendingUser = () => {
     return res;
   };
 
-
   const { data, refetch, isLoading } = useQuery(
     "pendingStudents",
     handleGetPendingStudents
@@ -50,9 +49,7 @@ const PendingUser = () => {
         ))}
       </div>
       <div className="h-[70vh] w-[95%] mt-10 ml-10 overflow-y-auto  bg-primaryColor-100">
-
         {activeTab === "teacher" && (
-
           <PendingTeacher
             isLoading={isPending}
             refetch={refetchTeacher}
@@ -61,7 +58,6 @@ const PendingUser = () => {
         )}
 
         {activeTab === "student" && (
-
           <PendingStudent
             isLoading={isLoading}
             refetch={refetch}
