@@ -48,10 +48,10 @@ const ScannerModal = () => {
     <div className=" h-fit relative  rounded-md flex flex-wrap flex-col">
       <div
         id="reader"
-        className="mx-auto  h-[400px] md:h-[350px]  "
+        className="mx-auto absolute  h-[400px] md:h-[350px]  "
         style={{
           position: "absolute",
-          top: 20,
+          top: 30,
           width: "300px",
           flexWrap: "wrap",
           display: "flex",
