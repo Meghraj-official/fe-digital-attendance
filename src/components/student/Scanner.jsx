@@ -26,7 +26,7 @@ const Scanner = () => {
         <button variant="outline">Open Sanner</button>
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-[425px]  bg-white"
+        className="sm:max-w-[425px] flex flex-col flex-wrap  bg-white"
         onInteractOutside={(e) => {
           e.preventDefault();
         }}

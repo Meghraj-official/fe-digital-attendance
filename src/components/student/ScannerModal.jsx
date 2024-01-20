@@ -45,8 +45,8 @@ const ScannerModal = () => {
     <div className="max-h-96 max-w-96 min-h-max  rounded-md flex flex-wrap flex-col">
       <div
         id="reader"
-        className="mx-auto "
-        style={{ height: "300px", width: "300px" }}
+        className="mx-auto  "
+        style={{ height: "200px", width: "300px" }}
       />
       <div className="flex justify-center gap-5 py-2">
         <button
