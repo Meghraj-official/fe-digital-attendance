@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/store/authStore";
+
 export function PendingTeacher({ teacherData, refetch }) {
   const { token } = useAuthStore();
   const handleVerifyUser = (userId) => {
@@ -44,6 +45,7 @@ export function PendingTeacher({ teacherData, refetch }) {
           <TableHead className="text-center">Actions</TableHead>
         </TableRow>
       </TableHeader>
+
       <TableBody className=" ">
         {teacherData?.length === 0 ? (
           "No pending data.."

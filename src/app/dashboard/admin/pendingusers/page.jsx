@@ -1,41 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PendingTeacher } from "@/components/dashboard/admin/PendingTeacher";
 import { PendingStudent } from "@/components/dashboard/admin/PendingStudent";
 import axiosInstance from "@/lib/axios";
 import { useQuery } from "react-query";
-import { useAuthStore } from "@/store/authStore";
 
 const tab = ["teacher", "student"];
 
 const PendingUser = () => {
-  const { token } = useAuthStore();
   const [activeTab, setActiveTab] = useState("teacher");
 
   const handleGetPendingStudents = () => {
-    const res = axiosInstance.get("/user/pending-students", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const res = axiosInstance.get("/user/pending-students");
 
     return res;
   };
   const handleGetPendingTeachers = () => {
-    const res = axiosInstance.get("/user/pending-teachers", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const res = axiosInstance.get("/user/pending-teachers");
 
     return res;
   };
 
-  useEffect(() => {
-    handleGetPendingStudents();
-    handleGetPendingTeachers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const { data, refetch, isLoading } = useQuery(
     "pendingStudents",
     handleGetPendingStudents
