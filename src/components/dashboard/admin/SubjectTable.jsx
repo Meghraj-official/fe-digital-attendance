@@ -6,10 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-<<<<<<< HEAD
-=======
-import { Badge } from "@/components/ui/badge";
->>>>>>> 86b128a (feat:table for course and subject)
 
 const invoices = [
   {
