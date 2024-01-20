@@ -3,6 +3,7 @@ import React from "react";
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 import { DialogClose } from "../ui/dialog";
+import { XIcon } from "lucide-react";
 
 const ScannerModal = () => {
   const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
@@ -12,6 +13,7 @@ const ScannerModal = () => {
     html5QrCode = new Html5Qrcode("reader", {
       formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
     });
+    handleClickAdvanced();
   }, []);
 
   const handleClickAdvanced = () => {
@@ -49,27 +51,17 @@ const ScannerModal = () => {
         className="mx-auto  "
         style={{
           position: "absolute",
-          top: -10,
+          top: 30,
           height: "300px",
           width: "300px",
           flexWrap: "wrap",
           display: "flex",
         }}
       />
-      <div className="flex  absolute bottom-0 inset-x-0 justify-center gap-5 py-2">
-        <button
-          className="px-5 py-1 bg-slate-200  rounded-full "
-          onClick={() => handleClickAdvanced()}
-        >
-          {" "}
-          Open Scanner
-        </button>
+      <div className="flex  absolute top-3 right-3 justify-center">
         <DialogClose asChild>
-          <button
-            className="px-5 py-1  bg-slate-200  rounded-full"
-            onClick={() => handleStop()}
-          >
-            Close Scanner
+          <button className=" py-1   rounded-full" onClick={() => handleStop()}>
+            <XIcon className="h-5 w-5" />
           </button>
         </DialogClose>
       </div>
