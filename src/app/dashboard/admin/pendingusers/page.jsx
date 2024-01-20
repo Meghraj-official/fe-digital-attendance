@@ -1,13 +1,10 @@
 "use client";
 import { PendingTeacher } from "@/components/dashboard/admin/PendingTeacher";
 import { PendingStudent } from "@/components/dashboard/admin/PendingStudent";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+
 const PendingUser = () => {
   const [teacherOpen, setTeacherOpen] = useState("true");
-
-  // useEffect(() => {
-  //   console.log("clicked");
-  // }, []);
 
   return (
     <div className="w-full h-full flex flex-col justify-center">
