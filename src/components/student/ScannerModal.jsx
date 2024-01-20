@@ -1,18 +1,21 @@
 "use client";
 import React from "react";
-import { Html5Qrcode } from "html5-qrcode";
+import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 
 const ScannerModal = () => {
-  const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
+  const qrConfig = { fps: 10, qrbox: { width: 500, height: 500 } };
   let html5QrCode;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    html5QrCode = new Html5Qrcode("reader");
+    html5QrCode = new Html5Qrcode("reader", {
+      formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+    });
   }, []);
 
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+      alert(JSON.stringify(decodedText));
       console.log("sacnnned text", decodedText, decodedResult);
       handleStop();
     };
@@ -39,8 +42,12 @@ const ScannerModal = () => {
     }
   };
   return (
-    <div className="h-96 w-96 rounded-md">
-      <div id="reader" width="100%" className="w-full h-[80%] rounded-md" />
+    <div className="max-h-96 max-w-96 min-h-max  rounded-md flex flex-wrap flex-col">
+      <div
+        id="reader"
+        className="mx-auto "
+        style={{ height: "300px", width: "300px" }}
+      />
       <div className="flex justify-center gap-5 py-2">
         <button
           className="px-5 py-1 bg-slate-200  rounded-full "
