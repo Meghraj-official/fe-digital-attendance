@@ -4,7 +4,7 @@ import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 
 const ScannerModal = () => {
-  const qrConfig = { fps: 10, qrbox: { width: 500, height: 500 } };
+  const qrConfig = { fps: 10, qrbox: { width: 400, height: 400 } };
   let html5QrCode;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
