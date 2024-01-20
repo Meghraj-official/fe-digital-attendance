@@ -2,6 +2,7 @@
 import React from "react";
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
+import { DialogClose } from "../ui/dialog";
 
 const ScannerModal = () => {
   const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
@@ -42,18 +43,20 @@ const ScannerModal = () => {
     }
   };
   return (
-    <div className=" h-fit  rounded-md flex flex-wrap flex-col">
+    <div className=" h-96 relative  rounded-md flex flex-wrap flex-col">
       <div
         id="reader"
         className="mx-auto  "
         style={{
+          position: "absolute",
+          top: -10,
           height: "300px",
           width: "300px",
           flexWrap: "wrap",
           display: "flex",
         }}
       />
-      <div className="flex justify-center gap-5 py-2">
+      <div className="flex  absolute bottom-0 inset-x-0 justify-center gap-5 py-2">
         <button
           className="px-5 py-1 bg-slate-200  rounded-full "
           onClick={() => handleClickAdvanced()}
@@ -61,12 +64,14 @@ const ScannerModal = () => {
           {" "}
           Open Scanner
         </button>
-        <button
-          className="px-5 py-1  bg-slate-200  rounded-full"
-          onClick={() => handleStop()}
-        >
-          Close Scanner
-        </button>
+        <DialogClose asChild>
+          <button
+            className="px-5 py-1  bg-slate-200  rounded-full"
+            onClick={() => handleStop()}
+          >
+            Close Scanner
+          </button>
+        </DialogClose>
       </div>
     </div>
   );
