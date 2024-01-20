@@ -45,7 +45,6 @@ export function PendingTeacher({ teacherData, refetch }) {
           <TableHead className="text-center">Actions</TableHead>
         </TableRow>
       </TableHeader>
-
       <TableBody className=" ">
         {teacherData?.length === 0 ? (
           "No pending data.."
