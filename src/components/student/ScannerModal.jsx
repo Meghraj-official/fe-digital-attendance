@@ -4,7 +4,7 @@ import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 
 const ScannerModal = () => {
-  const qrConfig = { fps: 10, qrbox: { width: 400, height: 400 } };
+  const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
   let html5QrCode;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,12 +42,12 @@ const ScannerModal = () => {
     }
   };
   return (
-    <div className="  rounded-md flex flex-wrap flex-col">
+    <div className=" h-fit  rounded-md flex flex-wrap flex-col">
       <div
         id="reader"
         className="mx-auto  "
         style={{
-          height: "200px",
+          height: "300px",
           width: "300px",
           flexWrap: "wrap",
           display: "flex",
