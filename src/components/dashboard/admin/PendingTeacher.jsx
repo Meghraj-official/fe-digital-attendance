@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/store/authStore";
+
 export function PendingTeacher({ teacherData, refetch }) {
   const { token } = useAuthStore();
   const handleVerifyUser = (userId) => {
