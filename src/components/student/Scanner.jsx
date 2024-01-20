@@ -11,7 +11,7 @@ const Scanner = () => {
       </DialogTrigger>
       <DialogContent
         styleCloseButton="hidden"
-        className="sm:max-w-[425px]  px-0 py-0 flex flex-col flex-wrap  bg-white"
+        className="sm:max-w-[425px] h-[500px] md:h-[300px]  px-0 py-0 flex flex-col flex-wrap  bg-white"
         onInteractOutside={(e) => {
           e.preventDefault();
         }}

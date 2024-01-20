@@ -52,7 +52,6 @@ const ScannerModal = () => {
         style={{
           position: "absolute",
           top: 30,
-
           width: "300px",
           flexWrap: "wrap",
           display: "flex",
