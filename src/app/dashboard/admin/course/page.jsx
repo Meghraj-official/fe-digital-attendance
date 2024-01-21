@@ -1,5 +1,6 @@
 "use client";
 import TableComponent from "@/components/Table";
+import AddCourse from "@/components/common/AddCourse";
 import { Badge } from "@/components/ui/badge";
 import axiosInstance from "@/lib/axios";
 import React from "react";
@@ -17,7 +18,6 @@ const Course = () => {
     {
       label: "Course Type",
       accessorKey: "courseType",
-      component: (rowData) => <Badge variant="outline">{rowData?.name}</Badge>,
     },
   ];
 
@@ -31,8 +31,8 @@ const Course = () => {
   return (
     <>
       <div className="flex flex-col justify-center gap-4 px-3">
-        <button className="bg-primaryColor-300 p-2 place-self-end mr-10 rounded-md">
-          Add Course
+        <button className="bg-primaryColor-300  place-self-end mr-10 rounded-md">
+          <AddCourse />
         </button>
         {/* <div className="bg-primaryColor-100 overflow-y-auto h-80 w-[100%] "> */}
         {/* <CourseTable /> */}
