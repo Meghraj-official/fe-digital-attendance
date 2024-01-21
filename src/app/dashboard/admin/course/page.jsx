@@ -10,7 +10,6 @@ const Course = () => {
     return (await axiosInstance.get("/course/list")).data;
   });
 
-  console.log(data?.courses);
   const tableHeader = [
     { label: "Course Name", accessorKey: "name" },
     { label: "Course Id", accessorKey: "code" },
