@@ -8,7 +8,6 @@ import { useAuthStore } from "@/store/authStore";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axios";
-// import LoginData from "./LoginData";
 import toast from "react-hot-toast";
 import LoginData from "./LoginData";
 

@@ -1,7 +1,6 @@
 "use client";
 import TableComponent from "@/components/Table";
 import AddSubject from "@/components/common/AddSubject";
-import { SubjectTable } from "@/components/dashboard/admin/SubjectTable";
 import axiosInstance from "@/lib/axios";
 import React from "react";
 import { useQuery } from "react-query";

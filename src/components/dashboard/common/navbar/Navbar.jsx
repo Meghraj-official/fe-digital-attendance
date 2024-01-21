@@ -51,6 +51,7 @@ const Navbar = () => {
             <img
               className=" absolute w-full h-full object-cover rounded-full"
               src="/images/admin.png "
+              alt="admin logo"
             />
           </div>
         </div>

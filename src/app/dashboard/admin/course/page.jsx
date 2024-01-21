@@ -1,7 +1,6 @@
 "use client";
 import TableComponent from "@/components/Table";
 import AddCourse from "@/components/common/AddCourse";
-import { Badge } from "@/components/ui/badge";
 import axiosInstance from "@/lib/axios";
 import React from "react";
 import { useQuery } from "react-query";
