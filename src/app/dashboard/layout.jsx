@@ -2,7 +2,6 @@
 
 import React from "react";
 import Sidebar from "@/components/dashboard/common/sidebar/Sidebar";
-import Navbar from "@/components/dashboard/common/navbar/Navbar";
 import SidebarContextProvider from "@/context/SidebarContext";
 import AuthWrapper from "@/components/common/AuthWrapper";
 
@@ -23,7 +22,7 @@ const Layout = ({ children }) => {
         <div className="flex">
           <Sidebar />
           <div className=" w-full lg:ml-72 flex flex-col text-center bg-white text-black h-screen ">
-            <Navbar /> <div> {children} </div>
+            <div> {children} </div>
           </div>
         </div>
       </SidebarContextProvider>

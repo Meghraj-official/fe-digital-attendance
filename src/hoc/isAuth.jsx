@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect } from "react";
+// import { useLayoutEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import { userCategory } from "@/lib/data/user";
@@ -11,45 +11,33 @@ export default function isAuth(Component) {
     const auth = isAuthenticated;
     const navigate = useRouter();
 
-    useLayoutEffect(() => {
-      if (!auth) {
-        return navigate.push("/login");
-      }
-    }, [auth, navigate]);
-
-    if (pathname.startsWith("/dashboard") && !auth) {
-      navigate.push("/login");
-    }
-
-    if (
-      auth &&
-      (pathname.startsWith("/login") || pathname.startsWith("/signup"))
-    ) {
-      navigate.push(`/dashboard/${userType.toLowerCase()}`);
-    }
-
-    if (!auth) {
-      navigate.push("/login");
-    }
-
+    const publicPaths = ["/", "/signup", "/login"];
+    const isPublicRoute = publicPaths.some((path) => path === pathname);
     if (auth) {
       if (
         userType === userCategory.student &&
-        (pathname.includes("/teacher") || pathname.includes("/admin"))
+        (pathname.includes("/teacher") ||
+          pathname.includes("/admin") ||
+          isPublicRoute)
       ) {
         navigate.push("/dashboard/student");
       } else if (
         userType === userCategory.teacher &&
-        (pathname.includes("/student") || pathname.includes("/admin"))
+        (pathname.includes("/student") ||
+          pathname.includes("/admin") ||
+          isPublicRoute)
       ) {
         navigate.push("/dashboard/teacher");
       } else if (
         userType === userCategory.admin &&
-        (pathname.includes("/teacher") || pathname.includes("/student"))
+        (pathname.includes("/teacher") ||
+          pathname.includes("/student") ||
+          isPublicRoute)
       ) {
         navigate.push("/dashboard/admin");
       }
     }
+
     return <Component {...props} />;
   };
 }
