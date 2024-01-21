@@ -12,7 +12,7 @@ const Navbar = ({ type }) => {
 
   return (
     <>
-      <div className=" py-5 px-2 m-8 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
+      <div className=" py-5 px-2 m-3 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
         {/* Search Bar and buttons here */}
         <div className="flex  items-center justify-between  w-full  ">
           <span
