@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
 import LoginData from "./LoginData";
+import Spinner from "../common/Spinner";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -124,7 +125,7 @@ export default function Loginform() {
               <div className="flex justify-center  mt-10 max-sm:mt-1    ">
                 <Button
                   className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
-                  buttonText={isLoading ? "Logging in..." : "Login"}
+                  buttonText={isLoading ? <Spinner /> : "Login"}
                 />
               </div>
             </div>

@@ -74,7 +74,7 @@ const Sidebar = () => {
       {/* Logout button here */}
       <button
         onClick={() => {
-          router.push("/");
+          router.push("/login");
           setAuth({
             isAuth: false,
             token: null,

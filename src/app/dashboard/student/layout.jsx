@@ -4,7 +4,7 @@ import React from "react";
 const layout = ({ children }) => {
   return (
     <div className="flex flex-col">
-      <Navbar type="admin" />
+      <Navbar type="student" />
       {children}
     </div>
   );
