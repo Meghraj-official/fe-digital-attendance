@@ -8,6 +8,12 @@ import Image from "next/image";
 import Scanner from "@/components/student/Scanner";
 
 const Navbar = ({ type }) => {
+  const imageURL =
+    type === "student"
+      ? "/images/student.png "
+      : type === "teacher"
+      ? "/images/teacher.png "
+      : "/images/admin.png ";
   const { open, setOpen } = useContext(SidebarContext);
 
   return (
@@ -54,7 +60,7 @@ const Navbar = ({ type }) => {
             <Image
               fill="true"
               className=" absolute w-full h-full object-cover rounded-full"
-              src="/images/admin.png "
+              src={imageURL}
               alt="user Image"
             />
           </figure>
