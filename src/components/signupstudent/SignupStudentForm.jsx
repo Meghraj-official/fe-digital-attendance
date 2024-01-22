@@ -23,6 +23,20 @@ const schema = yup.object({
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
   rollNo: yup.string().required("Roll number is required").nullable(),
+  courseType: yup.string().required("Select Course Type"),
+  courseCode: yup.string().required("Select Course"),
+  year: yup.string().when("courseType", {
+    is: (isYearly) => isYearly === "YEARLY",
+    then: (schema) => schema.required("Year is required"),
+    otherwise: (schema) => schema.nullable(),
+  }),
+  semester: yup.string().when("courseType", {
+    is: (isYearly) => isYearly === "SEMESTER",
+    then: (schema) => schema.required("Semester is required"),
+    otherwise: (schema) => schema.nullable(),
+  }),
+  section: yup.string().required("Section is required"),
+  batch: yup.string().required("Batch is required"),
 });
 
 const inputField = [
@@ -70,24 +84,19 @@ const sectionField = [
 const Data = ({ item, register, errors }) => {
   return (
     <div className="">
-      {/* <div className="mb-3 max-lg:mb-1  ">
-        <label className=" mb-1 text-sm max-sm:text-xs max-md:text-xs max-lg:text-sm text-primaryColor-950">
-          {item.placeholder}
-        </label>
-      </div> */}
-      <div className="flex  max-lg:mb-1">
+      <div className="flex ">
         <Input
-          placeholder=""
+          placeholder="relative"
           autoComplete="off"
           type={item.type}
           {...register(item.name)}
-          className="w-full bg-primaryColor-50  max-sm:text-xs max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 transition duration-200 input-type "
+          className="w-full bg-primaryColor-50   max-md:text-xs max-lg:text-sm relative focus:border-primaryColor-700 focus:text-primaryColor-950 border-primaryColor-500 transition duration-200 input-type "
         />
-        <label className="absolute pointer-events-none mt-3 ml-3  max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs scale-100  text-primaryColor-400 text-sm transition duration-200 input-text">
+        <label className=" absolute pointer-events-none mt-3 ml-3  max-sm:ml-3 max-sm:mt-3 max-md:text-xs max-lg:text-sm max-sm:text-xs scale-100  text-primaryColor-400 text-sm transition duration-200 input-text">
           {item.placeholder}
         </label>
       </div>
-      <p className="text-red-500 mb-3 text-xs max-sm:text-[10px]">
+      <p className="text-red-500 mb-3 text-left text-xs max-sm:text-[10px]">
         {errors[item.name]?.message}
       </p>
     </div>
@@ -100,6 +109,9 @@ const signupApi = (data) => {
 
 export default function SignupStudentForm() {
   const methods = useForm({
+    // defaultValues: {
+    //   courseType: "SEMESTER",
+    // },
     resolver: yupResolver(schema),
   });
   const { handleSubmit, register, formState, watch } = methods;
@@ -129,9 +141,9 @@ export default function SignupStudentForm() {
   };
 
   return (
-    <div className="min-h-screen  w-full  bg-primaryColor-100  max-sm:h-screen max-sm:w-screen flex  ">
-      <div className=" flex w-1/2 bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:hidden  bg-red-800   ">
-        <div className="relative  w-full h-full">
+    <div className="min-h-screen overflow-y-scroll relative w-full  bg-primaryColor-100 max-sm:h-screen max-sm:w-screen flex  ">
+      <div className="flex w-1/2  bg-gradient-to-tl from-primaryColor-500 to-primaryColor-900 max-sm:hidden  bg-red-800 items-center ">
+        <div className="relative w-full h-full">
           <Image
             className="object-cover object-center"
             src="/images/stupic.jpg"
@@ -142,18 +154,21 @@ export default function SignupStudentForm() {
       </div>
       <div className="w-1/2 h-screen   max-sm:w-full flex justify-center items-center ">
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full h-screen   "
+          >
             <div className="h-8 w-full text-center  py-1 ">
-              <label className="text-center max-sm:hidden font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:sm max-lg:text-xl text-2xl">
+              <label className="text-center  font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:text-sm max-lg:text-xl text-2xl">
                 SignUp
               </label>
             </div>
-            <div className="h-6 w-full mb-2 max-sm:mb-0  text-center align-middle  ">
+            <div className="h-6 w-full mb-2 max-sm:mb-4  text-center align-middle  ">
               <label className="text-center font-thin tracking-wide text-primaryColor-600 font-poppins max-lg:text-xs text-sm">
                 Transform Attendance with a Scan
               </label>
             </div>
-            <div className="px-40 max-sm:px-10 max-lg:px-20 text-primaryColor-950 rounded-lg  max-sm:w-full max-sm:h-full ">
+            <div className="  px-40 max-sm:px-10 max-lg:px-20 text-primaryColor-950 rounded-lg  max-sm:w-full  ">
               {inputField.slice(0, 2).map((item) => (
                 <Data
                   register={register}
@@ -163,9 +178,9 @@ export default function SignupStudentForm() {
                 />
               ))}
 
-              <div className="flex h-10 w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3">
+              <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 text-primaryColor-500">
                 {" "}
-                <div className=" border h-10 w-1/2 border-primaryColor-900 rounded-md text-center bg-primaryColor-50 ">
+                <div className=" bg-primaryColor-50 h-fit w-1/2  rounded-md text-center   ">
                   <RhfSelect
                     placeholder="Course Type"
                     name="courseType"
@@ -175,38 +190,32 @@ export default function SignupStudentForm() {
                     ]}
                   />
                 </div>
-                <div className=" border h-10 w-1/2 border-primaryColor-900 rounded-md text-center bg-primaryColor-50 ">
+                <div className="w-1/2 h-fit outline-none rounded-md text-center bg-primaryColor-50 ">
+                  <RhfSelect
+                    placeholder={isYearly ? "Select Year" : "Select Semester"}
+                    name={isYearly ? "year" : "semester"}
+                    options={isYearly ? yearOptions : semesterOptions}
+                  />
+                </div>
+              </div>
+              <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm text-primaryColor-500 ">
+                <div className="bg-primaryColor-50 h-fit  w-1/2 rounded-md text-center  ">
                   <RhfSelect
                     placeholder="Choose Course"
                     name="courseCode"
                     options={courseOptions}
                   />
                 </div>
-              </div>
-              <div className="flex h-10 w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3">
-                <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
-                  <RhfSelect
-                    placeholder={isYearly ? "Select Year" : "Select Semester"}
-                    name={isYearly ? "year" : "semester"}
-                    options={isYearly ? yearOptions : semesterOptions}
-                  />
+                <div className=" w-1/2 h-full outline-none rounded-md text-center">
+                  {sectionField.map((item) => (
+                    <Data
+                      register={register}
+                      item={item}
+                      key={item.name}
+                      errors={errors}
+                    />
+                  ))}
                 </div>
-                {sectionField.map((item) => (
-                  <Data
-                    register={register}
-                    item={item}
-                    key={item.name}
-                    errors={errors}
-                  />
-                ))}
-
-                {/* <div className=" w-1/2 h-full outline-none rounded-md bg-primaryColor-50  text-center">
-                  <RhfSelect
-                    placeholder={isYearly ? "Select Year" : "Select Semester"}
-                    name={isYearly ? "year" : "semester"}
-                    options={isYearly ? yearOptions : semesterOptions}
-                  />
-                </div> */}
               </div>
 
               {inputField.slice(2).map((item) => (
@@ -219,14 +228,14 @@ export default function SignupStudentForm() {
               ))}
             </div>
 
-            <div className="flex justify-center mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
+            <div className="flex justify-center  mb-2 max-lg:mb-0 text-sm max-sm:mb-1  max-lg:text-xs max-lg:mt-0">
               Already have an account?
               <Link href="/login" className="underline font-semibold ml-3">
                 Login
               </Link>
             </div>
 
-            <div className="flex justify-center  max-sm:mt-1 mt-3  px-40 max-lg:px-20">
+            <div className="flex justify-center  max-sm:mt-1 mt-3   px-40 max-lg:px-20">
               <Button
                 className=" text-primaryColor-50 font-medium max-sm:text-sm  max-sm:my-5 tracking-wider uppercase text-lg py-2 mx-auto max-lg:text-base md:mx-10 w-[80%] md:w-[70%]  xl:w-[50%] mt-8 lg:mt-0  xl:ml-10 "
                 buttonText="Sign Up"

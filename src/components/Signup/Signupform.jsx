@@ -117,11 +117,11 @@ export default function Signupform() {
       <div className="w-1/2 h-screen   max-sm:w-full flex justify-center items-center ">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="h-8 w-full text-center  py-1 ">
-            <label className="text-center max-sm:hidden font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:sm max-lg:text-xl text-2xl">
+            <label className="text-center  font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:sm max-lg:text-xl text-2xl">
               SignUp
             </label>
           </div>
-          <div className="h-6 w-full mb-2 max-sm:mb-0  text-center align-middle  ">
+          <div className="h-6 w-full mb-4   text-center align-middle  ">
             <label className="text-center font-thin tracking-wide text-primaryColor-600 font-poppins max-lg:text-xs text-sm">
               Transform Attendance with a Scan
             </label>
