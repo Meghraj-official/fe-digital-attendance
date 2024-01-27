@@ -16,6 +16,7 @@ const OtpModal = () => {
   const handleChangeOtp = (e) => {
     setOtpValue(e.target.value);
   };
+  
 
   const handleVerifyOtp = () => {
     const otpData = {
@@ -53,37 +54,33 @@ const OtpModal = () => {
   });
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
-      <div className="flex flex-col border border-primaryColor-800 rounded-xl p-6  gap-5">
-        <h2 className="text-3xl font-bold text-center">Verify OTP</h2>
+    <div className="h-screen w-screen flex items-center bg-primaryColor-100 justify-center">
+      <div className="flex flex-col border border-primaryColor-600 bg-primaryColor-50  rounded-xl p-7 gap-1">
+        <h2 className="text-xl font-semibold text-center  text-primaryColor-950  font-poppins  ">OTP verification</h2>
+        <p className="mb-5 text-primaryColor-500 font-poppins text-center text-sm">Check your email {email} for the otp</p>
         <>
-          <label htmlFor="email"> Email</label>
+        
+          
+      
+          <label className="mt-2 font-poppins text-sm"htmlFor="email"> OTP</label>
           <input
-            className="h-10 border border-primaryColor-900 "
-            name="email"
-            type="email"
-            value={email}
-            // onChange={handleChangeEmail}
-          />
-        </>
-
-        <>
-          <label htmlFor="email"> OTP</label>
-          <input
-            className="h-10 border border-primaryColor-900 "
+            className="h-8 border  rounded-md px-2 border-primaryColor-950 "
             type="text"
             value={otpValue}
             onChange={handleChangeOtp}
-          />
+                    />
         </>
+        <div className="flex flex-row justify-center ">
         <Button
-          className="py-3 text-white"
+          className="border-b w-36 h-8  mt-4 font-poppins text-primaryColor-50"
           buttonText="Verify"
           onClick={mutate}
           isLoading={isLoading}
         />
-        <button onClick={mutateResend}> Resend OTP </button>
+        </div>
+        <button className="text-primaryColor-950 font-poppins mt-1 text-sm" onClick={mutateResend}> Resend OTP </button>
       </div>
+      
     </div>
   );
 };
