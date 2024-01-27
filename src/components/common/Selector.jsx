@@ -15,7 +15,7 @@ const Selector = (props) => {
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col ">
           <label htmlFor={name}> {labelName} </label>
           <Select
             onValueChange={onChange}
@@ -41,7 +41,7 @@ const Selector = (props) => {
             </SelectContent>
           </Select>
           {error && (
-            <p className="text-red-500 bg-primaryColor-100   text-xs max-sm:text-[10px] text-left">
+            <p className="text-red-700 text-xs max-sm:text-[10px] text-left">
               {error?.message}
             </p>
           )}

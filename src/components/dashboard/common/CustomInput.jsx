@@ -8,7 +8,7 @@ const CustomInput = ({ name, id, labelName, placeholder }) => {
     formState: { errors },
   } = useFormContext();
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col ">
       <label htmlFor={id} className=" text-sm">
         {labelName}
       </label>

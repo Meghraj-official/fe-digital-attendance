@@ -1,4 +1,3 @@
-import TableSkeleton from "@/components/common/TableSkeleton";
 import React from "react";
 
 const Admin = () => {

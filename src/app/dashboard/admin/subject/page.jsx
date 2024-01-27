@@ -6,7 +6,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 const Subject = () => {
-  const { data } = useQuery("subjects", async () => {
+  const { data, isLoading } = useQuery("subjects", async () => {
     return (await axiosInstance.get("/subject/list")).data;
   });
 
@@ -31,7 +31,7 @@ const Subject = () => {
         <div className="bg-white  h-80 w-[100%] ">
           {/* <SubjectTable /> */}
           <TableComponent
-            isLoading={data?.subjects}
+            isLoading={isLoading}
             tableHeader={tableHeader}
             tableBody={data?.subjects}
             // actions={actions}
