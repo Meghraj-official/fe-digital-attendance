@@ -10,13 +10,25 @@ import axiosInstance from "@/lib/axios";
 import { useForm, FormProvider } from "react-hook-form";
 import { useMutation } from "react-query";
 import RhfSelect from "../reactHookForms/RhfSelect";
+import CustomInput from "../dashboard/common/CustomInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Button from "./Button";
+import { createCourseSchema } from "@/lib/validations/CourseValidation";
 
 const AddCourse = () => {
   const { mutate } = useMutation(async (body) => {
     return await axiosInstance.post("/course/create", body);
   });
-  const methods = useForm();
-  const { register, handleSubmit } = methods;
+  const methods = useForm({ resolver: yupResolver(createCourseSchema) });
+  const {
+    handleSubmit,
+    // formState: { isDirty },
+  } = methods;
+  const onSubmit = (data, e) => {
+    e.preventDefault();
+    console.log("hello", data);
+    mutate(data);
+  };
 
   return (
     <Dialog>
@@ -28,39 +40,24 @@ const AddCourse = () => {
       <DialogContent className="sm:max-w-[425px] bg-primaryColor-200">
         <DialogHeader>
           <DialogTitle>Add Course</DialogTitle>
-          {/* <DialogDescription>
-              Add student's data manually. Click save when you're done.
-            </DialogDescription> */}
         </DialogHeader>
         <FormProvider {...methods}>
-          <form
-            onSubmit={handleSubmit((data) => {
-             
-              mutate(data);
-            })}
-          >
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <label htmlFor="name" className="text-right text-sm">
-                  Course Name
-                </label>
-                <input
-                  {...register("name")}
-                  id="name"
-                  className="col-span-3 outline-none h-6 text-sm"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <label htmlFor="id" className="text-right text-sm">
-                  Course Code
-                </label>
-                <input
-                  {...register("code")}
-                  id="id"
-                  className="col-span-3 h-6 outline-none text-sm "
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className=" flex flex-col gap-3">
+              <CustomInput
+                name="name"
+                id="name"
+                labelName="Course Name"
+                placeholder="Bachelor in Science"
+              />
+              <CustomInput
+                name="code"
+                id="code"
+                labelName="Course Code"
+                placeholder="BSc"
+              />
+
+              <div>
                 <RhfSelect
                   name="courseType"
                   placeholder=" Select Course Type"
@@ -71,14 +68,12 @@ const AddCourse = () => {
                 />
               </div>
             </div>
-
-            <DialogFooter>
-              <button
-                type="submit "
-                className="bg-primaryColor-800 hover:bg-primaryColor-600 border-1 rounded-md p-2 text-primaryColor-50"
-              >
-                Add
-              </button>
+            <DialogFooter className="my-3">
+              <Button
+                buttonText="Add Course"
+                type="submit"
+                className="w-full py-2 text-white mt-3  "
+              />
             </DialogFooter>
           </form>
         </FormProvider>
