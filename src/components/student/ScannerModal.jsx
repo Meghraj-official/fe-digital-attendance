@@ -17,7 +17,7 @@ const ScannerModal = () => {
   }, []);
 
   const handleClickAdvanced = () => {
-    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+    const qrCodeSuccessCallback = (decodedText) => {
       alert(JSON.stringify(decodedText));
      
       handleStop();
@@ -33,7 +33,7 @@ const ScannerModal = () => {
     try {
       html5QrCode
         .stop()
-        .then((res) => {
+        .then(() => {
           
           html5QrCode.clear();
         })
