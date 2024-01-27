@@ -1,6 +1,5 @@
 "use client";
 import TableComponent from "@/components/Table";
-import TableSkeleton from "@/components/common/TableSkeleton";
 import AddSubject from "@/components/common/AddSubject";
 import axiosInstance from "@/lib/axios";
 import React from "react";
