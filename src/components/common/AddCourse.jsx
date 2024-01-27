@@ -35,7 +35,7 @@ const AddCourse = () => {
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit((data) => {
-              console.log("hello", data);
+             
               mutate(data);
             })}
           >

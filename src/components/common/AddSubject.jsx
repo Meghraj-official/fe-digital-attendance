@@ -32,7 +32,7 @@ const AddSubject = () => {
         </DialogHeader>
         <form
           onSubmit={handleSubmit((data) => {
-            console.log("hiiii", data);
+           
             mutate(data);
           })}
         >
