@@ -28,7 +28,7 @@ const Subject = () => {
         </button>
         {/* <TableSkeleton /> */}
 
-        <div className="bg-white overflow-y-auto h-80 w-[100%] ">
+        <div className="bg-white  h-80 w-[100%] ">
           {/* <SubjectTable /> */}
           <TableComponent
             isLoading={data?.subjects}
