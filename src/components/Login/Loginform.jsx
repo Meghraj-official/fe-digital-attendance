@@ -80,10 +80,11 @@ export default function Loginform() {
                 Revolutionize Attendance with Speed!
               </label>
             </div>
-            <div className="flex justify-center mt-10 max-sm:mt-1">
+            <div className="flex flex-col gap-2 md:gap-1 md:flex-row  items-center md:justify-center  mt-10 max-sm:mt-1  ">
+             
               <div>
                 <Link
-                  className=" text-center px-2 lg:px-5 text-primaryColor-950  max-sm:text-sm bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  className=" text-center py-1 px-2  md:py-2 lg:px-5 text-primaryColor-950  text-xs bg-primaryColor-50  hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase md:text-base p-2 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
                   href={`/signup?type=teacher`}
                 >
                   Sign Up As Teacher
@@ -91,15 +92,16 @@ export default function Loginform() {
               </div>
               <div>
                 <Link
-                  className=" text-center text-primaryColor-950  max-sm:text-sm bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase text-md 
-                   py-2 px-2 lg:px-5 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
+                  className=" text-center  text-primaryColor-950  text-xs bg-primaryColor-50 hover:bg-primaryColor-900 focus:bg-primaryColor-800 hover:text-primaryColor-50 rounded-3xl  font-medium  uppercase md:text-base
+                   py-1 px-2 md:py-2 lg:px-5 mx-auto md:mx-10 w-[50%] md:w-[70%]  xl:w-[50%]  lg:mt-0  xl:ml-10 "
                   href={`/signup?type=student`}
                 >
                   Sign Up As Student
                 </Link>
               </div>
+              </div>
             </div>
-          </div>
+          
         </div>
 
         <div className="flex w-1/2 h-full justify-center items-center  max-sm:w-full max-sm:h-2/3 ">
