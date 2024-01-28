@@ -96,7 +96,7 @@ const Data = ({ item, register, errors }) => {
           {item.placeholder}
         </label>
       </div>
-      <p className="text-red-500 mb-3 text-left text-xs max-sm:text-[10px]">
+      <p className="text-red-700 mb-3 text-left text-xs max-sm:text-[10px]">
         {errors[item.name]?.message}
       </p>
     </div>
@@ -180,7 +180,7 @@ export default function SignupStudentForm() {
 
               <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 text-primaryColor-500">
                 {" "}
-                <div className=" bg-primaryColor-50 h-fit w-1/2  rounded-md text-center   ">
+                <div className="  h-fit w-1/2  rounded-md text-center   ">
                   <RhfSelect
                     placeholder="Course Type"
                     name="courseType"
@@ -190,7 +190,7 @@ export default function SignupStudentForm() {
                     ]}
                   />
                 </div>
-                <div className="w-1/2 h-fit outline-none rounded-md text-center bg-primaryColor-50 ">
+                <div className="w-1/2 h-fit outline-none rounded-md text-center  ">
                   <RhfSelect
                     placeholder={isYearly ? "Select Year" : "Select Semester"}
                     name={isYearly ? "year" : "semester"}
@@ -199,7 +199,7 @@ export default function SignupStudentForm() {
                 </div>
               </div>
               <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm text-primaryColor-500 ">
-                <div className="bg-primaryColor-50 h-fit  w-1/2 rounded-md text-center  ">
+                <div className=" h-fit  w-1/2 rounded-md text-center  ">
                   <RhfSelect
                     placeholder="Choose Course"
                     name="courseCode"
