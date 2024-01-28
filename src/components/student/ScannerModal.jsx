@@ -20,12 +20,12 @@ const ScannerModal = () => {
   }, []);
 
   const handleClickAdvanced = () => {
-    const qrCodeSuccessCallback = (decodedText) => {
+    const qrCodeSuccessCallback = (decodedText,decodedResult) => {
 
       const formattedBody = {
-        qrToken : decodedText
+        qrToken : decodedResult
       }
-      alert(JSON.stringify(decodedText));
+      alert(JSON.stringify(decodedResult));
       console.log('sdf', decodedText)
            try {
         const res = axiosInstance.post(
