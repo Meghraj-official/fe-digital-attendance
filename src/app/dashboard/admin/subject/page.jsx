@@ -21,8 +21,9 @@ const Subject = () => {
     },
   ];
 
-  const actions = (
+  const actions = (rowData) => (
     <div className="flex flex-row gap-2 mt-2">
+      {console.log(rowData)}
       <button className="bg-primaryColor-300 p-2 rounded-md">Edit</button>
       <button className="bg-primaryColor-300 p-2 rounded-md">Delete</button>
     </div>

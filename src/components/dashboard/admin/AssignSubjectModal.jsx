@@ -17,25 +17,26 @@ const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
   const {
     register,
     handleSubmit,
-    // formState: { isDirty },
+    formState: { isDirty },
   } = methods;
 
-  const { mutate: handleAssignSubject } = useMutation(async (values) => {
-    try {
-      const formattedBody = { ...values, teacherId };
+  const { isLoading: isAssignLoading, mutate: handleAssignSubject } =
+    useMutation(async (values) => {
+      try {
+        const formattedBody = { ...values, teacherId };
 
-      const res = await axiosInstance.post(
-        "/admin/assign-subject",
-        formattedBody
-      );
+        const res = await axiosInstance.post(
+          "/admin/assign-subject",
+          formattedBody
+        );
 
-      toast.success(res?.data?.message);
-    } catch (err) {
-      toast.error("Something Went Wrong!");
-    } finally {
-      dialogClose();
-    }
-  });
+        toast.success(res?.data?.message);
+      } catch (err) {
+        toast.error("Something Went Wrong!");
+      } finally {
+        dialogClose();
+      }
+    });
 
   return (
     <div>
@@ -79,6 +80,8 @@ const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
               buttonText="Assign"
               type="submit"
               className="w-full py-2 text-white mt-3  "
+              disabled={!isDirty || isLoading}
+              isLoading={isAssignLoading}
             />
           </DialogFooter>
         </form>
