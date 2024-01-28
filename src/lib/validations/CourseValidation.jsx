@@ -13,3 +13,10 @@ export const createSubjectSchema = yup.object({
   semester: yup.string().nullable(),
   year: yup.string().nullable(),
 });
+
+export const qrFormSchema = yup.object({
+  courseCode: yup.string().nullable(),
+  section: yup.string().required("Please Choose Section "),
+  batch: yup.string().required("Please Choose Batch "),
+  subjectCode: yup.string().required("Please Subject Code "),
+});

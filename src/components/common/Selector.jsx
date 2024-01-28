@@ -15,8 +15,11 @@ const Selector = (props) => {
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div className="flex flex-col items-start gap-2">
-          <label htmlFor={name}> {labelName} </label>
+        <div className=" flex flex-col items-start ">
+          <label htmlFor={name} className="text-sm">
+            {" "}
+            {labelName}{" "}
+          </label>
           <Select
             onValueChange={onChange}
             defaultValue={value}
