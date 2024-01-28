@@ -4,6 +4,8 @@ import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 import { DialogClose } from "../ui/dialog";
 import { XIcon } from "lucide-react";
+import axiosInstance from "@/lib/axios";
+import toast from "react-hot-toast";
 
 const ScannerModal = () => {
   const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
@@ -19,8 +21,22 @@ const ScannerModal = () => {
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText) => {
       alert(JSON.stringify(decodedText));
+      console.log('sdf', decodedText)
+           try {
+        const res = axiosInstance.post(
+          `/attendance/scan-qr`,
+          JSON.stringify(decodedText)
+        );
+        console.log(res);
+
+        toast.success("Attendance Success");
+      } catch (err) {
+        console.log("Error", err);
+        toast.error(`${err?.response?.data?.error?.message || "Error"}  `);
+      }
      
       handleStop();
+      
     };
     html5QrCode.start(
       { facingMode: "environment" },
