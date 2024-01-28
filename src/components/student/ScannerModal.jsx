@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { useEffect } from "react";
 import { DialogClose } from "../ui/dialog";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { dialogClose } from "@/lib/utils";
 
 const ScannerModal = () => {
+  const [result, setResult] = useState(null);
   const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
   let html5QrCode;
   useEffect(() => {
@@ -19,16 +20,10 @@ const ScannerModal = () => {
     handleClickAdvanced();
   }, []);
 
-  const handleClickAdvanced = () => {
-    const qrCodeSuccessCallback = async(decodedText) => {
-      const cleanedData = decodedText.replace(/["\\]/g, "");
-
-      const formattedBody = {
-        qrToken: cleanedData,
-      };
-
+  useEffect(() => {
+    async function handleAttendance() {
       try {
-        const res =await axiosInstance.post(`/attendance/scan-qr`, formattedBody);
+        const res = await axiosInstance.post(`/attendance/scan-qr`, result);
         console.log(res);
         toast.success("Attendance Success", {
           duration: 6000,
@@ -41,6 +36,23 @@ const ScannerModal = () => {
           position: "top-center",
         });
       }
+      finally{
+        setResult(null)
+      }
+    }
+    if (result !== null) {
+      handleAttendance();
+    }
+  }, [result]);
+
+  const handleClickAdvanced = () => {
+    const qrCodeSuccessCallback = async (decodedText) => {
+      const cleanedData = decodedText.replace(/["\\]/g, "");
+
+      const formattedBody = {
+        qrToken: cleanedData,
+      };
+      setResult(formattedBody);
 
       handleStop();
       dialogClose();
