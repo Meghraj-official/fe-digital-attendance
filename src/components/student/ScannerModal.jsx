@@ -19,7 +19,7 @@ const ScannerModal = () => {
     handleClickAdvanced();
   }, []);
 
-  const handleClickAdvanced = async() => {
+  const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = async(decodedText) => {
       const cleanedData = decodedText.replace(/["\\]/g, "");
 
@@ -31,13 +31,13 @@ const ScannerModal = () => {
         const res =await axiosInstance.post(`/attendance/scan-qr`, formattedBody);
         console.log(res);
         toast.success("Attendance Success", {
-          duration: 5000,
+          duration: 6000,
           position: "top-center",
         });
       } catch (err) {
         console.log("Error", err);
         toast.error(`${err?.response?.data?.error?.message || "Error"}  `, {
-          duration: 5000,
+          duration: 6000,
           position: "top-center",
         });
       }
