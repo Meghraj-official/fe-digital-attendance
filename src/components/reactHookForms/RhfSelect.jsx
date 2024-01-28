@@ -15,24 +15,26 @@ const RhfSelect = (props) => {
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div className=" flex flex-col items-start">
+        <div className=" flex  flex-col items-start ">
           <label className="text-sm ">{label}</label>
-          <Select
-            onValueChange={onChange}
-            defaultValue={value}
-            className="bg-primaryColor-50 h-full   outline-none border  border-primaryColor-800 rounded-md text-center "
-          >
-            <SelectTrigger>
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-            <SelectContent className="bg-primaryColor-50 ">
-              {options?.map((option) => (
-                <SelectItem value={option?.value} key={option.value}>
-                  {option?.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="bg-primaryColor-50 rounded-md w-full">
+            <Select
+              onValueChange={onChange}
+              defaultValue={value}
+              className="bg-primaryColor-50 h-full   outline-none border  border-primaryColor-800 rounded-md text-center "
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+              <SelectContent className="bg-primaryColor-50 ">
+                {options?.map((option) => (
+                  <SelectItem value={option?.value} key={option.value}>
+                    {option?.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           {error && (
             <p className="text-red-700 text-xs max-sm:text-[10px] text-left">
               {error?.message}
