@@ -22,7 +22,7 @@ const ScannerModal = () => {
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText) => {
 
-   const   cleaned_data = data.strip("\"").replace("\\", "")
+   const   cleaned_data = decodedText.strip("\"").replace("\\", "")
 
       const formattedBody = {
         qrToken : cleaned_data
