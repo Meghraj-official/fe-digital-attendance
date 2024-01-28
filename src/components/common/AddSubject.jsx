@@ -57,8 +57,9 @@ const AddSubject = () => {
   const methods = useForm({
     resolver: yupResolver(createSubjectSchema),
   });
-  const { handleSubmit, watch } = methods;
+  const { handleSubmit, watch, formState } = methods;
 
+  console.log(formState.errors);
   const { mutate } = useMutation(async (body) => {
     return await axiosInstance.post("/subject/create", body);
   });
@@ -86,7 +87,8 @@ const AddSubject = () => {
                 ? delete formatData?.semester
                 : delete formatData?.year;
               delete formatData.course;
-              mutate(data);
+
+              mutate(formatData);
             })}
           >
             {" "}
