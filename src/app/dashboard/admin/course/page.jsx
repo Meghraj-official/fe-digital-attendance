@@ -1,14 +1,15 @@
 "use client";
 import TableComponent from "@/components/Table";
 import AddCourse from "@/components/common/AddCourse";
-import axiosInstance from "@/lib/axios";
+import { useCourseStore } from "@/store/courseStore";
 import React from "react";
 import { useQuery } from "react-query";
 
 const Course = () => {
   const { data, isLoading } = useQuery("courses", async () => {
-    return (await axiosInstance.get("/course/list")).data;
+    return useCourseStore.getState().getCourses()
   });
+
 
   const tableHeader = [
     { label: "Course Name", accessorKey: "name" },
