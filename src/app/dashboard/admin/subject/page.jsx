@@ -20,6 +20,14 @@ const Subject = () => {
       accessorKey: "code",
     },
   ];
+
+  const actions = (
+    <div className="flex flex-row gap-2 mt-2">
+      <button className="bg-primaryColor-300 p-2 rounded-md">Edit</button>
+      <button className="bg-primaryColor-300 p-2 rounded-md">Delete</button>
+    </div>
+  );
+
   return (
     <>
       <div className="flex flex-col   justify-center px-3 gap-4 ">
@@ -34,7 +42,7 @@ const Subject = () => {
             isLoading={isLoading}
             tableHeader={tableHeader}
             tableBody={data?.subjects}
-            // actions={actions}
+            actions={actions}
           />
         </div>
       </div>

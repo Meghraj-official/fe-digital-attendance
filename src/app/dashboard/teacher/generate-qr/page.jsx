@@ -10,14 +10,15 @@ import { useState } from "react";
 import QrCodeModal from "@/components/dashboard/teacher/QrCode";
 import { useQuery } from "react-query";
 import { useCourseStore } from "@/store/courseStore";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { qrFormSchema } from "@/lib/validations/CourseValidation";
 const GenerateQR = () => {
   const {} = useQuery("courses", async () => {
-      return useCourseStore.getState().getCourses()
-    });
+    return useCourseStore.getState().getCourses();
+  });
 
-  const Courses = useCourseStore.getState().courses
-  const [qrText, setQrText] = useState(null)
+  const Courses = useCourseStore.getState().courses;
+  const [qrText, setQrText] = useState(null);
   const handleGenerateQr = (formData) => {
     const parsedCourseData = JSON.parse(formData.course);
     const formattedBody = {
@@ -28,12 +29,13 @@ const GenerateQR = () => {
       ? delete formattedBody?.semester
       : delete formattedBody?.year;
     delete formattedBody.course;
-    setQrText(formattedBody)
+    setQrText(formattedBody);
     console.log("QR data", formattedBody);
   };
 
- 
-  const methods = useForm();
+  const methods = useForm({
+    resolver: yupResolver(qrFormSchema),
+  });
   const {
     handleSubmit,
     watch,
@@ -46,7 +48,7 @@ const GenerateQR = () => {
   const isSemester = courseType === "SEMESTER";
   return (
     <>
-      <div className="flex flex-col items-center max-w-lg mx-auto">
+      <div className="flex flex-wrap mt-16  max-w-lg mx-auto">
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit((data) => {
@@ -54,16 +56,17 @@ const GenerateQR = () => {
               //   console.log("log ", data);
             })}
           >
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-4  text-left ">
               <Selector
                 name="course"
                 labelName="Course Code"
                 placeholder="Choose course"
-                options={Courses   && Courses?.courses}
+                options={Courses && Courses?.courses}
               />
 
               {(isYearly || isSemester) && (
                 <RhfSelect
+                  label="Level"
                   placeholder={isYearly ? "Select Year" : "Select Semester"}
                   name={isYearly ? "year" : "semester"}
                   options={isYearly ? yearOptions : semesterOptions}
@@ -77,21 +80,23 @@ const GenerateQR = () => {
                 labelName="Subject Code"
               />
             </div>
+
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   buttonText="Create Qr Code"
                   type="submit"
-                  className="w-full py-2 text-white mt-3  "
+                  className="w-full py-2 text-white mt-6   "
                 />
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200">
-<QrCodeModal QrData={qrText} />
-              </DialogContent>
+              {qrText && (
+                <DialogContent className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200">
+                  <QrCodeModal QrData={qrText} />
+                </DialogContent>
+              )}
             </Dialog>
           </form>
         </FormProvider>
-
       </div>
     </>
   );
