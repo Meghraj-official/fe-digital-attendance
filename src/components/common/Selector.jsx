@@ -15,7 +15,7 @@ const Selector = (props) => {
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div className="flex flex-col ">
+        <div className="flex flex-col items-start gap-2">
           <label htmlFor={name}> {labelName} </label>
           <Select
             onValueChange={onChange}
@@ -34,7 +34,7 @@ const Selector = (props) => {
 
                 return (
                   <SelectItem value={JSON.stringify(value)} key={option.code}>
-                    {option?.code}
+                    {option?.name}
                   </SelectItem>
                 );
               })}

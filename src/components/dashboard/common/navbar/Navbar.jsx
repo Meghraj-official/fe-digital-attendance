@@ -3,9 +3,9 @@
 import React, { useContext } from "react";
 import { Menu } from "lucide-react";
 import { SidebarContext } from "@/context/SidebarContext";
-import QRBox from "../../teacher/QRBox";
 import Image from "next/image";
 import Scanner from "@/components/student/Scanner";
+import TeacherNavigations from "../../teacher/TeacherNavigations";
 
 const Navbar = ({ type }) => {
   const imageURL =
@@ -53,7 +53,7 @@ const Navbar = ({ type }) => {
           </div>
           <div>
             {type === "student" && <Scanner />}
-            {type === "teacher" && <QRBox />}
+            {type === "teacher" && <TeacherNavigations />}
           </div>
 
           <figure className="relative h-14 w-14 rounded-full bg-primaryColor-600 max-sm:h-8 max-sm:w-8">
