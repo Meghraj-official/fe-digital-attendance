@@ -6,6 +6,7 @@ import { DialogClose } from "../ui/dialog";
 import { XIcon } from "lucide-react";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
+import { dialogClose } from "@/lib/utils";
 
 const ScannerModal = () => {
   const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
@@ -20,12 +21,16 @@ const ScannerModal = () => {
 
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText) => {
+
+      const formattedBody = {
+        qrToken : decodedText
+      }
       alert(JSON.stringify(decodedText));
       console.log('sdf', decodedText)
            try {
         const res = axiosInstance.post(
           `/attendance/scan-qr`,
-          JSON.stringify(decodedText)
+          formattedBody
         );
         console.log(res);
 
@@ -36,7 +41,7 @@ const ScannerModal = () => {
       }
      
       handleStop();
-      
+      dialogClose();
     };
     html5QrCode.start(
       { facingMode: "environment" },
