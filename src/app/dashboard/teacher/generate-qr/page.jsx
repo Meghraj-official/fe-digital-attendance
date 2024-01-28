@@ -48,7 +48,7 @@ const GenerateQR = () => {
 
   return (
     <>
-      <div className="flex flex-wrap mt-16  max-w-lg mx-auto">
+      <div className="flex flex-wrap mt-16  max-w-lg mx-auto ">
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit((data) => {
@@ -71,11 +71,13 @@ const GenerateQR = () => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  buttonText="Create Qr Code"
-                  type="submit"
-                  className="w-full py-2 text-white mt-6   "
-                />
+                <div className="flex justify-center">
+                  <Button
+                    buttonText="Create Qr Code"
+                    type="submit"
+                    className="sm:w-full py-2 text-white sm:mt-6 mt-3 w-[80%]   "
+                  />
+                </div>
               </DialogTrigger>
               {qrText && (
                 <DialogContent className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200">

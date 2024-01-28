@@ -60,7 +60,7 @@ const AddSubject = () => {
   const { handleSubmit, watch, formState } = methods;
 
   console.log(formState.errors);
-  const { mutate } = useMutation(async (body) => {
+  const { isLoading, mutate } = useMutation(async (body) => {
     return await axiosInstance.post("/subject/create", body);
   });
   const course = watch("course");
@@ -112,6 +112,8 @@ const AddSubject = () => {
                 buttonText="Add Subject"
                 type="submit"
                 className="w-full py-2 text-white mt-3  "
+                isLoading={isLoading}
+                disabled={isLoading}
               />
             </DialogFooter>
           </form>
