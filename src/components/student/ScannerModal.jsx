@@ -19,8 +19,8 @@ const ScannerModal = () => {
     handleClickAdvanced();
   }, []);
 
-  const handleClickAdvanced = () => {
-    const qrCodeSuccessCallback = (decodedText) => {
+  const handleClickAdvanced = async() => {
+    const qrCodeSuccessCallback = async(decodedText) => {
       const cleanedData = decodedText.replace(/["\\]/g, "");
 
       const formattedBody = {
@@ -28,7 +28,7 @@ const ScannerModal = () => {
       };
 
       try {
-        const res = axiosInstance.post(`/attendance/scan-qr`, formattedBody);
+        const res =await axiosInstance.post(`/attendance/scan-qr`, formattedBody);
         console.log(res);
         toast.success("Attendance Success", {
           duration: 5000,
