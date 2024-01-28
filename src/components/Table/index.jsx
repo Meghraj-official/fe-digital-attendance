@@ -85,7 +85,7 @@ const TableComponent = (props) => {
                             : body?.[row?.accessorKey]}
                         </TableCell>
                       ))}
-                      {actions && actions}
+                      {actions && actions(body)}
                     </TableRow>
                   ))}
                 </>
