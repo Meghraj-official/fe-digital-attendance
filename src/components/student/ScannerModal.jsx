@@ -22,12 +22,12 @@ const ScannerModal = () => {
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText) => {
 
-   const   cleaned_data = decodedText.strip("\"").replace("\\", "")
+   const   cleanedData = decodedText.replace(/["\\]/g, '');
 
       const formattedBody = {
-        qrToken : cleaned_data
+        qrToken : cleanedData
       }
-      alert(JSON.stringify(cleaned_data));
+      alert(JSON.stringify(cleanedData));
       console.log('sdf', decodedText)
            try {
         const res = axiosInstance.post(
