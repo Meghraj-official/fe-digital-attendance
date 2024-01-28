@@ -15,7 +15,7 @@ const Selector = (props) => {
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div className=" flex flex-col items-start ">
+        <div className=" flex flex-col items-start  ">
           <label htmlFor={name} className="text-sm">
             {" "}
             {labelName}{" "}

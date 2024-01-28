@@ -48,7 +48,7 @@ const GenerateQR = () => {
   const isSemester = courseType === "SEMESTER";
   return (
     <>
-      <div className="flex flex-wrap mt-16  max-w-lg mx-auto">
+      <div className="flex flex-wrap mt-16  max-w-lg mx-auto ">
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit((data) => {
@@ -56,7 +56,7 @@ const GenerateQR = () => {
               //   console.log("log ", data);
             })}
           >
-            <div className="grid grid-cols-2 gap-4  text-left ">
+            <div className="grid grid-cols-2 sm:gap-4 gap-2 mx-5 text-left ">
               <Selector
                 name="course"
                 labelName="Course Code"
@@ -83,11 +83,13 @@ const GenerateQR = () => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  buttonText="Create Qr Code"
-                  type="submit"
-                  className="w-full py-2 text-white mt-6   "
-                />
+                <div className="flex justify-center">
+                  <Button
+                    buttonText="Create Qr Code"
+                    type="submit"
+                    className="sm:w-full py-2 text-white sm:mt-6 mt-3 w-[80%]   "
+                  />
+                </div>
               </DialogTrigger>
               {qrText && (
                 <DialogContent className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200">
