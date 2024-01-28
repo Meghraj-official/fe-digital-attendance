@@ -21,27 +21,27 @@ const ScannerModal = () => {
 
   const handleClickAdvanced = () => {
     const qrCodeSuccessCallback = (decodedText) => {
-
-   const   cleanedData = decodedText.replace(/["\\]/g, '');
+      const cleanedData = decodedText.replace(/["\\]/g, "");
 
       const formattedBody = {
-        qrToken : cleanedData
-      }
-      alert(JSON.stringify(cleanedData));
-      console.log('sdf', decodedText)
-           try {
-        const res = axiosInstance.post(
-          `/attendance/scan-qr`,
-          formattedBody
-        );
-        console.log(res);
+        qrToken: cleanedData,
+      };
 
-        toast.success("Attendance Success");
+      try {
+        const res = axiosInstance.post(`/attendance/scan-qr`, formattedBody);
+        console.log(res);
+        toast.success("Attendance Success", {
+          duration: 5000,
+          position: "top-center",
+        });
       } catch (err) {
         console.log("Error", err);
-        toast.error(`${err?.response?.data?.error?.message || "Error"}  `);
+        toast.error(`${err?.response?.data?.error?.message || "Error"}  `, {
+          duration: 5000,
+          position: "top-center",
+        });
       }
-     
+
       handleStop();
       dialogClose();
     };
@@ -57,7 +57,6 @@ const ScannerModal = () => {
       html5QrCode
         .stop()
         .then(() => {
-          
           html5QrCode.clear();
         })
         .catch((err) => {
