@@ -1,4 +1,5 @@
 import {
+  ADMIN_ASSIGN_SUBJECT_ROUTE,
   ADMIN_COURSE_ROUTE,
   ADMIN_HOME_ROUTE,
   ADMIN_PENDINGUSERS_ROUTE,
@@ -77,5 +78,11 @@ export const adminNavigation = [
     icon: HomeIcon,
     label: "Subject",
     pathName: ADMIN_SUBJECT_ROUTE,
+  },
+  {
+    id: 5,
+    icon: HomeIcon,
+    label: "Assign Subjects",
+    pathName: ADMIN_ASSIGN_SUBJECT_ROUTE,
   },
 ];

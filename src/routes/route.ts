@@ -8,3 +8,4 @@ export const ADMIN_HOME_ROUTE = "/dashboard/admin";
 export const ADMIN_PENDINGUSERS_ROUTE = "/dashboard/admin/pendingusers";
 export const ADMIN_COURSE_ROUTE = "/dashboard/admin/course";
 export const ADMIN_SUBJECT_ROUTE = "/dashboard/admin/subject";
+export const ADMIN_ASSIGN_SUBJECT_ROUTE = "/dashboard/admin/assign-subject";
