@@ -10,10 +10,10 @@ import Scanner from "@/components/student/Scanner";
 const Navbar = ({ type }) => {
   const imageURL =
     type === "student"
-      ? "/images/student.png "
+      ? "/images/student.jpg"
       : type === "teacher"
-      ? "/images/teacher.png "
-      : "/images/admin.png ";
+      ? "/images/teacher.png"
+      : "/images/admin.png";
   const { open, setOpen } = useContext(SidebarContext);
 
   return (
@@ -59,7 +59,7 @@ const Navbar = ({ type }) => {
           <figure className="relative h-14 w-14 rounded-full bg-primaryColor-600 max-sm:h-8 max-sm:w-8">
             <Image
               fill="true"
-              className=" absolute w-full h-full object-cover rounded-full"
+              className=" absolute w-full h-full object-cover rounded-full z-20"
               src={imageURL}
               alt="user Image"
             />
