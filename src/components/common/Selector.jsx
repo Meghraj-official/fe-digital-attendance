@@ -28,7 +28,7 @@ const Selector = (props) => {
             <SelectContent className="bg-primaryColor-50 ">
               {options?.map((option) => {
                 const value = {
-                  courseName: option?.code,
+                  courseCode: option?.code,
                   courseType: option?.courseType,
                 };
 
