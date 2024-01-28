@@ -17,9 +17,9 @@ const ScannerModal = () => {
   }, []);
 
   const handleClickAdvanced = () => {
-    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+    const qrCodeSuccessCallback = (decodedText) => {
       alert(JSON.stringify(decodedText));
-      console.log("sacnnned text", decodedText, decodedResult);
+     
       handleStop();
     };
     html5QrCode.start(
@@ -33,8 +33,8 @@ const ScannerModal = () => {
     try {
       html5QrCode
         .stop()
-        .then((res) => {
-          console.log("scanner stopped", res);
+        .then(() => {
+          
           html5QrCode.clear();
         })
         .catch((err) => {

@@ -41,7 +41,7 @@ const Selector = (props) => {
             </SelectContent>
           </Select>
           {error && (
-            <p className="text-red-500 bg-primaryColor-100   text-xs max-sm:text-[10px] text-left">
+            <p className="text-red-700 text-xs max-sm:text-[10px] text-left">
               {error?.message}
             </p>
           )}

@@ -14,6 +14,8 @@ import Button from "./Button";
 import Selector from "./Selector";
 import RhfSelect from "../reactHookForms/RhfSelect";
 import { semesterOptions, yearOptions } from "@/lib/data/signup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createSubjectSchema } from "@/lib/validations/CourseValidation";
 
 const AllCourses = [
   {
@@ -52,12 +54,11 @@ const AllCourses = [
 
 const AddSubject = () => {
   // { resolver: yupResolver(createCourseSchema) }
-  const methods = useForm();
-  const {
-    handleSubmit,
-    watch,
-    // formState: { isDirty },
-  } = methods;
+  const methods = useForm({
+    resolver: yupResolver(createSubjectSchema),
+  });
+  const { handleSubmit, watch } = methods;
+
   const { mutate } = useMutation(async (body) => {
     return await axiosInstance.post("/subject/create", body);
   });
