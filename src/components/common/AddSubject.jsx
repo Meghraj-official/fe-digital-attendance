@@ -16,6 +16,7 @@ import RhfSelect from "../reactHookForms/RhfSelect";
 import { semesterOptions, yearOptions } from "@/lib/data/signup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createSubjectSchema } from "@/lib/validations/CourseValidation";
+import toast from "react-hot-toast";
 
 const AllCourses = [
   {
@@ -52,7 +53,7 @@ const AllCourses = [
   },
 ];
 
-const AddSubject = () => {
+const AddSubject = ({ refetch }) => {
   // { resolver: yupResolver(createCourseSchema) }
   const methods = useForm({
     resolver: yupResolver(createSubjectSchema),
@@ -60,9 +61,20 @@ const AddSubject = () => {
   const { handleSubmit, watch, formState } = methods;
 
   console.log(formState.errors);
-  const { isLoading, mutate } = useMutation(async (body) => {
-    return await axiosInstance.post("/subject/create", body);
-  });
+  const { isLoading, mutate } = useMutation(
+    async (body) => {
+      return await axiosInstance.post("/subject/create", body);
+    },
+    {
+      onSuccess: () => {
+        toast.success("Subject Added Sucessfully");
+        refetch();
+      },
+      onError: (error) => {
+        toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      },
+    }
+  );
   const course = watch("course");
   const courseType = course && JSON.parse(course).courseType;
   const isYearly = courseType === "YEARLY";
