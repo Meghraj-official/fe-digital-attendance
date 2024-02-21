@@ -61,7 +61,7 @@ const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
                     </label>
                     <input
                       className="h-5 w-5"
-                      defaultChecked={assignedSubjects.some(
+                      defaultChecked={assignedSubjects?.some(
                         (item) => item.code === subject?.code
                       )}
                       value={subject?.code}
