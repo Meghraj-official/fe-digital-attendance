@@ -1,12 +1,14 @@
 "use client";
 import TableComponent from "@/components/Table";
 import AddCourse from "@/components/common/AddCourse";
+import axiosInstance from "@/lib/axios";
 import { useCourseStore } from "@/store/courseStore";
 import React from "react";
-import { useQuery } from "react-query";
+import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
 
 const Course = () => {
-  const { data, isLoading } = useQuery("courses", async () => {
+  const { data, isLoading , refetch : refetchCourse } = useQuery("courses", async () => {
     return useCourseStore.getState().getCourses()
   });
 
@@ -19,12 +21,23 @@ const Course = () => {
       accessorKey: "courseType",
     },
   ];
+  const handleDeleteCourse = async (id) => {
+    return await axiosInstance.delete(`/course/delete/${id}`);
+  };  
+  const { mutate: deleteCourse , isLoading: isDeleting } = useMutation(handleDeleteCourse, {
+    onSuccess: () => {
+      toast.success("Course Deleted Sucessfully");
+    refetchCourse();
+ 
+    },
+    onError: (error) => {
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+    },
+  });
 
   const actions =(rowData) =>  (
     <div className="flex flex-row gap-2 mt-2">
-      {console.log('row data', rowData)}
-      <button className="bg-primaryColor-300 p-2 rounded-md">Edit</button>
-      <button className="bg-primaryColor-300 p-2 rounded-md">Delete</button>
+      <button className="bg-primaryColor-300 p-2 disabled:opacity-60 disabled:cursor-not-allowed rounded-md"  disabled={isDeleting} onClick={() => { deleteCourse(rowData?._id) }}>Delete</button>
     </div>
   );
 
@@ -32,7 +45,7 @@ const Course = () => {
     <>
       <div className="flex flex-col justify-center gap-4 px-3">
         <button className="bg-primaryColor-300  place-self-end mr-10 rounded-md">
-          <AddCourse />
+          <AddCourse refetch={refetchCourse} />
         </button>
         {/* <div className="bg-primaryColor-100 overflow-y-auto h-80 w-[100%] "> */}
         {/* <CourseTable /> */}
