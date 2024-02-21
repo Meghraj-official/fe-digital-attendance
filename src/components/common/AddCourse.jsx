@@ -14,20 +14,38 @@ import CustomInput from "../dashboard/common/CustomInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "./Button";
 import { createCourseSchema } from "@/lib/validations/CourseValidation";
+import toast from "react-hot-toast";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { useRef } from "react";
 
-const AddCourse = () => {
-  const { isLoading, mutate } = useMutation(async (body) => {
-    return await axiosInstance.post("/course/create", body);
-  });
+const AddCourse = ({refetch}) => {
+  const buttonRef = useRef();
   const methods = useForm({ resolver: yupResolver(createCourseSchema) });
   const {
     handleSubmit,
-    // formState: { isDirty },
+    reset,
   } = methods;
+  const { isLoading, mutate } = useMutation(async (body ) => {
+    return await axiosInstance.post("/course/create", body);
+  }, {
+    onSuccess: () => {
+      toast.success("Course created Sucessfully");
+      refetch();
+      reset();
+      buttonRef?.current?.click();
+    
+    },
+    onError: (error) => {
+      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      buttonRef?.current?.click();
+    },
+  });
+ 
+
   const onSubmit = (data, e) => {
     e.preventDefault();
-    console.log("hello", data);
     mutate(data);
+
   };
 
   return (
@@ -41,6 +59,11 @@ const AddCourse = () => {
         <DialogHeader>
           <DialogTitle>Add Course</DialogTitle>
         </DialogHeader>
+        <DialogClose className="hidden" asChild>
+        <button ref={buttonRef} className="flex   p-2 rounded-md bg-primaryColor-300 font-medium ">
+    close
+        </button>
+      </DialogClose>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" flex flex-col gap-3">

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { useForm, FormProvider } from "react-hook-form";
 import axiosInstance from "@/lib/axios";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import CustomInput from "../dashboard/common/CustomInput";
 import Button from "./Button";
 import Selector from "./Selector";
@@ -17,48 +17,21 @@ import { semesterOptions, yearOptions } from "@/lib/data/signup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createSubjectSchema } from "@/lib/validations/CourseValidation";
 import toast from "react-hot-toast";
+import { useCourseStore } from "@/store/courseStore";
+import { dialogClose } from "@/lib/utils";
 
-const AllCourses = [
-  {
-    _id: "65a988d3242f4a886b328207",
-    name: "Bachelors in Business Administration",
-    code: "BSC CSIT",
-    courseType: "YEARLY",
-    __v: 0,
-    years: {
-      first: ["CSC3"],
-      second: ["CSC3"],
-      third: ["CSC3"],
-      fourth: ["CSC3"],
-      _id: "65abe856ad4f513623f89f34",
-    },
-  },
-  {
-    _id: "65a98e576d88f5b723d37d02",
-    name: "Bachelors in Business Administration",
-    code: "BBA",
-    courseType: "SEMESTER",
-    semesters: {
-      first: ["CSC3"],
-      second: ["CSC3"],
-      third: ["CSC3"],
-      fourth: ["CSC3"],
-      fifth: ["CSC3"],
-      sixth: ["CSC3"],
-      seventh: ["CSC3"],
-      eighth: ["CSC3"],
-      _id: "65a98e576d88f5b723d37d03",
-    },
-    __v: 0,
-  },
-];
+
 
 const AddSubject = ({ refetch }) => {
   // { resolver: yupResolver(createCourseSchema) }
   const methods = useForm({
     resolver: yupResolver(createSubjectSchema),
   });
-  const { handleSubmit, watch, formState } = methods;
+  const { handleSubmit, watch, formState , reset } = methods;
+
+  const { data :Courses  } = useQuery("courses", async () => {
+    return useCourseStore.getState().getCourses()
+  });
 
   console.log(formState.errors);
   const { isLoading, mutate } = useMutation(
@@ -69,9 +42,13 @@ const AddSubject = ({ refetch }) => {
       onSuccess: () => {
         toast.success("Subject Added Sucessfully");
         refetch();
+        dialogClose();
+        reset();
       },
       onError: (error) => {
         toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+        dialogClose();
+        reset();
       },
     }
   );
@@ -111,7 +88,7 @@ const AddSubject = ({ refetch }) => {
                 name="course"
                 labelName="Select Course"
                 placeholder="Choose course"
-                options={AllCourses}
+                options={Courses?.courses}
               />
               <RhfSelect
                 placeholder={isYearly ? "Select Year" : "Select Semester"}

@@ -2,6 +2,7 @@
 import TableComponent from "@/components/Table";
 import AddSubject from "@/components/common/AddSubject";
 import axiosInstance from "@/lib/axios";
+import { dialogClose } from "@/lib/utils";
 import React from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
@@ -34,9 +35,11 @@ const Subject = () => {
     onSuccess: () => {
       toast.success("Subject Deleted Sucessfully");
       refetchSubjects();
+      dialogClose();
     },
     onError: (error) => {
       toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      dialogClose();
     },
   });
 
