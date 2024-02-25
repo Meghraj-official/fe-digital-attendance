@@ -46,9 +46,14 @@ const StudentStats=()=>{
     }
     return(
         <>
-        <div className='h-80 w-80 mt-0  mb-12'>
+      
+      
+        <div className='sm:h-80 sm:w-80 h-64 w-64 mt-0     mb-12 '>
         <Doughnut className='' data={data}  options={options} />
         </div>
+      
+       
+       
         </>
     )
 
