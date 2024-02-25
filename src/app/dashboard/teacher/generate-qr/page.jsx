@@ -29,6 +29,7 @@ const GenerateQR = () => {
       console.log('res', res?.data?.qrToken)
       setQrText(res?.data?.qrToken)
       toast.success('Qr generated')
+     setTimeout(() => {  toast.success('It will be closed automatically after 1 minute.')},2000)
     }
     catch(err)
     {
@@ -95,7 +96,7 @@ const GenerateQR = () => {
                 </div>
               </DialogTrigger>
               {qrText && (
-                <DialogContent className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200" 
+                <DialogContent styleCloseButton="hidden" className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200" 
                 
                 onInteractOutside={(e) => {
                   e.preventDefault();
