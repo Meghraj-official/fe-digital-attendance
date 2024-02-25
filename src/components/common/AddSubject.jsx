@@ -20,17 +20,15 @@ import toast from "react-hot-toast";
 import { useCourseStore } from "@/store/courseStore";
 import { dialogClose } from "@/lib/utils";
 
-
-
 const AddSubject = ({ refetch }) => {
   // { resolver: yupResolver(createCourseSchema) }
   const methods = useForm({
     resolver: yupResolver(createSubjectSchema),
   });
-  const { handleSubmit, watch, formState , reset } = methods;
+  const { handleSubmit, watch, formState, reset } = methods;
 
-  const { data :Courses  } = useQuery("courses", async () => {
-    return useCourseStore.getState().getCourses()
+  const { data: Courses } = useQuery("courses", async () => {
+    return useCourseStore.getState().getCourses();
   });
 
   console.log(formState.errors);
