@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
   email: yup.string().email().required("Email is required"),
-  password: yup.string().required("Password is required").min(6).max(10),
+  password: yup.string().required("Password is required").min(6),
   confirmpassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
