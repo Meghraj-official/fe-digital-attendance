@@ -5,7 +5,7 @@ const layout = ({ children }) => {
   return (
     <div className="flex flex-col">
       <Navbar type="teacher" />
-      {children}
+      <div className="px-2"> {children}</div>
     </div>
   );
 };

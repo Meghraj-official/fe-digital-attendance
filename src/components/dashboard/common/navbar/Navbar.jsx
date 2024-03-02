@@ -44,14 +44,14 @@ const Navbar = ({ type }) => {
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
               />
             </svg>
-
+            
             <input
               type="text"
               className="h-10  pl-10 border border-primaryColor-950 rounded-full max-sm:h-8 max-sm:w-40 max-sm:text-xs max-sm:pl-8"
               placeholder="Search here"
             />
           </div> */}
-          <div className="flex justify-between items-center w-52">
+          <div>
             {type === "student" && <Scanner />}
             {type === "teacher" && <TeacherNavigations />}
 
