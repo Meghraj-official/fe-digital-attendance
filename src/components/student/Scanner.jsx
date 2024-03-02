@@ -2,12 +2,16 @@
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import ScannerModal from "./ScannerModal";
+import Button from "../common/Button";
 
 const Scanner = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button variant="outline">Open Sanner</button>
+        <Button
+          className="text-primaryColor-50 py-2 px-2  rounded-lg  h-fit "
+          buttonText="Open Scanner"
+        />
       </DialogTrigger>
       <DialogContent
         styleCloseButton="hidden"

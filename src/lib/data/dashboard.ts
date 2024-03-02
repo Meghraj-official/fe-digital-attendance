@@ -6,12 +6,17 @@ import {
   ADMIN_SUBJECT_ROUTE,
   STUDENT_HOME_ROUTE,
   STUDENT_PROFILE_ROUTE,
-  STUDENT_SETTINGS_ROUTE,
   TEACHER_HOME_ROUTE,
   TEACHER_PROFILE_ROUTE,
   TEACHER_SETTINGS_ROUTE,
 } from "@/routes/route";
-import { HomeIcon, Settings, UserIcon,BookOpenText,BookMarked  } from "lucide-react";
+import {
+  HomeIcon,
+  Settings,
+  UserIcon,
+  BookOpenText,
+  BookMarked,
+} from "lucide-react";
 
 export const studentNavigation = [
   {
@@ -23,14 +28,8 @@ export const studentNavigation = [
   {
     id: 2,
     icon: UserIcon,
-    label: "Profile",
+    label: "Attendance List",
     pathName: STUDENT_PROFILE_ROUTE,
-  },
-  {
-    id: 3,
-    icon: Settings,
-    label: "Settings",
-    pathName: STUDENT_SETTINGS_ROUTE,
   },
 ];
 export const teacherNavigation = [
@@ -69,7 +68,7 @@ export const adminNavigation = [
   },
   {
     id: 3,
-    icon: BookMarked ,
+    icon: BookMarked,
     label: "Course",
     pathName: ADMIN_COURSE_ROUTE,
   },

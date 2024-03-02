@@ -29,7 +29,7 @@ const Navbar = ({ type }) => {
           >
             <Menu className="h-10 w-10 max-sm:h-6 max-sm:w-6 text-primaryColor-950 " />
           </span>
-          <div className="flex items-center  ">
+          {/* <div className="flex items-center  ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -50,20 +50,20 @@ const Navbar = ({ type }) => {
               className="h-10  pl-10 border border-primaryColor-950 rounded-full max-sm:h-8 max-sm:w-40 max-sm:text-xs max-sm:pl-8"
               placeholder="Search here"
             />
-          </div>
-          <div>
+          </div> */}
+          <div className="flex justify-between items-center w-52">
             {type === "student" && <Scanner />}
             {type === "teacher" && <TeacherNavigations />}
-          </div>
 
-          <figure className="relative h-14 w-14 rounded-full bg-primaryColor-600 max-sm:h-8 max-sm:w-8">
-            <Image
-              fill="true"
-              className=" absolute w-full h-full object-cover rounded-full z-20"
-              src={imageURL}
-              alt="user Image"
-            />
-          </figure>
+            <figure className="relative h-14 w-14 rounded-full bg-primaryColor-600 max-sm:h-8 max-sm:w-8">
+              <Image
+                fill="true"
+                className=" absolute w-full h-full object-cover rounded-full z-20"
+                src={imageURL}
+                alt="user Image"
+              />
+            </figure>
+          </div>
         </div>
       </div>
     </>
