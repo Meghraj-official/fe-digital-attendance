@@ -26,7 +26,7 @@ const HomeInfo = ({ teacherData }) => {
           {teacherData?.fullName}
         </span>{" "}
       </h2>
-      <div className="flex flex-col md:flex-row h-fit w-full justify-around  gap-5 lg:gap-20 ">
+      <div className="flex flex-col md:flex-row h-fit w-full justify-around  gap-5 lg:gap-10 ">
         <div className="flex flex-col lg:w-[50%] w-full border bg-primaryColor-100 p-5 rounded-md">
           <h1 className="lg:text-2xl text-xl text-center font-bold mb-5">
             Assigned Subjects.
