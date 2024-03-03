@@ -22,16 +22,16 @@ const AttendanceListTools = () => {
   const { CurrentSubject } = useAttendanceListStore((state) => state);
 
   return (
-    <div className="flex flex-col gap-5 md:gap-10 items-start ">
-      <h1 className="text-2xl md:text-3xl text-primaryColor-900  font-bold">
+    <div className="flex flex-col gap-5 md:gap-10">
+      <h1 className="text-2xl md:text-3xl text-primaryColor-900 text-center  font-bold">
         Attendance List
       </h1>
       <div className="flex gap-5 flex-wrap w-full  md:justify-end ">
-        <div className="bg-primaryColor-50 rounded-md min-w-[225px] max-w-fit ">
+        <div className=" rounded-md min-w-[225px] max-w-fit ">
           <Select
             onValueChange={(value) => setState({ subjectCode: value })}
             defaultValue={CurrentSubject}
-            className="bg-primaryColor-50 h-full   outline-none border  border-primaryColor-800 rounded-md text-center z-10 "
+            className="bg-primaryColor-50 h-full outline-none border border-primaryColor-800 rounded-md text-center text-sm lg:text-sm  "
           >
             <SelectTrigger>
               <SelectValue placeholder="Select subject" />

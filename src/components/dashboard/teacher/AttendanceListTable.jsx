@@ -30,7 +30,7 @@ const AttendanceListTable = () => {
     <>
       {/* <div className="flex flex-col justify-center gap-4 px-3"> */}
 
-      <div className=" place-self-center  h-auto w-[75dvw] bg-primaryColor-100  ">
+      <div className="flex justify-center h-auto md:w-[75dvw] w-[95%] bg-primaryColor-100  ">
         <TableComponent
           isLoading={isLoading}
           tableBody={data?.courses}

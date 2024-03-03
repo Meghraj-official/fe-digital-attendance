@@ -18,7 +18,7 @@ const HomeInfo = ({ teacherData }) => {
     greet = "Good Night";
 
   return (
-    <div className="lg:h-[80vh] w-full px-5 flex flex-col ">
+    <div className="lg:h-[80vh] w-full md:px-5 px-2  flex flex-col ">
       <h2 className=" text-xl text-left my-6 text-primaryColor-950 font-semibold tracking-wide  ">
         {" "}
         {greet},{" "}
@@ -26,9 +26,9 @@ const HomeInfo = ({ teacherData }) => {
           {teacherData?.fullName}
         </span>{" "}
       </h2>
-      <div className="flex flex-col md:flex-row h-fit w-full  gap-5 lg:gap-20 ">
-        <div className="flex flex-col  max-w-[300px] border bg-primaryColor-100 p-5 rounded-md">
-          <h1 className="text-2xl text-left font-bold mb-5">
+      <div className="flex flex-col md:flex-row h-fit w-full justify-around  gap-5 lg:gap-10 ">
+        <div className="flex flex-col lg:w-[50%] w-full border bg-primaryColor-100 p-5 rounded-md">
+          <h1 className="lg:text-2xl text-xl text-center font-bold mb-5">
             Assigned Subjects.
           </h1>
           <ul className="text-left space-y-1">
@@ -41,27 +41,36 @@ const HomeInfo = ({ teacherData }) => {
             })}
           </ul>
         </div>
-        <div className="flex flex-col  max-w-[300px] border bg-primaryColor-100 p-5 rounded-md">
-          <h1 className="text-2xl font-bold mb-5 text-left">
+        <div className="flex flex-col justify-between w-full lg:w-[50%] h-80 border bg-primaryColor-100 p-5 rounded-md">
+          <h1 className="lg:text-2xl text-xl font-bold  text-center">
             {" "}
             Personal Details
           </h1>
-          <ul className="text-left flex flex-col space-y-1">
-            <li className="flex gap-2 items-center ">
-              <span className="font-semibold">Name : </span>{" "}
-              <p> {teacherData?.fullName}</p>
+          <ul className="text-left flex flex-col gap-5">
+            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm  ">
+              <span className="font-semibold  ">Name : </span>{" "}
+              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
+                {" "}
+                <p> {teacherData?.fullName}</p>
+              </div>
             </li>
-            <li className="flex gap-2 items-center ">
+            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm">
               <span className="font-semibold">Role : </span>{" "}
-              <p> {teacherData?.role}</p>
+              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
+                <p> {teacherData?.role}</p>
+              </div>
             </li>
-            <li className="flex gap-2 flex-wrap items-center ">
+            <li className="flex justify-around gap-2 flex-wrap items-center lg:text-sm text-sm ">
               <span className="font-semibold">Mail : </span>{" "}
-              <p className="flex-wrap"> {teacherData?.email}</p>
+              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
+                <p className="flex-wrap"> {teacherData?.email}</p>
+              </div>
             </li>
-            <li className="flex gap-2 items-center ">
+            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm">
               <span className="font-semibold">Status : </span>{" "}
-              <p> {teacherData?.status}</p>
+              <div className=" border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
+                <p> {teacherData?.status}</p>
+              </div>
             </li>
           </ul>
         </div>
