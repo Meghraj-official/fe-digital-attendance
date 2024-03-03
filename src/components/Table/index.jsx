@@ -37,7 +37,7 @@ const TableComponent = (props) => {
       <div
         ref={tableRef}
         style={{ maxHeight: tableHeight, minHeight: tableHeight }}
-        className={`overflow-y-auto border border-gray-300 scrollbar relative`}
+        className={`overflow-y-auto border border-gray-300 scrollbar relative overflow-scroll`}
       >
         <Table>
           <TableHeader className="bg-primaryColor-300 w-full sticky -top-1">

@@ -14,8 +14,7 @@ import Spinner from "../common/Spinner";
 
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
-
-  password: yup.string().required("Password is required").min(6).max(28),
+  password: yup.string().required("Password is required").min(6),
 });
 
 const loginField = [

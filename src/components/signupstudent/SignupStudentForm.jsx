@@ -11,13 +11,16 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 
 import RhfSelect from "../reactHookForms/RhfSelect";
-import { courseOptions, semesterOptions, yearOptions } from "@/lib/data/signup";
+import { semesterOptions, yearOptions } from "@/lib/data/signup";
 import toast from "react-hot-toast";
+import { useCourseStore } from "@/store/courseStore";
+import { useEffect } from "react";
+import { convertToCustomFormat } from "@/lib/helpers/CourseFormatter";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
   email: yup.string().email().required("Email is required"),
-  password: yup.string().required("Password is required").min(6).max(10),
+  password: yup.string().required("Password is required").min(6),
   confirmpassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
@@ -134,11 +137,20 @@ export default function SignupStudentForm() {
 
   const onSubmit = async (data) => {
     sessionStorage.setItem("email", data.email);
+    console.log("formdta", data);
     data.courseType === "YEARLY" ? delete data?.semester : delete data?.year;
-
     delete data?.confirmpassword;
     mutate(data);
   };
+  const { courses, getCourses } = useCourseStore((state) => state);
+
+  useEffect(() => {
+    getCourses();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log("courses", courses);
 
   return (
     <div className="min-h-screen overflow-y-scroll relative w-full  bg-primaryColor-100 max-sm:h-screen max-sm:w-screen flex  ">
@@ -201,9 +213,9 @@ export default function SignupStudentForm() {
               <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm text-primaryColor-500 ">
                 <div className=" h-fit  w-1/2 rounded-md text-center  ">
                   <RhfSelect
-                    placeholder="Choose Course"
+                    placeholder="Course"
                     name="courseCode"
-                    options={courseOptions}
+                    options={courses && convertToCustomFormat(courses?.courses)}
                   />
                 </div>
                 <div className=" w-1/2 h-full outline-none rounded-md text-center">

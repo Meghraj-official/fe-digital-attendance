@@ -1,9 +1,15 @@
-import React from 'react'
+"use client";
+import AttendanceListTable from "@/components/dashboard/teacher/AttendanceListTable";
+import AttendanceListTools from "@/components/dashboard/teacher/AttendanceListTools";
+import React from "react";
 
 const Index = () => {
   return (
-    <div>This is attendance list page.</div>
-  )
-}
+    <div className="flex flex-col gap-4">
+      <AttendanceListTools />
+      <AttendanceListTable />
+    </div>
+  );
+};
 
-export default Index
+export default Index;
