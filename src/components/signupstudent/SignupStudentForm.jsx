@@ -15,7 +15,10 @@ import { semesterOptions, yearOptions } from "@/lib/data/signup";
 import toast from "react-hot-toast";
 import { useCourseStore } from "@/store/courseStore";
 import { useEffect } from "react";
-import { convertToCustomFormat } from "@/lib/helpers/CourseFormatter";
+import {
+  categorizeCourses,
+  convertToCustomFormat,
+} from "@/lib/helpers/CourseFormatter";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -38,7 +41,7 @@ const schema = yup.object({
     then: (schema) => schema.required("Semester is required"),
     otherwise: (schema) => schema.nullable(),
   }),
-  section: yup.string().required("Section is required"),
+  section: yup.string().required("Section is required").min(1).max(1),
   batch: yup.string().required("Batch is required"),
 });
 
@@ -137,7 +140,6 @@ export default function SignupStudentForm() {
 
   const onSubmit = async (data) => {
     sessionStorage.setItem("email", data.email);
-    console.log("formdta", data);
     data.courseType === "YEARLY" ? delete data?.semester : delete data?.year;
     delete data?.confirmpassword;
     mutate(data);
@@ -149,8 +151,6 @@ export default function SignupStudentForm() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("courses", courses);
 
   return (
     <div className="min-h-screen overflow-y-scroll relative w-full  bg-primaryColor-100 max-sm:h-screen max-sm:w-screen flex  ">
@@ -215,7 +215,17 @@ export default function SignupStudentForm() {
                   <RhfSelect
                     placeholder="Course"
                     name="courseCode"
-                    options={courses && convertToCustomFormat(courses?.courses)}
+                    options={
+                      courses?.courses?.length > 0
+                        ? isYearly
+                          ? convertToCustomFormat(
+                              categorizeCourses(courses?.courses).yearly
+                            )
+                          : convertToCustomFormat(
+                              categorizeCourses(courses?.courses).semester
+                            )
+                        : []
+                    }
                   />
                 </div>
                 <div className=" w-1/2 h-full outline-none rounded-md text-center">
