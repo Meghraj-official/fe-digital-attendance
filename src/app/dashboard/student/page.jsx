@@ -22,10 +22,26 @@ const Student = () => {
     greet = "Good Night";
 
   return (
-    <div className="flex flex-col justify-between h-[80vh]  ">
+    // <div className="flex flex-col justify-between h-[80vh]  ">
+    //   {/* <Navbar type="student" /> */}
+    //   <div className="w-full flex flex-col justify-end  h-full text-left font-poppins pl-5 mb-5 ">
+    //     <h2 className=" text-xl  text-primaryColor-950 font-semibold tracking-wide  ">
+    //       {" "}
+    //       {greet},{" "}
+    //       <span className="font-normal text-primaryColor-700 ">
+    //         {data?.fullName}
+    //       </span>{" "}
+    //     </h2>
+    //   </div>
+    //   <div className="flex justify-between">
+    //     <StudentStats />
+    //     <Info data={data} />
+    //   </div>
+    // </div>
+    <div className="flex flex-col justify-between h-[80vh]   ">
       {/* <Navbar type="student" /> */}
       <div className="w-full flex flex-col justify-end  h-full text-left font-poppins pl-5 mb-5 ">
-        <h2 className=" text-xl  text-primaryColor-950 font-semibold tracking-wide  ">
+        <h2 className="text- lg:text-xl  text-primaryColor-950 font-semibold tracking-wide mt-3 ">
           {" "}
           {greet},{" "}
           <span className="font-normal text-primaryColor-700 ">
@@ -33,7 +49,7 @@ const Student = () => {
           </span>{" "}
         </h2>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-col-reverse items-center lg:items-start  lg:flex-row lg:justify-around gap-5 ">
         <StudentStats />
         <Info data={data} />
       </div>
