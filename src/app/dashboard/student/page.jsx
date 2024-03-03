@@ -25,7 +25,7 @@ const Student = () => {
     <div className="flex flex-col justify-between h-[80vh]   ">
       {/* <Navbar type="student" /> */}
       <div className="w-full flex flex-col justify-end  h-full text-left font-poppins pl-5 mb-5 ">
-        <h2 className="text-base lg:text-xl  text-primaryColor-950 font-semibold tracking-wide mt-3 ">
+        <h2 className="text- lg:text-xl  text-primaryColor-950 font-semibold tracking-wide mt-3 ">
           {" "}
           {greet},{" "}
           <span className="font-normal text-primaryColor-700 ">
