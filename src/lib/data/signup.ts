@@ -95,3 +95,13 @@ export const batchOptions = [
     value: "2020",
   },
 ];
+export const sectionOptions = [
+  {
+    label: "A",
+    value: "A",
+  },
+  {
+    label: "B",
+    value: "B",
+  },
+];

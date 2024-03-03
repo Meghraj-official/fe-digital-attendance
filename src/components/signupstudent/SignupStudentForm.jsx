@@ -11,7 +11,12 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 
 import RhfSelect from "../reactHookForms/RhfSelect";
-import { semesterOptions, yearOptions } from "@/lib/data/signup";
+import {
+  batchOptions,
+  sectionOptions,
+  semesterOptions,
+  yearOptions,
+} from "@/lib/data/signup";
 import toast from "react-hot-toast";
 import { useCourseStore } from "@/store/courseStore";
 import { useEffect } from "react";
@@ -58,15 +63,16 @@ const inputField = [
     placeholder: "Email",
   },
   {
-    name: "rollNo",
-    type: "number",
-    placeholder: "Roll Number",
-  },
-  {
     name: "batch",
     type: "text",
     placeholder: "Batch",
   },
+  {
+    name: "rollNo",
+    type: "number",
+    placeholder: "Roll Number",
+  },
+
   {
     name: "password",
     type: "password",
@@ -76,14 +82,6 @@ const inputField = [
     name: "confirmpassword",
     type: "password",
     placeholder: "Confirm Password",
-  },
-];
-
-const sectionField = [
-  {
-    name: "section",
-    type: "text",
-    placeholder: "Section",
   },
 ];
 
@@ -190,7 +188,7 @@ export default function SignupStudentForm() {
                 />
               ))}
 
-              <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 text-primaryColor-500">
+              <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 ">
                 {" "}
                 <div className="  h-fit w-1/2  rounded-md text-center   ">
                   <RhfSelect
@@ -210,7 +208,7 @@ export default function SignupStudentForm() {
                   />
                 </div>
               </div>
-              <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm text-primaryColor-500 ">
+              <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm ">
                 <div className=" h-fit  w-1/2 rounded-md text-center  ">
                   <RhfSelect
                     placeholder="Course"
@@ -228,19 +226,24 @@ export default function SignupStudentForm() {
                     }
                   />
                 </div>
-                <div className=" w-1/2 h-full outline-none rounded-md text-center">
-                  {sectionField.map((item) => (
-                    <Data
-                      register={register}
-                      item={item}
-                      key={item.name}
-                      errors={errors}
-                    />
-                  ))}
+                <div className=" w-1/2 h-full mb-3 outline-none rounded-md text-center">
+                  <RhfSelect
+                    placeholder="Select Section"
+                    name="section"
+                    options={sectionOptions}
+                  />
                 </div>
               </div>
 
-              {inputField.slice(2).map((item) => (
+              <div className="mb-3">
+                <RhfSelect
+                  placeholder="Batch"
+                  name="batch"
+                  options={batchOptions}
+                />
+              </div>
+
+              {inputField.slice(3).map((item) => (
                 <Data
                   register={register}
                   item={item}

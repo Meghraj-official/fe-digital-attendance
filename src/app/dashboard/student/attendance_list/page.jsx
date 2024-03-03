@@ -48,16 +48,7 @@ const AttendanceList = () => {
     <>
       <div className="flex flex-col justify-center gap-4 px-3">
         <div className="flex w-40 overflow-hidden gap-2">
-          {/* <button className="bg-primaryColor-300  place-self-start p-2 mr-10 rounded-md">
-            Refresh
-          </button> */}
-          {/* <button className="bg-primaryColor-300  place-self-start p-2 mr-10 rounded-md">
-            Subject
-          </button> */}
-          <Select
-            // defaultValue={value}
-            className="bg-primaryColor-50 h-full w-20   outline-none border  border-primaryColor-800 rounded-md text-center "
-          >
+          <Select className="bg-primaryColor-50 h-full w-20   outline-none border  border-primaryColor-800 rounded-md text-center ">
             <SelectTrigger>
               <SelectValue placeholder="Select Subject" />
             </SelectTrigger>
@@ -71,14 +62,11 @@ const AttendanceList = () => {
           </Select>
         </div>
 
-        <div className=" overflow-y-auto h-80 w-[75dvw] bg-primaryColor-100 ">
-          {/* <CourseTable /> */}
-          <TableComponent
-            isLoading={isLoading}
-            tableBody={data?.courses}
-            tableHeader={tableHeader}
-          />
-        </div>
+        <TableComponent
+          isLoading={isLoading}
+          tableBody={data?.courses}
+          tableHeader={tableHeader}
+        />
       </div>
     </>
   );
