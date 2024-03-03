@@ -18,16 +18,16 @@ const Navbar = ({ type }) => {
 
   return (
     <>
-      <div className=" py-5 px-2 m-3 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between ">
+      <div className=" py-5 px-2 m-3 max-sm:py-5 bg-primaryColor-100 backdrop-blur-lg rounded-md flex justify-between  ">
         {/* Search Bar and buttons here */}
-        <div className="flex  items-center justify-between  w-full  ">
+        <div className="flex  items-center justify-between gap-5  w-full  ">
           <span
             className="  block lg:hidden"
             onClick={() => {
               setOpen(!open);
             }}
           >
-            <Menu className="h-10 w-10 max-sm:h-6 max-sm:w-6 text-primaryColor-950 " />
+            <Menu className="h-10 w-10 max-sm:h-6 max-sm:w-6 text-primaryColor-950 bg-slate " />
           </span>
           {/* <div className="flex items-center  ">
             <svg
@@ -51,7 +51,7 @@ const Navbar = ({ type }) => {
               placeholder="Search here"
             />
           </div> */}
-          <div>
+          <div className=" w-full flex  justify-between  items-center ">
             {type === "student" && <Scanner />}
             {type === "teacher" && <TeacherNavigations />}
 

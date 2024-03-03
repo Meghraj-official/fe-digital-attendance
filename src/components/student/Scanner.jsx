@@ -9,7 +9,7 @@ const Scanner = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="text-primaryColor-50 py-2 px-2  rounded-lg  h-fit "
+          className="text-primaryColor-50 py-2 px-2 rounded-xxl text-sm  h-fit md:text-l "
           buttonText="Open Scanner"
         />
       </DialogTrigger>
