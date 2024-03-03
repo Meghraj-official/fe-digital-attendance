@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import AuthWrapper from "@/components/common/AuthWrapper";
-import Loginform from "@/components/login/Loginform";
+import Loginform from "@/components/Login/Loginform";
 
 const Login = () => {
   return (
