@@ -32,8 +32,8 @@ const PendingUser = () => {
   } = useQuery("pendingTeachers", handleGetPendingTeachers);
 
   return (
-    <div className="w-full h-full flex flex-col justify-center">
-      <div className="flex flex-row justify-start ml-10 gap-4 ">
+    <div className="w-full h-full flex flex-col justify-center px-3">
+      <div className="flex flex-row place-self-end mr-10 gap-2 mt-2  ">
         {tab.map((item) => (
           <button
             key={item}
@@ -48,7 +48,7 @@ const PendingUser = () => {
           </button>
         ))}
       </div>
-      <div className="h-[70vh] w-[95%] mt-10 ml-10 overflow-y-auto  bg-primaryColor-100">
+      <div className="h-[70vh] w-[100%] mt-2  overflow-y-auto  bg-primaryColor-100">
         {activeTab === "teacher" && (
           <PendingTeacher
             isLoading={isPending}

@@ -20,14 +20,14 @@ const AssignSubject = () => {
 
   const actions = (rowData) => { 
     return ( 
-      <div className="flex flex-row gap-2 mt-2">
+      <div className="flex flex-row gap-2 mt-2 ">
       <Dialog>
         <DialogTrigger>
           <button className="bg-primaryColor-300 p-2 rounded-md">
             Assign Subject
           </button>
         </DialogTrigger>
-        <DialogContent className="bg-white">
+        <DialogContent className="bg-white ">
        <AssignSubjectModal teacherId={rowData?._id} assignedSubjects={rowData?.assignedSubjects} />
         </DialogContent>
       </Dialog>
