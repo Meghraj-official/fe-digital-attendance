@@ -1,6 +1,5 @@
 export const STUDENT_HOME_ROUTE = "/dashboard/student";
-export const STUDENT_PROFILE_ROUTE = "/dashboard/student/profile";
-export const STUDENT_SETTINGS_ROUTE = "/dashboard/student/settings";
+export const STUDENT_PROFILE_ROUTE = "/dashboard/student/attendance_list";
 export const TEACHER_HOME_ROUTE = "/dashboard/teacher";
 export const TEACHER_ATTENDANCE_LIST_ROUTE =
   "/dashboard/teacher/attendance-list";

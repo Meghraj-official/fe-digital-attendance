@@ -29,14 +29,8 @@ export const studentNavigation = [
   {
     id: 2,
     icon: UserIcon,
-    label: "Profile",
+    label: "Attendance List",
     pathName: STUDENT_PROFILE_ROUTE,
-  },
-  {
-    id: 3,
-    icon: Settings,
-    label: "Settings",
-    pathName: STUDENT_SETTINGS_ROUTE,
   },
 ];
 export const teacherNavigation = [
