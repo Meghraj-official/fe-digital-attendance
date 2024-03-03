@@ -9,17 +9,6 @@ const AttendanceListTable = () => {
     return useCourseStore.getState().getCourses();
   });
 
-  const options = [
-    {
-      label: "Web Technology",
-      value: "web",
-    },
-    {
-      label: "DBMS",
-      value: "dbms",
-    },
-  ];
-
   const tableHeader = [
     { label: "SN", accessorKey: "index" },
     { label: "Name", accessorKey: "name" },
