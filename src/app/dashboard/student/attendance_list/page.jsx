@@ -1,10 +1,8 @@
 "use client";
 import TableComponent from "@/components/Table";
-import axiosInstance from "@/lib/axios";
 import { useCourseStore } from "@/store/courseStore";
 import React from "react";
-import { useMutation, useQuery } from "react-query";
-import RhfSelect from "@/components/reactHookForms/RhfSelect";
+import { useQuery } from "react-query";
 import {
   Select,
   SelectContent,
@@ -12,14 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormProvider } from "react-hook-form";
 
-const attendanceList = () => {
-  const {
-    data,
-    isLoading,
-    refetch: refetchCourse,
-  } = useQuery("courses", async () => {
+const AttendanceList = () => {
+  const { data, isLoading } = useQuery("courses", async () => {
     return useCourseStore.getState().getCourses();
   });
 
@@ -90,4 +83,4 @@ const attendanceList = () => {
     </>
   );
 };
-export default attendanceList;
+export default AttendanceList;
