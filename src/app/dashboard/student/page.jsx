@@ -9,11 +9,10 @@ const Student = () => {
   const { data } = useQuery("profile", async () => {
     return (await axiosInstance.get("/user/showme"))?.data;
   });
-  console.log("hiii", data)
 
   var myDate = new Date();
   var hrs = myDate.getHours();
-  console.log(hrs)
+  console.log(hrs);
 
   var greet;
 
@@ -25,12 +24,11 @@ const Student = () => {
 
   return (
     <div className="flex flex-col justify-between h-[80vh]   ">
-      {/* <Navbar type="student" /> */}
       <div className="w-full flex flex-col justify-end  h-full text-left font-poppins pl-5 mb-5 ">
         <h2 className="text- lg:text-xl  text-primaryColor-950 font-semibold tracking-wide mt-3 ">
           {" "}
           {greet},{" "}
-          <span className="font-normal text-primaryColor-700 ">
+          <span className="font-normal capitalize text-primaryColor-700 ">
             {data?.fullName}
           </span>{" "}
         </h2>
