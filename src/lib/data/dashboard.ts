@@ -6,17 +6,11 @@ import {
   ADMIN_SUBJECT_ROUTE,
   STUDENT_HOME_ROUTE,
   STUDENT_PROFILE_ROUTE,
+  TEACHER_ATTENDANCE_LIST_ROUTE,
   TEACHER_HOME_ROUTE,
-  TEACHER_PROFILE_ROUTE,
-  TEACHER_SETTINGS_ROUTE,
+  TEACHER_MANUAL_ATTENDANCE_ROUTE,
 } from "@/routes/route";
-import {
-  HomeIcon,
-  Settings,
-  UserIcon,
-  BookOpenText,
-  BookMarked,
-} from "lucide-react";
+import { HomeIcon, UserIcon, BookOpenText, BookMarked } from "lucide-react";
 
 export const studentNavigation = [
   {
@@ -42,14 +36,14 @@ export const teacherNavigation = [
   {
     id: 2,
     icon: UserIcon,
-    label: "Profile",
-    pathName: TEACHER_PROFILE_ROUTE,
+    label: "Attendance List",
+    pathName: TEACHER_ATTENDANCE_LIST_ROUTE,
   },
   {
     id: 3,
-    icon: Settings,
-    label: "Settings",
-    pathName: TEACHER_SETTINGS_ROUTE,
+    icon: UserIcon,
+    label: "Manual Attendance",
+    pathName: TEACHER_MANUAL_ATTENDANCE_ROUTE,
   },
 ];
 
