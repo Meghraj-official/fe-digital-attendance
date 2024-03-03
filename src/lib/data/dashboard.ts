@@ -6,18 +6,11 @@ import {
   ADMIN_SUBJECT_ROUTE,
   STUDENT_HOME_ROUTE,
   STUDENT_PROFILE_ROUTE,
-  STUDENT_SETTINGS_ROUTE,
   TEACHER_ATTENDANCE_LIST_ROUTE,
   TEACHER_HOME_ROUTE,
   TEACHER_MANUAL_ATTENDANCE_ROUTE,
 } from "@/routes/route";
-import {
-  HomeIcon,
-  Settings,
-  UserIcon,
-  BookOpenText,
-  BookMarked,
-} from "lucide-react";
+import { HomeIcon, UserIcon, BookOpenText, BookMarked } from "lucide-react";
 
 export const studentNavigation = [
   {
