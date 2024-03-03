@@ -37,7 +37,7 @@ export function PendingTeacher({ teacherData, refetch }) {
   });
   return (
     <Table>
-      <TableHeader className="bg-primaryColor-300 z-0 ">
+      <TableHeader className="bg-primaryColor-300 z-0  ">
         <TableRow className="">
           <TableHead className="text-center">Full Name</TableHead>
           <TableHead className="text-center">Email </TableHead>
