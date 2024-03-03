@@ -1,6 +1,5 @@
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import CustomInput from "@/components/dashboard/common/CustomInput";
 import RhfSelect from "@/components/reactHookForms/RhfSelect";
 import Button from "@/components/common/Button";
 import { useForm, FormProvider } from "react-hook-form";
@@ -15,29 +14,27 @@ import toast from "react-hot-toast";
 import startTimer from "@/lib/helpers/Timer";
 import { dialogClose } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { batchOptions, sectionOptions } from "@/lib/data/signup";
 const GenerateQR = () => {
-
-  const { data:teacherData } = useQuery("currentTeacher", async () => {
+  const { data: teacherData } = useQuery("currentTeacher", async () => {
     return (await axiosInstance.get("/user/showme")).data;
   });
 
   const [qrText, setQrText] = useState(null);
   const router = useRouter();
-  const handleGenerateQr =async (formData) => {
+  const handleGenerateQr = async (formData) => {
     try {
-      const res = await axiosInstance.post('/attendance/generate-qr',formData)
-      console.log('res', res?.data?.qrToken)
-      setQrText(res?.data?.qrToken)
-      toast.success('Qr generated')
-     setTimeout(() => {  toast.success('It will be closed automatically after 1 minute.')},2000)
+      const res = await axiosInstance.post("/attendance/generate-qr", formData);
+      console.log("res", res?.data?.qrToken);
+      setQrText(res?.data?.qrToken);
+      toast.success("Qr generated");
+      setTimeout(() => {
+        toast.success("It will be closed automatically after 1 minute.");
+      }, 2000);
+    } catch (err) {
+      toast.error("Something Went Wrong");
+      console.log("Error", err);
     }
-    catch(err)
-    {
-      toast.error('Something Went Wrong')
-      console.log('Error', err)
-    }
-   
-    console.log("QR data", formData);
   };
 
   const methods = useForm({
@@ -45,12 +42,9 @@ const GenerateQR = () => {
   });
   const {
     handleSubmit,
-    
 
     formState: { isSubmitting },
   } = methods;
-
-
 
   return (
     <>
@@ -62,32 +56,42 @@ const GenerateQR = () => {
               //   console.log("log ", data);
             })}
           >
-            <div className="grid grid-cols-2 gap-4  text-left ">
-              <CustomInput name="section" id="section" labelName="Section" />
-              <CustomInput name="batch" id="batch" labelName="Batch" />
-            
-                <RhfSelect
-                  label="Select Subject"
-                  placeholder="Subjects"
-                  name="subjectCode"
-                  options={FormatAssignSubjects(teacherData?.assignedSubjects)}
-                />
-        
+            <div className="flex flex-col min-w-[300px] gap-3 text-left ">
+              <RhfSelect
+                label="Section"
+                placeholder="Select Section"
+                name="section"
+                options={sectionOptions}
+              />
+
+              <RhfSelect
+                label="Batch"
+                placeholder="Batch"
+                name="batch"
+                options={batchOptions}
+              />
+
+              <RhfSelect
+                label="Select Subject"
+                placeholder="Subjects"
+                name="subjectCode"
+                options={FormatAssignSubjects(teacherData?.assignedSubjects)}
+              />
             </div>
 
             <Dialog>
               <DialogTrigger asChild>
                 <div className="flex justify-center">
-                  <Button 
-                      onClick={() => { startTimer(60,(remainingTime) => { 
-                        if(remainingTime === 0)
-                        {
-                          toast.success('Time up')
-                          router.push('/dashboard/teacher/attendance-list')
+                  <Button
+                    onClick={() => {
+                      startTimer(60, (remainingTime) => {
+                        if (remainingTime === 0) {
+                          toast.success("Time up");
+                          router.push("/dashboard/teacher/attendance-list");
                           dialogClose();
                         }
-                      }) }
-                      }
+                      });
+                    }}
                     buttonText="Create Qr Code"
                     disabled={isSubmitting}
                     type="submit"
@@ -96,11 +100,13 @@ const GenerateQR = () => {
                 </div>
               </DialogTrigger>
               {qrText && (
-                <DialogContent styleCloseButton="hidden" className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200" 
-                
-                onInteractOutside={(e) => {
-                  e.preventDefault();
-                }}>
+                <DialogContent
+                  styleCloseButton="hidden"
+                  className="sm:max-w-[425px] flex w-full justify-center h-[500px] items-center bg-primaryColor-200"
+                  onInteractOutside={(e) => {
+                    e.preventDefault();
+                  }}
+                >
                   <QrCodeModal QrData={qrText} />
                 </DialogContent>
               )}
