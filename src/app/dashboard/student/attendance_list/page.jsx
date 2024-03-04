@@ -1,6 +1,4 @@
 "use client";
-import TableComponent from "@/components/Table";
-import { useCourseStore } from "@/store/courseStore";
 import React from "react";
 import { useQuery } from "react-query";
 import {
@@ -10,39 +8,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import axiosInstance from "@/lib/axios";
+import { FormatAssignSubjects } from "@/lib/helpers/FormatAssignSubjects";
+import AttendanceListTable from "@/components/dashboard/student/AttendanceListTable";
 
 const AttendanceList = () => {
-  const { data, isLoading } = useQuery("courses", async () => {
-    return useCourseStore.getState().getCourses();
+  const { data: subjects } = useQuery("mysubjects", async () => {
+    return (await axiosInstance.get("/subject/student")).data;
   });
-
-  const options = [
-    {
-      label: "Web Technology",
-      value: "web",
-    },
-    {
-      label: "DBMS",
-      value: "dbms",
-    },
-  ];
-
-  const tableHeader = [
-    { label: "SN", accessorKey: "index" },
-    { label: "Name", accessorKey: "name" },
-    {
-      label: "Subject",
-      accessorKey: "subject",
-    },
-    {
-      label: "Date",
-      accessorKey: "date",
-    },
-    {
-      label: "Status",
-      accessorKey: "status",
-    },
-  ];
+  const date = new Date();
+  const year = date.getFullYear();
+  const inputMonth = new Date(year, 2, 1);
 
   return (
     <>
@@ -53,7 +29,7 @@ const AttendanceList = () => {
               <SelectValue placeholder="Select Subject" />
             </SelectTrigger>
             <SelectContent className="bg-primaryColor-50 ">
-              {options?.map((option) => (
+              {FormatAssignSubjects(subjects?.subjects)?.map((option) => (
                 <SelectItem value={option?.value} key={option.value}>
                   {option?.label}
                 </SelectItem>
@@ -61,12 +37,7 @@ const AttendanceList = () => {
             </SelectContent>
           </Select>
         </div>
-
-        <TableComponent
-          isLoading={isLoading}
-          tableBody={data?.courses}
-          tableHeader={tableHeader}
-        />
+        <AttendanceListTable month={inputMonth} />
       </div>
     </>
   );
