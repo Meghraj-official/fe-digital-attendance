@@ -60,7 +60,7 @@ const Subject = () => {
   return (
     <>
       <div className="flex flex-col   justify-center px-3 gap-4 ">
-        <button className="bg-primaryColor-300  place-self-end mr-10 rounded-md">
+        <button className="bg-primaryColor-300  place-self-end  rounded-md">
           <AddSubject refetch={refetchSubjects} />
         </button>
         {/* <TableSkeleton /> */}

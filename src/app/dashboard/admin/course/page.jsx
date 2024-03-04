@@ -44,7 +44,7 @@ const Course = () => {
   return (
     <>
       <div className="flex flex-col justify-center gap-4 px-3">
-        <button className="bg-primaryColor-300  place-self-end mr-10 rounded-md">
+        <button className="bg-primaryColor-300  place-self-end  rounded-md">
           <AddCourse refetch={refetchCourse} />
         </button>
         {/* <div className="bg-primaryColor-100 overflow-y-auto h-80 w-[100%] "> */}
