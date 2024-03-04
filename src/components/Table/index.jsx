@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import TableSkeleton from "../common/TableSkeleton";
 
 const TableComponent = (props) => {
-  const { tableHeader, tableBody, actions, isLoading } = props;
+  const { tableHeader, tableBody, actions, isLoading, status } = props;
 
   const tableRef = useRef(null);
 
@@ -50,6 +50,7 @@ const TableComponent = (props) => {
                   {header.label}
                 </TableHead>
               ))}
+              {/* {status && <TableHead className="text-left">Status</TableHead>} */}
               {actions && <TableHead className="text-left">Actions</TableHead>}
             </TableRow>
           </TableHeader>
@@ -85,6 +86,7 @@ const TableComponent = (props) => {
                             : body?.[row?.accessorKey]}
                         </TableCell>
                       ))}
+                      {/* {status && status(body)} */}
                       {actions && actions(body)}
                     </TableRow>
                   ))}
@@ -101,6 +103,7 @@ const TableComponent = (props) => {
 TableComponent.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object),
   tableBody: PropTypes.array,
+  status: PropTypes.node,
   actions: PropTypes.node,
 };
 

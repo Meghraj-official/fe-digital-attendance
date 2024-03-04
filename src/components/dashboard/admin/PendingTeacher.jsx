@@ -64,6 +64,7 @@ export function PendingTeacher({ teacherData, refetch, isLoading }) {
   ];
 
   const actions = (param) => {
+    console.log(param, "hello");
     return (
       <div className="flex flex-row gap-2 mt-2">
         <button
