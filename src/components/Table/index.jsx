@@ -103,7 +103,7 @@ const TableComponent = (props) => {
 TableComponent.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.object),
   tableBody: PropTypes.array,
-  status: PropTypes.node,
+
   actions: PropTypes.node,
 };
 
