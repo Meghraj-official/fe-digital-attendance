@@ -33,7 +33,7 @@ const PendingUser = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center px-3">
-      <div className="flex flex-row place-self-end mr-10 gap-2 mt-2  ">
+      <div className="flex flex-row place-self-end  gap-2 mt-2  ">
         {tab.map((item) => (
           <button
             key={item}

@@ -22,48 +22,51 @@ export default function DashboardStats() {
   const data=[
     {
       title:" Students",
-      count:datas?.students,
+      count:datas?.students?.toString()|| "XX",
       description:" Total count of the student in the system",
       icon:<GraduationCap/>
     },
     {
       title:" Teachers",
-      count:datas?.teachers,
+      count:datas?.teachers?.toString()|| "XX",
       description:" Total count of the teacher in the system",
-      icon:<User2Icon/>
+      icon:<User2Icon/>,
+     
     },
     {
       title:" Course",
-      count:datas?.courses,
+      count:datas?.courses?.toString()|| "XX",
       description:" Total count of the course in the system",
       icon:<BookCopyIcon/>
     },
     {
       title:" Subject",
-      count:datas?.subjects,
+      count:datas?.subjects?.toString()|| "XX",
       description:"Total count of the subject in the system",
       icon:<BookOpenIcon/>
     },
     {
       title:" Pending students",
-      count:datas?.pendingStudents,
+      count:datas?.pendingStudents?.toString()|| "XX",
       description:"Total count of the pending students in the system",
       icon:<User2Icon/>
     },
     {
       title:"Pending Teachers ",
-      count:datas?.pendingTeachers,
+      count:datas?.pendingTeachers?.toString()|| "XX",
       description:"Total count of the pending teachers in the system",
       icon:<User2Icon/>
     }
   ]
  
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 lg:h-[80vh] py-2 px-1 lg:px-3 ">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-5 lg:h-[80vh] py-2 px-1  lg:px-3 ">
       {data.map((item,index)=>{
         return(
-          <Card key={index}>
-          <CardHeader className="flex flex-row items-center justify-between h-[20%] pb-2 space-y-0">
+          <div key={index} className="min-w-fit">
+          <Card >
+            
+          <CardHeader className="flex flex-row items-center justify-between h-[20%]  pb-2 space-y-0">
             <CardTitle className="text-xs  lg:text-base font-semibold">
             {item.title}
             </CardTitle>
@@ -76,6 +79,7 @@ export default function DashboardStats() {
             </p>
           </CardContent>
         </Card>
+        </div>
 
         )
       })}

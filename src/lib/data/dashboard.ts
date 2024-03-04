@@ -10,7 +10,7 @@ import {
   TEACHER_HOME_ROUTE,
   TEACHER_MANUAL_ATTENDANCE_ROUTE,
 } from "@/routes/route";
-import { HomeIcon, UserIcon, BookOpenText, BookMarked } from "lucide-react";
+import { HomeIcon, UserIcon, BookOpenText, BookMarked, BookPlus } from "lucide-react";
 
 export const studentNavigation = [
   {
@@ -74,7 +74,7 @@ export const adminNavigation = [
   },
   {
     id: 5,
-    icon: HomeIcon,
+    icon: BookPlus,
     label: "Assign Subjects",
     pathName: ADMIN_ASSIGN_SUBJECT_ROUTE,
   },
