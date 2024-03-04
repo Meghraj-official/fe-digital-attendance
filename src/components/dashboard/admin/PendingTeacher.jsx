@@ -1,18 +1,10 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { useMutation } from "react-query";
 import axiosInstance from "@/lib/axios";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/store/authStore";
+import TableComponent from "@/components/Table";
 
-export function PendingTeacher({ teacherData, refetch }) {
+export function PendingTeacher({ teacherData, refetch, isLoading }) {
   const { token } = useAuthStore();
   const handleVerifyUser = (userId) => {
     return axiosInstance.patch(
@@ -25,67 +17,84 @@ export function PendingTeacher({ teacherData, refetch }) {
       }
     );
   };
+  const handleDeleteUser = (userId) => {
+    return axiosInstance.delete(
+      `/user/delete/${userId}`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+  };
 
-  const { mutate: verifyUser } = useMutation(handleVerifyUser, {
-    onSuccess: () => {
-      toast.success("User Verified");
-      refetch();
+  const { mutate: verifyUser, isLoading: isVerifying } = useMutation(
+    handleVerifyUser,
+    {
+      onSuccess: () => {
+        toast.success("User Verified");
+        refetch();
+      },
+      onError: (error) => {
+        toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      },
+    }
+  );
+  const { mutate: deleteUser, isLoading: isDeleting } = useMutation(
+    handleDeleteUser,
+    {
+      onSuccess: () => {
+        toast.success("User Deleted");
+        refetch();
+      },
+      onError: (error) => {
+        toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      },
+    }
+  );
+
+  const tableHeader = [
+    { label: "Full Name", accessorKey: "fullName" },
+    { label: "Email", accessorKey: "email" },
+    {
+      label: "Status",
+      accessorKey: "status",
     },
-    onError: (error) => {
-      toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
-    },
-  });
+  ];
+
+  const actions = (param) => {
+    console.log(param, "hello");
+    return (
+      <div className="flex flex-row gap-2 mt-2">
+        <button
+          className="bg-primaryColor-300 p-2 disabled:opacity-60 disabled:cursor-not-allowed rounded-md"
+          disabled={isVerifying}
+          onClick={() => {
+            verifyUser(param?._id);
+          }}
+        >
+          Verify
+        </button>
+        <button
+          className="bg-primaryColor-300 p-2 disabled:opacity-60 disabled:cursor-not-allowed rounded-md"
+          disabled={isDeleting}
+          onClick={() => {
+            deleteUser(param?._id);
+          }}
+        >
+          Delete
+        </button>
+      </div>
+    );
+  };
+
   return (
-    <Table>
-      <TableHeader className="bg-primaryColor-300 z-0  ">
-        <TableRow className="">
-          <TableHead className="text-center">Full Name</TableHead>
-          <TableHead className="text-center">Email </TableHead>
-          <TableHead className="text-center">Status</TableHead>
-          <TableHead className="text-center">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className=" ">
-        {teacherData?.length === 0 ? (
-          "No pending data.."
-        ) : (
-          <>
-            {teacherData?.map((teacher) => {
-              const { email, fullName, status } = teacher;
-              return (
-                <TableRow
-                  key={teacher._id}
-                  className="border-b border-primaryColor-200"
-                >
-                  <TableCell className="font-medium ">{fullName}</TableCell>
-                  <TableCell>{email}</TableCell>
-                  <TableCell>
-                    {status === "UNVERIFIED" ? (
-                      <Badge className="bg-red-200 text-primaryColor-800">
-                        {status}
-                      </Badge>
-                    ) : (
-                      <Badge className="bg-green-200 text-primaryColor-800">
-                        {status}
-                      </Badge>
-                    )}
-                  </TableCell>
-                  <TableCell className="flex  w-full justify-center gap-2">
-                    <button
-                      onClick={() => {
-                        verifyUser(teacher._id);
-                      }}
-                    >
-                      Verify{" "}
-                    </button>
-                    <button>Delete</button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}{" "}
-          </>
-        )}
-      </TableBody>
-    </Table>
+    <TableComponent
+      isLoading={isLoading}
+      tableBody={teacherData}
+      tableHeader={tableHeader}
+      actions={actions}
+    />
   );
 }
