@@ -3,13 +3,12 @@ import CustomInput from "@/components/dashboard/common/CustomInput";
 import RhfSelect from "@/components/reactHookForms/RhfSelect";
 import Button from "@/components/common/Button";
 import { useForm, FormProvider } from "react-hook-form";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import axiosInstance from "@/lib/axios";
 import { FormatAssignSubjects } from "@/lib/helpers/FormatAssignSubjects";
 import toast from "react-hot-toast";
-import { batchOptions } from "@/lib/data/signup";
+import { batchOptions, sectionOptions } from "@/lib/data/signup";
 import { manualAttendanceSchema } from "@/lib/validations/ManualAttendanceValidation";
 const ManualAttendance = () => {
   const { data: teacherData } = useQuery("currentTeacher", async () => {
@@ -17,13 +16,20 @@ const ManualAttendance = () => {
   });
 
   const handleManualAttendance = async (formData) => {
-    try {
-      console.log("formData", formData);
-    } catch (err) {
-      toast.error("Something Went Wrong");
-      console.log("Error", err);
-    }
+    const inputData = { ...formData, rollNo: formData?.rollNo.toString() };
+    return await axiosInstance.post("/attendance/manual", inputData);
   };
+  const { mutate: markAttendance, isLoading } = useMutation(
+    handleManualAttendance,
+    {
+      onSuccess: () => {
+        toast.success("Attendance Marked Sucessfully");
+      },
+      onError: (error) => {
+        toast.error(`${error?.response?.data?.error?.message || "Error"}  `);
+      },
+    }
+  );
 
   const methods = useForm({
     resolver: yupResolver(manualAttendanceSchema),
@@ -40,11 +46,16 @@ const ManualAttendance = () => {
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit((data) => {
-              handleManualAttendance(data);
+              markAttendance(data);
             })}
           >
             <div className="grid grid-cols-2 gap-4  text-left ">
-              <CustomInput name="section" id="section" labelName="Section" />
+              <RhfSelect
+                label="Section"
+                placeholder="Select Section"
+                name="section"
+                options={sectionOptions}
+              />
               <RhfSelect
                 label="Batch"
                 placeholder="Batch"
@@ -62,8 +73,9 @@ const ManualAttendance = () => {
 
             <div className="flex justify-center">
               <Button
+                isLoading={isLoading}
                 buttonText="Mark Attendance"
-                disabled={isSubmitting || !isDirty}
+                disabled={isLoading || !isDirty || isSubmitting}
                 type="submit"
                 className="sm:w-full py-2 text-white sm:mt-6 mt-3 w-[80%]   "
               />

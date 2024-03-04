@@ -40,7 +40,7 @@ const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
 
   return (
     <div>
-      <DialogHeader className="text-lg font-bold">
+      <DialogHeader className="text-lg  font-bold">
         Choose subjects to Assign
       </DialogHeader>
       <FormProvider {...methods}>

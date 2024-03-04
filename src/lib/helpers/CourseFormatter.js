@@ -15,3 +15,20 @@ export const convertToCustomFormat = (courses) => {
     };
   });
 };
+
+export function categorizeCourses(courses) {
+  const categorizedCourses = {
+    yearly: [],
+    semester: [],
+  };
+
+  courses.forEach((course) => {
+    if (course.courseType === "YEARLY") {
+      categorizedCourses.yearly.push(course);
+    } else if (course.courseType === "SEMESTER") {
+      categorizedCourses.semester.push(course);
+    }
+  });
+
+  return categorizedCourses;
+}

@@ -9,13 +9,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-
 import RhfSelect from "../reactHookForms/RhfSelect";
-import { semesterOptions, yearOptions } from "@/lib/data/signup";
+import { sectionOptions } from "@/lib/data/signup";
 import toast from "react-hot-toast";
 import { useCourseStore } from "@/store/courseStore";
 import { useEffect } from "react";
-import { convertToCustomFormat } from "@/lib/helpers/CourseFormatter";
+import {
+  categorizeCourses,
+  convertToCustomFormat,
+} from "@/lib/helpers/CourseFormatter";
 
 const schema = yup.object({
   fullName: yup.string().required("Full name is required"),
@@ -28,18 +30,18 @@ const schema = yup.object({
   rollNo: yup.string().required("Roll number is required").nullable(),
   courseType: yup.string().required("Select Course Type"),
   courseCode: yup.string().required("Select Course"),
-  year: yup.string().when("courseType", {
-    is: (isYearly) => isYearly === "YEARLY",
-    then: (schema) => schema.required("Year is required"),
-    otherwise: (schema) => schema.nullable(),
-  }),
-  semester: yup.string().when("courseType", {
-    is: (isYearly) => isYearly === "SEMESTER",
-    then: (schema) => schema.required("Semester is required"),
-    otherwise: (schema) => schema.nullable(),
-  }),
-  section: yup.string().required("Section is required"),
-  batch: yup.string().required("Batch is required"),
+  // year: yup.string().when("courseType", {
+  //   is: (isYearly) => isYearly === "YEARLY",
+  //   then: (schema) => schema.required("Year is required"),
+  //   otherwise: (schema) => schema.nullable(),
+  // }),
+  // semester: yup.string().when("courseType", {
+  //   is: (isYearly) => isYearly === "SEMESTER",
+  //   then: (schema) => schema.required("Semester is required"),
+  //   otherwise: (schema) => schema.nullable(),
+  // }),
+  section: yup.string().required("Section is required").min(1).max(1),
+  // batch: yup.string().required("Batch is required"),
 });
 
 const inputField = [
@@ -55,15 +57,16 @@ const inputField = [
     placeholder: "Email",
   },
   {
-    name: "rollNo",
-    type: "number",
-    placeholder: "Roll Number",
-  },
-  {
     name: "batch",
     type: "text",
     placeholder: "Batch",
   },
+  {
+    name: "rollNo",
+    type: "number",
+    placeholder: "Roll Number",
+  },
+
   {
     name: "password",
     type: "password",
@@ -73,14 +76,6 @@ const inputField = [
     name: "confirmpassword",
     type: "password",
     placeholder: "Confirm Password",
-  },
-];
-
-const sectionField = [
-  {
-    name: "section",
-    type: "text",
-    placeholder: "Section",
   },
 ];
 
@@ -137,10 +132,16 @@ export default function SignupStudentForm() {
 
   const onSubmit = async (data) => {
     sessionStorage.setItem("email", data.email);
-    console.log("formdta", data);
-    data.courseType === "YEARLY" ? delete data?.semester : delete data?.year;
-    delete data?.confirmpassword;
-    mutate(data);
+    const date = new Date();
+    const year = date.getFullYear();
+
+    const inputData =
+      data.courseType === "YEARLY"
+        ? { ...data, year: "1", batch: year.toString() }
+        : { ...data, semester: "1", batch: year.toString() };
+    delete inputData?.confirmpassword;
+
+    mutate(inputData);
   };
   const { courses, getCourses } = useCourseStore((state) => state);
 
@@ -149,8 +150,6 @@ export default function SignupStudentForm() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("courses", courses);
 
   return (
     <div className="min-h-screen overflow-y-scroll relative w-full  bg-primaryColor-100 max-sm:h-screen max-sm:w-screen flex  ">
@@ -164,12 +163,10 @@ export default function SignupStudentForm() {
           />
         </div>
       </div>
-      <div className="w-1/2 h-screen   max-sm:w-full flex justify-center items-center ">
+
+      <div className="w-1/2 h-screen  flex justify-center items-center  max-sm:w-full   ">
         <FormProvider {...methods}>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="w-full h-screen   "
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full  ">
             <div className="h-8 w-full text-center  py-1 ">
               <label className="text-center  font-bold tracking-wide text-primaryColor-900 font-poppins max-sm:text-sm max-lg:text-xl text-2xl">
                 SignUp
@@ -190,9 +187,9 @@ export default function SignupStudentForm() {
                 />
               ))}
 
-              <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 text-primaryColor-500">
+              <div className="flex h-fit w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm  mb-3 ">
                 {" "}
-                <div className="  h-fit w-1/2  rounded-md text-center   ">
+                <div className="  h-fit w-full  rounded-md text-center   ">
                   <RhfSelect
                     placeholder="Course Type"
                     name="courseType"
@@ -202,35 +199,50 @@ export default function SignupStudentForm() {
                     ]}
                   />
                 </div>
-                <div className="w-1/2 h-fit outline-none rounded-md text-center  ">
+                {/* <div className="w-1/2 h-fit outline-none rounded-md text-center  ">
                   <RhfSelect
                     placeholder={isYearly ? "Select Year" : "Select Semester"}
                     name={isYearly ? "year" : "semester"}
                     options={isYearly ? yearOptions : semesterOptions}
                   />
-                </div>
+                </div> */}
               </div>
-              <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm text-primaryColor-500 ">
+              <div className="flex w-full justify-between gap-2 flex-row max-lg:text-sm max-sm:text-xs text-sm ">
                 <div className=" h-fit  w-1/2 rounded-md text-center  ">
                   <RhfSelect
                     placeholder="Course"
                     name="courseCode"
-                    options={courses && convertToCustomFormat(courses?.courses)}
+                    options={
+                      courses?.courses?.length > 0
+                        ? isYearly
+                          ? convertToCustomFormat(
+                              categorizeCourses(courses?.courses).yearly
+                            )
+                          : convertToCustomFormat(
+                              categorizeCourses(courses?.courses).semester
+                            )
+                        : []
+                    }
                   />
                 </div>
-                <div className=" w-1/2 h-full outline-none rounded-md text-center">
-                  {sectionField.map((item) => (
-                    <Data
-                      register={register}
-                      item={item}
-                      key={item.name}
-                      errors={errors}
-                    />
-                  ))}
+                <div className=" w-1/2 h-full mb-3 outline-none rounded-md text-center">
+                  <RhfSelect
+                    placeholder="Select Section"
+                    name="section"
+                    options={sectionOptions}
+                  />
                 </div>
               </div>
 
-              {inputField.slice(2).map((item) => (
+              {/* <div className="mb-3">
+                <RhfSelect
+                  placeholder="Batch"
+                  name="batch"
+                  options={batchOptions}
+                />
+              </div> */}
+
+              {inputField.slice(3).map((item) => (
                 <Data
                   register={register}
                   item={item}
