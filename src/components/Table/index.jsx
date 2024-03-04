@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import TableSkeleton from "../common/TableSkeleton";
 
 const TableComponent = (props) => {
-  const { tableHeader, tableBody, actions, isLoading, status } = props;
+  const { tableHeader, tableBody, actions, isLoading } = props;
 
   const tableRef = useRef(null);
 
