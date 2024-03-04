@@ -1,4 +1,5 @@
 import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 const HomeInfo = ({ teacherData }) => {
   const assignedSubjects = teacherData?.assignedSubjects?.flatMap(
@@ -22,7 +23,7 @@ const HomeInfo = ({ teacherData }) => {
       <h2 className=" text-xl text-left my-6 text-primaryColor-950 font-semibold tracking-wide  ">
         {" "}
         {greet},{" "}
-        <span className="font-2xl text-2xl text-primaryColor-700 ">
+        <span className="font-2xl text-2xl text-primaryColor-700 capitalize ">
           {teacherData?.fullName}
         </span>{" "}
       </h2>
@@ -34,9 +35,20 @@ const HomeInfo = ({ teacherData }) => {
           <ul className="text-left space-y-1">
             {assignedSubjects?.map((subject, i) => {
               return (
-                <li className="flex gap-2 items-center " key={subject}>
-                  <span> {i + 1}.</span> <p>{subject}</p>
-                </li>
+                <>
+                  <li
+                    className={`${
+                      assignedSubjects?.length - 1 === i
+                        ? "border-none"
+                        : "border-b"
+                    } border-primaryColor-300 flex gap-2 items-center lg:text-sm text-sm text-primaryColor-950 py-2.5`}
+                    key={subject}
+                  >
+                    <span> {i + 1}.</span>{" "}
+                    <p className=" text-center  ">{subject}</p>
+                  </li>
+                  {/* <hr className="w-full border-y-1 border-primaryColor-300" /> */}
+                </>
               );
             })}
           </ul>
@@ -47,30 +59,31 @@ const HomeInfo = ({ teacherData }) => {
             Personal Details
           </h1>
           <ul className="text-left flex flex-col gap-5">
-            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm  ">
-              <span className="font-semibold  ">Name : </span>{" "}
-              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
-                {" "}
-                <p> {teacherData?.fullName}</p>
-              </div>
+            {/* <hr className="w-full border-y-1 border-primaryColor-300" /> */}
+
+            <li className="flex justify-between gap-1 items-center lg:text-sm text-sm  ">
+              <span className="font-semibold  ">Name </span>{" "}
+              <p> {teacherData?.fullName}</p>
             </li>
-            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm">
-              <span className="font-semibold">Role : </span>{" "}
-              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
-                <p> {teacherData?.role}</p>
-              </div>
+            <hr className="w-full border-y-1 border-primaryColor-300" />
+
+            <li className="flex justify-between gap-2 items-center lg:text-sm text-sm">
+              <span className="font-semibold">Role </span>{" "}
+              <p> {teacherData?.role}</p>
             </li>
-            <li className="flex justify-around gap-2 flex-wrap items-center lg:text-sm text-sm ">
-              <span className="font-semibold">Mail : </span>{" "}
-              <div className="border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
-                <p className="flex-wrap"> {teacherData?.email}</p>
-              </div>
+            <hr className="w-full border-y-1 border-primaryColor-300" />
+
+            <li className="flex justify-between gap-2 flex-wrap items-center lg:text-sm text-sm ">
+              <span className="font-semibold">Email </span>{" "}
+              <p className="flex-wrap"> {teacherData?.email}</p>
             </li>
-            <li className="flex justify-around gap-2 items-center lg:text-sm text-sm">
-              <span className="font-semibold">Status : </span>{" "}
-              <div className=" border border-primaryColor-800 bg-primaryColor-50 w-[70%] rounded-md p-2">
+            <hr className="w-full border-y-1 border-primaryColor-300" />
+
+            <li className="flex justify-between gap-2 items-center lg:text-sm text-sm">
+              <span className="font-semibold">Status </span>{" "}
+              <Badge className="bg-green-200  text-green-700">
                 <p> {teacherData?.status}</p>
-              </div>
+              </Badge>
             </li>
           </ul>
         </div>

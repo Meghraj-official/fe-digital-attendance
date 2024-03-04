@@ -54,13 +54,12 @@ export function PendingStudent({ studentData, refetch, isLoading }) {
     }
   );
   const Status = (rowData) => {
-    console.log("this is status", rowData);
     return (
       <div>
-        {rowData.isOtpVerified ? (
-          <Badge>Verified</Badge>
+        {rowData?.isOtpVerified ? (
+          <Badge className="bg-green-200 text-green-700">Verified</Badge>
         ) : (
-          <Badge variant={"destructive"}>Unverified</Badge>
+          <Badge className="bg-red-200 text-red-700">Unverified</Badge>
         )}
       </div>
     );
