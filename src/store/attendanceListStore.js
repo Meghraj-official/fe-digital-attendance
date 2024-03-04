@@ -8,7 +8,10 @@ const initialState = {
 
 export const useAttendanceListStore = create((set) => ({
   ...initialState,
-  setSubjectCode: () =>
-    set((newSubjectCode) => ({ subjectCode: newSubjectCode })),
+  setSubjectCode: (data) => {
+    console.log("datra from zus", data);
+
+    set((state) => ({ ...state, subjectCode: data }));
+  },
   setDate: ({ date }) => set((state) => ({ ...state, date })),
 }));

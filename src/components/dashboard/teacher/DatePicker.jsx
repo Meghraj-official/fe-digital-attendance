@@ -11,7 +11,6 @@ function DatePickerComponent() {
         className="border py-1.5 border-black  rounded-md p-1"
         selected={date}
         onChange={(date) => {
-          console.log(date);
           setDate({ date });
         }}
         placeholderText={"dd/mm/yyyy"}

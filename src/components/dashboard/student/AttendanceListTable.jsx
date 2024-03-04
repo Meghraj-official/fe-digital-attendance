@@ -14,7 +14,7 @@ import TableComponent from "@/components/Table";
 
 const DateListWithoutSaturdays = ({ month }) => {
   const [datesWithoutSaturdays, setDatesWithoutSaturdays] = useState([]);
-  const { data, isLoading } = useQuery("courses", async () => {
+  const { data, isLoading } = useQuery("attendanceListStudent", async () => {
     return await axiosInstance.get(`/attendance/list/student`, null, {
       params: {
         month: 3,
@@ -64,13 +64,13 @@ const DateListWithoutSaturdays = ({ month }) => {
   const resultData = CompareDates(formattedDays, presentDays);
 
   return (
-    <div>
+    <>
       <TableComponent
         isLoading={isLoading}
         tableBody={resultData}
         tableHeader={tableHeader}
       />
-    </div>
+    </>
   );
 };
 

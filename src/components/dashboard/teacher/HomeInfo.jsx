@@ -7,7 +7,6 @@ const HomeInfo = ({ teacherData }) => {
 
   var myDate = new Date();
   var hrs = myDate.getHours();
-  console.log(teacherData);
 
   var greet;
 
