@@ -1,16 +1,18 @@
 "use client";
 import HomeInfo from "@/components/dashboard/teacher/HomeInfo";
-import axiosInstance from "@/lib/axios";
-import React from "react";
-import { useQuery } from "react-query";
+import { useTeacherStore } from "@/store/teacherData";
+import React, { useEffect } from "react";
 
 const Teacher = () => {
-  const { data } = useQuery("teacherInfo", async () => {
-    return (await axiosInstance.get("/user/showme")).data;
-  });
+  const { getTeacher, teacherData } = useTeacherStore();
+
+  useEffect(() => {
+    getTeacher();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
-      <HomeInfo teacherData={data} />
+      <HomeInfo teacherData={teacherData} />
     </>
   );
 };

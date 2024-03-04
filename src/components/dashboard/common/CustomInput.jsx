@@ -12,7 +12,12 @@ const CustomInput = ({ name, id, labelName, placeholder }) => {
       <label htmlFor={id} className=" text-sm">
         {labelName}
       </label>
-      <Input {...register(name)} id={id} placeholder={placeholder} />
+      <Input
+        className="bg-primaryColor-50"
+        {...register(name)}
+        id={id}
+        placeholder={placeholder}
+      />
 
       {errors && (
         <p className="text-xs text-red-700">{errors[name]?.message}</p>
