@@ -37,7 +37,7 @@ const AssignSubject = () => {
 
 
   return (
-    <div>
+    <div className="px-3">
       
             <TableComponent
               isLoading={isLoading}
