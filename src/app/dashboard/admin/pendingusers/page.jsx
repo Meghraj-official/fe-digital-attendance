@@ -48,7 +48,7 @@ const PendingUser = () => {
           </button>
         ))}
       </div>
-      <div className="h-[70vh] w-[100%] mt-2  overflow-y-auto  bg-primaryColor-100">
+      <div className="h-[70vh] w-[100%] mt-2  overflow-y-auto">
         {activeTab === "teacher" && (
           <PendingTeacher
             isLoading={isPending}
