@@ -1,37 +1,63 @@
 "use client"
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
+import axiosInstance from "@/lib/axios";
 
 import { BookCopyIcon,BookOpenIcon, GraduationCap, User2Icon} from "lucide-react";
-const data=[
-  {
-    title:" Students",
-    count:"500",
-    description:" Total count of the student in the system",
-    icon:<GraduationCap/>
-  },
-  {
-    title:" Teachers",
-    count:"30",
-    description:" Total count of the teacher in the system",
-    icon:<User2Icon/>
-  },
-  {
-    title:" Course",
-    count:"500",
-    description:" Total count of the course in the system",
-    icon:<BookCopyIcon/>
-  },
-  {
-    title:" Subject",
-    count:"500",
-    description:"Total count of the subject in the system",
-    icon:<BookOpenIcon/>
-  }
-]
+import { useQuery } from "react-query";
+
 
 
 
 export default function DashboardStats() {
+  const getDashboardData = async() => {
+    const res =await axiosInstance.get("/admin/dashboard");
+
+    return res?.data;
+  };
+
+  const { data:datas } = useQuery(
+    "dashboardData",
+    getDashboardData
+  );
+  const data=[
+    {
+      title:" Students",
+      count:datas?.students,
+      description:" Total count of the student in the system",
+      icon:<GraduationCap/>
+    },
+    {
+      title:" Teachers",
+      count:datas?.teachers,
+      description:" Total count of the teacher in the system",
+      icon:<User2Icon/>
+    },
+    {
+      title:" Course",
+      count:datas?.courses,
+      description:" Total count of the course in the system",
+      icon:<BookCopyIcon/>
+    },
+    {
+      title:" Subject",
+      count:datas?.subjects,
+      description:"Total count of the subject in the system",
+      icon:<BookOpenIcon/>
+    },
+    {
+      title:" Pending students",
+      count:datas?.pendingStudents,
+      description:"Total count of the pending students in the system",
+      icon:<User2Icon/>
+    },
+    {
+      title:"Pending Teachers ",
+      count:datas?.pendingTeachers,
+      description:"Total count of the pending teachers in the system",
+      icon:<User2Icon/>
+    }
+  ]
+ 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 lg:h-[80vh] py-2 px-1 lg:px-3 ">
       {data.map((item,index)=>{
@@ -53,48 +79,7 @@ export default function DashboardStats() {
 
         )
       })}
-        {/* <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium">
-              Total Students
-            </CardTitle>
-            <UsersIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">500</div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              +15% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium">
-              Total Teachers
-            </CardTitle>
-            <SchoolIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">30</div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              +10% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium">
-              Verified Users
-            </CardTitle>
-            <CheckIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">200</div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              +25% from last month
-            </p>
-          </CardContent>
-        </Card> */}
+        
       </div>
     
   );
