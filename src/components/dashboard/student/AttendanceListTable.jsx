@@ -12,16 +12,35 @@ import axiosInstance from "@/lib/axios";
 import { CompareDates } from "@/lib/helpers/ComparesDate";
 import TableComponent from "@/components/Table";
 
-const DateListWithoutSaturdays = ({ month }) => {
+const DateListWithoutSaturdays = ({
+  month,
+  isFetchingCourse,
+  currentSubject,
+}) => {
   const [datesWithoutSaturdays, setDatesWithoutSaturdays] = useState([]);
-  const { data, isLoading } = useQuery("attendanceListStudent", async () => {
-    return await axiosInstance.get(`/attendance/list/student`, null, {
-      params: {
-        month: 3,
-        subjectCode: "SOS-002",
-      },
-    });
-  });
+
+  const date = new Date(month);
+
+  const paramMonth = date.getMonth() + 1;
+
+  const { data, isLoading } = useQuery(
+    ["attendanceListStudent", paramMonth, currentSubject],
+    async () => {
+      return await axiosInstance.get(`/attendance/list/student`, null, {
+        params: {
+          month: paramMonth,
+          subjectCode: currentSubject,
+        },
+      });
+    }
+  );
+
+  console.log(
+    "current subjects and date",
+    isFetchingCourse,
+    paramMonth,
+    currentSubject
+  );
 
   const presentDays =
     data?.data?.attendance?.flatMap?.((item) => {

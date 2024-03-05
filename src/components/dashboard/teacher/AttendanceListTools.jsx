@@ -177,7 +177,6 @@ const AttendanceListTools = () => {
 export default AttendanceListTools;
 
 const tableHeader = [
-  { label: "SN", accessorKey: "index" },
   { label: "Name", accessorKey: "fullName" },
   {
     label: "Roll No",
