@@ -8,7 +8,7 @@ import Spinner from "@/components/common/Spinner";
 import toast from "react-hot-toast";
 import { dialogClose } from "@/lib/utils";
 
-const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
+const AssignSubjectModal = ({ teacherId, assignedSubjects, refetch }) => {
   const { data: Subjects, isLoading } = useQuery("getAllSubjects", async () => {
     return (await axiosInstance.get("/subject/list")).data;
   });
@@ -31,6 +31,7 @@ const AssignSubjectModal = ({ teacherId, assignedSubjects }) => {
         );
 
         toast.success(res?.data?.message);
+        refetch();
       } catch (err) {
         toast.error("Something Went Wrong!");
       } finally {
