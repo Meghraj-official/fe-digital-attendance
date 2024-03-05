@@ -87,7 +87,7 @@ const GenerateQR = () => {
                       startTimer(60, (remainingTime) => {
                         if (remainingTime === 0) {
                           toast.success("Time up");
-                          router.push("/dashboard/teacher/attendance-list");
+                          // router.push("/dashboard/teacher/attendance-list");
                           dialogClose();
                         }
                       });
