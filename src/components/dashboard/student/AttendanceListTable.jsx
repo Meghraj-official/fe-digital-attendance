@@ -26,7 +26,7 @@ const DateListWithoutSaturdays = ({
   const { data, isLoading } = useQuery(
     ["attendanceListStudent", paramMonth, currentSubject],
     async () => {
-      return await axiosInstance.get(`/attendance/list/student`, null, {
+      return await axiosInstance.get(`/attendance/list/student`, {
         params: {
           month: paramMonth,
           subjectCode: currentSubject,

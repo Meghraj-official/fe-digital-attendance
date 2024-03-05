@@ -187,8 +187,4 @@ const tableHeader = [
     label: "Status",
     accessorKey: "status",
   },
-  {
-    label: "Status",
-    accessorKey: "status",
-  },
 ];
