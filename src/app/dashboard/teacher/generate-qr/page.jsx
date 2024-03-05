@@ -13,7 +13,7 @@ import { FormatAssignSubjects } from "@/lib/helpers/FormatAssignSubjects";
 import toast from "react-hot-toast";
 import startTimer from "@/lib/helpers/Timer";
 import { dialogClose } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { batchOptions, sectionOptions } from "@/lib/data/signup";
 const GenerateQR = () => {
   const { data: teacherData } = useQuery("currentTeacher", async () => {
@@ -21,7 +21,7 @@ const GenerateQR = () => {
   });
 
   const [qrText, setQrText] = useState(null);
-  const router = useRouter();
+  // const router = useRouter();
   const handleGenerateQr = async (formData) => {
     try {
       const res = await axiosInstance.post("/attendance/generate-qr", formData);
