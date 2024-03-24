@@ -1,23 +1,37 @@
-name: Playwright Tests
+# name: Playwright Tests
 
-on:
-  deployment_status:
+# on:
+#   deployment_status:
+# jobs:
+#   run-e2es:
+#     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Install dependencies
+#         run: |
+#           if [ -e yarn.lock ]; then
+#           yarn install --frozen-lockfile
+#           elif [ -e package-lock.json ]; then
+#           npm ci
+#           else
+#           npm i
+#           fi
+#       - name: Run tests
+#         run: npx playwright test
+#         env:
+#           BASE_URL: ${{ github.event.deployment_status.environment_url }}
+
+name: digital attendance end-to-end tests
+on: [push]
 jobs:
-  run-e2es:
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
-      - name: Run tests
-        run: npx playwright test
-        env:
-          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: "http://localhost:5000"
+          browser: chrome
+          headless: true
